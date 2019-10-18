@@ -4,6 +4,7 @@ import { TareasService } from 'src/app/services/tareas.service';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute} from '@angular/router';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -14,8 +15,8 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class TareasComponent implements OnInit {
   private items: Tarea[];
   public nuevo: Tarea = new Tarea();
-  constructor(private service: TareasService, private http2: HttpClient, private servicioModal: NgbModal,
-    private router: Router, private route: ActivatedRoute) { }
+  constructor(private service: TareasService, private http2: HttpClient,
+    private router: Router, private route: ActivatedRoute, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.service.findList().subscribe(
@@ -51,4 +52,7 @@ export class TareasComponent implements OnInit {
       }
     );
   }
+
+  
+
 }

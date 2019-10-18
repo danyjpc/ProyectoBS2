@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {TareasComponent} from './/components/tareas/tareas.component';
+import { LoginComponent } from './components/login';
+import { AuthGuard } from './components/_guards';
+import { Role } from './models/role';
 
 const routes: Routes = [
   //Se configura el componente de inicio
@@ -11,7 +14,14 @@ const routes: Routes = [
   },
   {
     path: 'tareas',
-    component: TareasComponent
+    component: TareasComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+  },
+
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 
