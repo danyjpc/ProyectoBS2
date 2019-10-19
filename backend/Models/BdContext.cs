@@ -12,6 +12,9 @@ namespace backend.Models
         }
         public DbSet<Tarea> Tareas { get; set; }
         public DbSet<Empleado> Empleados { get; set; }
+        public DbSet<Puesto> Puestos { get; set; }
+        public DbSet<Permiso> Permisos { get; set; }
+        public DbSet<PermisoRol> Permisos_rol { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             base.OnModelCreating(modelBuilder);
@@ -38,6 +41,26 @@ namespace backend.Models
 
             modelBuilder.Entity<Empleado>()
             .HasKey(x => x.cod_empleado);
+
+            //Un puesto tiene muchos empleados
+            modelBuilder.Entity<Empleado>()
+                .HasOne(p => p.puesto)
+                .WithMany(e => e.Empleado)
+                .HasForeignKey(p => p.cod_puesto);
+
+            //Muchos permisos a muchos roles
+             modelBuilder.Entity<PermisoRol>()
+                .HasKey(k => new { k.cod_rol, k.cod_permiso });
+
+            modelBuilder.Entity<PermisoRol>()
+                .HasOne(r => r.ApplicationRole)
+                .WithMany(r => r.Permiso_rol)
+                .HasForeignKey(r => r.cod_rol);
+
+            modelBuilder.Entity<PermisoRol>()
+                .HasOne(p => p.permiso)
+                .WithMany(p => p.Permiso_Rol)
+                .HasForeignKey(p => p.cod_permiso);
         }
     }
 }

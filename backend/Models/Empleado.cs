@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
 {
+    
     public class Empleado
     {
         [Key]
@@ -15,6 +16,10 @@ namespace backend.Models
         public string dpi { get; set; }
         public int estado_activo { get; set; }
 
+        public int cod_puesto { get; set; }
+        [ForeignKey("cod_puesto")]
+        public Puesto puesto { get; set; }
         public ApplicationUser usuario { get; set; }
+
     }
 }
