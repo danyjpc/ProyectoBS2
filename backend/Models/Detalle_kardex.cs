@@ -14,7 +14,7 @@ namespace backend.Models
         public decimal precio_unitario{get;set;}
         [ForeignKey("id_kardex")]
         public int id_kardex {get;set;}
-        public Kardex karxex {get;set;}
+        public Kardex kardex {get;set;}
         [ForeignKey("id_producto")]
         public int id_producto {get;set;}
         public Producto producto {get;set;}

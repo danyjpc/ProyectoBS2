@@ -23,6 +23,7 @@ namespace backend.Models
         public Categoria categoria {get;set;}
         public List<Detalle_kardex> detalles_kardex{get;set;}
         public List<Detalle_factura> detalles_factura{get;set;}
+        public List<Dimension> dimensiones{get;set;}
 
         
     }

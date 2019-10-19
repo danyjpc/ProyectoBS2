@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace backend.Models
 {
@@ -14,7 +15,12 @@ namespace backend.Models
         [Column (TypeName="varchar(13)")]
         public string dpi { get; set; }
         public int estado_activo { get; set; }
-
+        [ForeignKey("id_puesto")]
+        public int id_puesto { get; set; }
+        public Puesto puesto{ get; set; }
+        public List<Factura> facturas {get;set;}
         public ApplicationUser usuario { get; set; }
+
+        
     }
 }
