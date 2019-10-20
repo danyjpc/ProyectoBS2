@@ -58,6 +58,9 @@ namespace backend.Models
                 {
                     var rol = new ApplicationRole { Name = "Administrador", descripcion = "Tiene todos los permisos", habilitado = 1 };
                     await _roleManager.CreateAsync(rol);
+
+                    var rol2 = new ApplicationRole { Name = "Ejecutivo de ventas", descripcion = "Solo puede vender", habilitado = 1 };
+                    await _roleManager.CreateAsync(rol2);
                 }
 
                 //PERMISOS
