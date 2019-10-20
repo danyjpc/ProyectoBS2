@@ -12776,11 +12776,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dany\\Desktop\\to do list\\backend\\backend.csproj",
+      "projectUniqueName": "c:\\Users\\Dany\\Desktop\\ProyectoBD2\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\Users\\Dany\\Desktop\\to do list\\backend\\backend.csproj",
+      "projectPath": "c:\\Users\\Dany\\Desktop\\ProyectoBD2\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\Dany\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dany\\Desktop\\to do list\\backend\\obj\\",
+      "outputPath": "c:\\Users\\Dany\\Desktop\\ProyectoBD2\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
