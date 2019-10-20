@@ -43,3 +43,17 @@ D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj
 D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
 D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
 >>>>>>> 2aea7aa513c8edd1ac2a5b1607c2beafd062857b
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.dll
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.pdb
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csprojAssemblyReference.cache
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csproj.CoreCompileInputs.cache
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cache
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cs
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfoInputs.cache
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfo.cs
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
+C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb

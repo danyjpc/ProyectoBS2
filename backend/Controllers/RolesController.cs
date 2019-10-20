@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,7 @@ namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class RolesController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -104,6 +107,32 @@ namespace backend.Controllers
         }
 
         /******************************** AREA DE INSERCIONES NUEVAS ******************/
+
+        //Creacion de nuevo rol
+        [HttpPost]
+        [Route("CrearRol")]
+        public async Task<IActionResult> CrearRol([FromBody] ApplicationRole rol_info)
+        {
+
+            if (!await _roleManager.RoleExistsAsync(rol_info.Name.ToString().ToUpper()))
+            {
+                var role = new ApplicationRole { Name = rol_info.Name.ToUpper(), descripcion = rol_info.descripcion, habilitado = rol_info.habilitado };
+                var result = await _roleManager.CreateAsync(role);
+                if (result.Succeeded)
+                {
+                    return Ok(new { message = "Rol creado exitosamente." });
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Rol Existente" });
+            }
+        }
+
         //Asignacion de roles a usuario
         //PARAMETROS: cod_usuario, nombre de rol
         [HttpPost]

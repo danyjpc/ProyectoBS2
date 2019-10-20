@@ -9,11 +9,12 @@ namespace backend.Models
     public class Puesto
     {
         [Key]
-        public int id_puesto { get; set; }
+        public int cod_puesto { get; set; }
         [Column(TypeName = "varchar(45)")]
-        public string nombre  {get;set;}
+        public string nombre { get; set; }
         [Column(TypeName = "varchar(120)")]
-        public string descripcion {get;set;}
-        public List<Empleado> empleados{get;set;}
+        public string descripcion { get; set; }
+        public int habilitado { get; set; }
+        public List<Empleado> empleados { get; set; }
     }
 }

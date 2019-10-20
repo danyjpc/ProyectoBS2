@@ -11,7 +11,10 @@ namespace backend.Models
 
         }
         public DbSet<Tarea> Tareas { get; set; }
-        public DbSet<Empleado> Empleados { get; set; } 
+        public DbSet<Empleado> Empleados { get; set; }
+        public DbSet<Puesto> Puestos { get; set; }
+        public DbSet<Permiso> Permisos { get; set; }
+        public DbSet<PermisoRol> Permisos_rol { get; set; }
         public DbSet<Proveedor> Proveedores { get; set; } 
         public DbSet<Kardex> Kardexs { get; set; } 
         public DbSet<Detalle_kardex> Detalles_kardex { get; set; }
@@ -21,7 +24,6 @@ namespace backend.Models
         public DbSet<Detalle_factura> Detalles_facturas { get; set; }
         public DbSet<Factura> Facturas { get; set; } 
         public DbSet<Cliente> Clientes { get; set; } 
-        public DbSet<Puesto> Puestos { get; set; }  
         public DbSet<Categoria> Categorias { get; set; } 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             base.OnModelCreating(modelBuilder);
@@ -32,22 +34,32 @@ namespace backend.Models
 
             //Cambiando nombres de tablas predeterminadas
             modelBuilder.Entity<ApplicationUser>()
-            .ToTable("user");
+            .ToTable("tb_user");
             modelBuilder.Entity<ApplicationRole>()
-            .ToTable("role");
+            .ToTable("tb_role");
             modelBuilder.Entity<IdentityUserRole<int>>()
-            .ToTable("user_role");
+            .ToTable("tb_user_role");
             modelBuilder.Entity<IdentityUserClaim<int>>()
-            .ToTable("user_claim");
+            .ToTable("tb_user_claim");
             modelBuilder.Entity<IdentityUserLogin<int>>()
-            .ToTable("user_login");
+            .ToTable("tb_user_login");
             modelBuilder.Entity<IdentityUserToken<int>>()
-            .ToTable("user_token");
+            .ToTable("tb_user_token");
             modelBuilder.Entity<IdentityRoleClaim<int>>()
-            .ToTable("role_claim");
+            .ToTable("tb_role_claim");
 
             modelBuilder.Entity<Empleado>()
             .HasKey(x => x.cod_empleado);
+
+            //Un puesto, muchos empleado
+            modelBuilder.Entity<Empleado>()
+            .HasOne(em => em.puesto)
+            .WithMany(pu => pu.empleados)
+            .HasForeignKey(em => em.cod_puesto);
+
+            //Clave compuesta del campo PermisoRol
+            modelBuilder.Entity<PermisoRol>()
+            .HasKey(x => new {x.cod_rol, x.cod_permiso});
 
             //Un proveedor, muchos kardex
             modelBuilder.Entity<Kardex>()
@@ -102,12 +114,6 @@ namespace backend.Models
             .HasOne(fa => fa.cliente)
             .WithMany(cl => cl.facturas)
             .HasForeignKey(fa => fa.id_cliente);
-
-            //Un puesto, muchos empleado
-            modelBuilder.Entity<Empleado>()
-            .HasOne(em => em.puesto)
-            .WithMany(pu => pu.empleados)
-            .HasForeignKey(em => em.id_puesto);
 
             //Un empleado, muchas factura
             modelBuilder.Entity<Factura>()
