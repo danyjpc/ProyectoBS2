@@ -1,19 +1,20 @@
-using System.Collections.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace backend.Models
 {
+    [Table("tb_puesto")]
     public class Puesto
     {
         [Key]
         public int cod_puesto { get; set; }
-        [Column(TypeName = "varchar(60)")]
+        [Column(TypeName = "varchar(45)")]
         public string nombre { get; set; }
-        [Column(TypeName = "varchar(250)")]
+        [Column(TypeName = "varchar(120)")]
         public string descripcion { get; set; }
         public int habilitado { get; set; }
-
-        public List<Empleado> Empleado { get; set; }
+        public List<Empleado> empleados { get; set; }
     }
 }
