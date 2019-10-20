@@ -1,0 +1,32 @@
+<div class="container col-md-8 offset-md-2 mt-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="h3 col text-center"><b>Crear Empleado</b></h3>
+          </div>
+          <div class="card-body">
+            <div class="form-group col-md-8 offset-md-2">
+              <label for=""><b>No. DPI *</b></label>
+              <input type="text" class="form-control" [(ngModel)]="emp.dpi" >
+            </div>
+            <div class="form-group col-md-8 offset-md-2">
+              <label for=""><b>Nombre del Empleado *</b></label>
+              <input type="text" class="form-control" [(ngModel)]="emp.nombre"  >
+            </div>
+            <div class="form-group col-md-8 offset-md-2">
+              <label for=""><b>Dirección *</b></label>
+              <input type="text" class="form-control" [(ngModel)]="emp.direccion" >
+            </div>
+            <div class="form-group col-md-8 offset-md-2">
+                    <label for="" class="mr-4"><b>Estado *</b></label>
+                    <input type="checkbox" [(ngModel)]="estado" class="ml-2" >
+                  </div>
+
+            <div class="form-group col text-center">
+                  <button class="btn btn-success ml-2" (click)="guardar()">Guardar</button>
+                  <button class="btn btn-danger ml-2" [routerLink]="['/empleado']"  >Cancelar</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      

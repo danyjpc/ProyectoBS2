@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { User } from '../models/user'
 import { APP_BASE_HREF } from '@angular/common';
+import { APPCONFIG } from '../constantes.module';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -20,12 +21,12 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`${APP_BASE_HREF}/users/authenticate`, { username, password })
+    login(email: string, password: string) {
+        return this.http.post<any>(APPCONFIG.BASE_URL+`/account/login`, { email, password })
             .pipe(map(user => {
-                // login successful if there's a jwt token in the response
+                // Usuario logeado correctamente
                 if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    //meto el json token que me retorna el
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.currentUserSubject.next(user);
                 }
