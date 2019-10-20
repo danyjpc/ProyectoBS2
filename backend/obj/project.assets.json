@@ -2709,7 +2709,7 @@
           }
         }
       },
-      "MySqlConnector/0.59.2": {
+      "MySqlConnector/0.60.0": {
         "type": "package",
         "compile": {
           "lib/netcoreapp2.1/MySqlConnector.dll": {}
@@ -7243,10 +7243,10 @@
         "version.txt"
       ]
     },
-    "MySqlConnector/0.59.2": {
-      "sha512": "GU999Wx9wpsjP2GANNn0WKp1iTb9drHh0fgn+7nCefS4KWYQoYAuvWvhD65dm09pqL0aa1mXPT4wWGrRMoN+gg==",
+    "MySqlConnector/0.60.0": {
+      "sha512": "7twaXeouPLPg8CCoWoKNimaH5hGVvEPu7jip+bTfQGuQPK5YS7a/X2c71UCk+DOR2nBokSLUFm+ua/OY4POoZA==",
       "type": "package",
-      "path": "mysqlconnector/0.59.2",
+      "path": "mysqlconnector/0.60.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7259,7 +7259,7 @@
         "lib/netstandard2.0/MySqlConnector.dll",
         "lib/netstandard2.1/MySqlConnector.dll",
         "logo.png",
-        "mysqlconnector.0.59.2.nupkg.sha512",
+        "mysqlconnector.0.60.0.nupkg.sha512",
         "mysqlconnector.nuspec"
       ]
     },
@@ -12154,6 +12154,7 @@
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.EntityFrameworkCore >= 2.2.6",
       "Microsoft.NETCore.App >= 2.2.0",
+      "MySqlConnector >= 0.60.0",
       "Pomelo.EntityFrameworkCore.Mysql >= 2.2.6"
     ]
   },
@@ -12164,11 +12165,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\hugui\\OneDrive\\Escritorio\\HDMC\\Cunor\\2do. Semestre 2019\\Bases de Datos 2\\Proyecto - Primera fase\\ProyectoBS2\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\Users\\hugui\\OneDrive\\Escritorio\\HDMC\\Cunor\\2do. Semestre 2019\\Bases de Datos 2\\Proyecto - Primera fase\\ProyectoBS2\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "c:\\Users\\hugui\\OneDrive\\Escritorio\\HDMC\\Cunor\\2do. Semestre 2019\\Bases de Datos 2\\Proyecto - Primera fase\\ProyectoBS2\\backend\\backend.csproj",
+      "projectPath": "C:\\Users\\hugui\\OneDrive\\Escritorio\\HDMC\\Cunor\\2do. Semestre 2019\\Bases de Datos 2\\Proyecto - Primera fase\\ProyectoBS2\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\hugui\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\hugui\\OneDrive\\Escritorio\\HDMC\\Cunor\\2do. Semestre 2019\\Bases de Datos 2\\Proyecto - Primera fase\\ProyectoBS2\\backend\\obj\\",
+      "outputPath": "C:\\Users\\hugui\\OneDrive\\Escritorio\\HDMC\\Cunor\\2do. Semestre 2019\\Bases de Datos 2\\Proyecto - Primera fase\\ProyectoBS2\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12220,6 +12221,10 @@
             "target": "Package",
             "version": "[2.2.0, )",
             "autoReferenced": true
+          },
+          "MySqlConnector": {
+            "target": "Package",
+            "version": "[0.60.0, )"
           },
           "Pomelo.EntityFrameworkCore.Mysql": {
             "target": "Package",
