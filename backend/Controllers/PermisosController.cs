@@ -41,15 +41,18 @@ namespace backend.Controllers
 
             var rolesUs = await _context.UserRoles.Where(x => x.UserId == usuario.Id).ToListAsync();
 
-            List<Permiso> permisos = null;
+            List<Permiso> permisos = new List<Permiso>();
 
             foreach (var rol in rolesUs)
             {
-                var perm = await _context.Permisos_rol.Where(x => x.cod_rol == rol.RoleId).Select(x => x.cod_permiso).FirstOrDefaultAsync();
+                var perms = await _context.Permisos_rol.Where(x => x.cod_rol == rol.RoleId).Select(x => x.cod_permiso).ToListAsync();
 
-                var permiso = await _context.Permisos.Where(x => x.cod_permiso == perm).FirstOrDefaultAsync();
+                foreach (var p in perms)
+                {
+                    var permiso = await _context.Permisos.Where(x => x.cod_permiso == p).FirstOrDefaultAsync();
 
-                permisos.Add(permiso);
+                    permisos.Add(permiso);
+                }   
             }
 
             return permisos;
@@ -62,7 +65,7 @@ namespace backend.Controllers
         {
             var cod_permisos = await _context.Permisos_rol.Where(x => x.cod_rol == cod_rol).Select(x => x.cod_permiso).ToListAsync();
 
-            List<Permiso> permisos = null;
+            List<Permiso> permisos = new List<Permiso>();
 
             foreach (var cod_perm in cod_permisos)
             {

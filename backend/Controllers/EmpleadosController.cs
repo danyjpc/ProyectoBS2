@@ -61,8 +61,8 @@ namespace backend.Controllers
             return item;
         }
 
-        //CREAR PERSONA
-        //POST: api/Personas
+        //CREAR EMPLEADO
+        //POST: api/Empleados
         [HttpPost]
         public async Task<ActionResult> crearEmpleado([FromBody] Empleado empleado)
         {
