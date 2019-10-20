@@ -20,6 +20,7 @@ import { RolesComponent } from './components/roles/roles.component';
 import { CrearRolesComponent } from './components/roles/crear-roles.component';
 import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
+import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EditarRolComponent } from './components/roles/editar-rol.component';
     RolesComponent, 
     CrearRolesComponent, 
     RolesinComponent,
-    EditarRolComponent
+    EditarRolComponent, 
+    AsignarPermisosComponent
   ],
   imports: [
     BrowserModule,

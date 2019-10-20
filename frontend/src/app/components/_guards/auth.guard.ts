@@ -40,6 +40,7 @@ export class AuthGuard implements CanActivate {
 
     
     llenarStorage(){
+        this.perm = new Array();
         this.permisos.findPermisos().subscribe(
             items => {
                 this.items = items;

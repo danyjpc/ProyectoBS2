@@ -45,11 +45,14 @@ namespace backend.Controllers
 
             foreach (var rol in rolesUs)
             {
-                var perm = await _context.Permisos_rol.Where(x => x.cod_rol == rol.RoleId).Select(x => x.cod_permiso).FirstOrDefaultAsync();
+                var perms = await _context.Permisos_rol.Where(x => x.cod_rol == rol.RoleId).Select(x => x.cod_permiso).ToListAsync();
 
-                var permiso = await _context.Permisos.Where(x => x.cod_permiso == perm).FirstOrDefaultAsync();
+                foreach (var p in perms)
+                {
+                    var permiso = await _context.Permisos.Where(x => x.cod_permiso == p).FirstOrDefaultAsync();
 
-                permisos.Add(permiso);
+                    permisos.Add(permiso);
+                }   
             }
 
             return permisos;

@@ -135,6 +135,7 @@ namespace backend.Controllers
         }
 
         /******************************** AREA DE INSERCIONES NUEVAS ******************/
+
         //Asignacion de roles a usuario
         //PARAMETROS: cod_usuario, nombre de rol
         [HttpPost]

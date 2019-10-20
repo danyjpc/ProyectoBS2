@@ -9,8 +9,8 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(BdContext))]
-    [Migration("20191020012423_SegundaMigraV1")]
-    partial class SegundaMigraV1
+    [Migration("20191020034012_OtraMigraV3")]
+    partial class OtraMigraV3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace backend.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("role_claim");
+                    b.ToTable("tb_role_claim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
@@ -52,7 +52,7 @@ namespace backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("user_claim");
+                    b.ToTable("tb_user_claim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
@@ -69,7 +69,7 @@ namespace backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("user_login");
+                    b.ToTable("tb_user_login");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
@@ -82,7 +82,7 @@ namespace backend.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("user_role");
+                    b.ToTable("tb_user_role");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -97,7 +97,7 @@ namespace backend.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("user_token");
+                    b.ToTable("tb_user_token");
                 });
 
             modelBuilder.Entity("backend.Models.ApplicationRole", b =>
@@ -124,7 +124,7 @@ namespace backend.Migrations
                         .IsUnique()
                         .HasName("RoleNameIndex");
 
-                    b.ToTable("role");
+                    b.ToTable("tb_role");
                 });
 
             modelBuilder.Entity("backend.Models.ApplicationUser", b =>
@@ -181,7 +181,7 @@ namespace backend.Migrations
                     b.HasIndex("cod_empleado")
                         .IsUnique();
 
-                    b.ToTable("user");
+                    b.ToTable("tb_user");
                 });
 
             modelBuilder.Entity("backend.Models.Categoria", b =>
@@ -306,7 +306,7 @@ namespace backend.Migrations
 
                     b.HasIndex("cod_puesto");
 
-                    b.ToTable("Empleados");
+                    b.ToTable("tb_empleado");
                 });
 
             modelBuilder.Entity("backend.Models.Factura", b =>
@@ -375,18 +375,15 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.PermisoRol", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("cod_rol");
 
                     b.Property<int>("cod_permiso");
 
-                    b.Property<int>("cod_rol");
+                    b.Property<int>("id");
 
-                    b.HasKey("id");
+                    b.HasKey("cod_rol", "cod_permiso");
 
                     b.HasIndex("cod_permiso");
-
-                    b.HasIndex("cod_rol");
 
                     b.ToTable("Permisos_rol");
                 });

@@ -38,5 +38,9 @@ export class RolesComponent implements OnInit{
         this.router.navigate(['/editar-rol', value.id])
     }
 
+    asignarPermisos(value){
+        this.router.navigate(['/asignar-permisos', value.id])
+    }
+
     
 }

@@ -41,16 +41,21 @@ export class EditarRolComponent implements OnInit{
     }
 
     cargar(id: number){
-        this.service.findbyId(id).subscribe(
-            items=>{
-                this.rol = items;
-                if(this.rol.habilitado ==1){
-                    this.estado = true;
-                }else{
-                    this.estado = false;
+        if(id > 1){
+            this.service.findbyId(id).subscribe(
+                items=>{
+                    this.rol = items;
+                    if(this.rol.habilitado ==1){
+                        this.estado = true;
+                    }else{
+                        this.estado = false;
+                    }
                 }
-            }
-        );
+            );
+        }else{
+            this.router.navigate(['/roles']);
+        }
+        
     }
 
 

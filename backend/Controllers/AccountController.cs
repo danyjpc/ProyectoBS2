@@ -39,6 +39,7 @@ namespace backend.Controllers
             _context = bdContext;
         }
 
+        [AllowAnonymous]
         [Route("CrearUsuario")]
         [HttpPost]
         public async Task<IActionResult> CrearUsuario([FromBody] UserInfo datos)

@@ -12,6 +12,7 @@ import { RolesComponent } from './components/roles/roles.component';
 import { CrearRolesComponent } from './components/roles/crear-roles.component';
 import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
+import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
 
 const routes: Routes = [
   //Se configura el componente de inicio
@@ -73,6 +74,12 @@ const routes: Routes = [
   {
     path: 'editar-rol/:id',
     component: EditarRolComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"1" }
+  },
+  {
+    path: 'asignar-permisos/:id',
+    component: AsignarPermisosComponent,
     canActivate: [AuthGuard],
     data: { permisos:"1" }
   },

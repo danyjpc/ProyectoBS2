@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace backend.Models
 {
-
+    [Table("tb_empleado")]
     public class Empleado
     {
         [Key]

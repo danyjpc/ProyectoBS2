@@ -25,7 +25,8 @@
                   <td scope="row">{{item.descripcion}}</td>
                  
                   <td>
-                    <button class="btn btn-sm ml-2 btn-primary" (click)="editarRol(item)">Editar</button>
+                    <button class="btn btn-sm ml-2 btn-primary" *ngIf="item.id > 1" (click)="editarRol(item)">Editar</button>
+                    <button class="btn btn-info btn-sm ml-2" *ngIf="item.id > 1" (click)="asignarPermisos(item)">Asignar permisos</button>
                   </td>
                 </tr>
       

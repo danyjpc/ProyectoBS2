@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend.Migrations
 {
-    public partial class SegundaMigraV1 : Migration
+    public partial class OtraMigraV3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,23 +20,6 @@ namespace backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Permisos", x => x.cod_permiso);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "role",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    descripcion = table.Column<string>(nullable: true),
-                    habilitado = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_role", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,6 +95,23 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tb_role",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    descripcion = table.Column<string>(nullable: true),
+                    habilitado = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tb_role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tb_unidad_medida",
                 columns: table => new
                 {
@@ -123,53 +123,6 @@ namespace backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_unidad_medida", x => x.id_unidad_medida);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Permisos_rol",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    cod_rol = table.Column<int>(nullable: false),
-                    cod_permiso = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permisos_rol", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Permisos_rol_Permisos_cod_permiso",
-                        column: x => x.cod_permiso,
-                        principalTable: "Permisos",
-                        principalColumn: "cod_permiso",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Permisos_rol_role_cod_rol",
-                        column: x => x.cod_rol,
-                        principalTable: "role",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "role_claim",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<int>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_role_claim", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_role_claim_role_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "role",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -221,7 +174,7 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Empleados",
+                name: "tb_empleado",
                 columns: table => new
                 {
                     cod_empleado = table.Column<int>(nullable: false)
@@ -234,12 +187,58 @@ namespace backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Empleados", x => x.cod_empleado);
+                    table.PrimaryKey("PK_tb_empleado", x => x.cod_empleado);
                     table.ForeignKey(
-                        name: "FK_Empleados_tb_puesto_cod_puesto",
+                        name: "FK_tb_empleado_tb_puesto_cod_puesto",
                         column: x => x.cod_puesto,
                         principalTable: "tb_puesto",
                         principalColumn: "cod_puesto",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Permisos_rol",
+                columns: table => new
+                {
+                    cod_rol = table.Column<int>(nullable: false),
+                    cod_permiso = table.Column<int>(nullable: false),
+                    id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permisos_rol", x => new { x.cod_rol, x.cod_permiso });
+                    table.ForeignKey(
+                        name: "FK_Permisos_rol_Permisos_cod_permiso",
+                        column: x => x.cod_permiso,
+                        principalTable: "Permisos",
+                        principalColumn: "cod_permiso",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Permisos_rol_tb_role_cod_rol",
+                        column: x => x.cod_rol,
+                        principalTable: "tb_role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tb_role_claim",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RoleId = table.Column<int>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tb_role_claim", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_tb_role_claim_tb_role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "tb_role",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -320,15 +319,15 @@ namespace backend.Migrations
                         principalColumn: "id_cliente",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_tb_factura_Empleados_id_empleado",
+                        name: "FK_tb_factura_tb_empleado_id_empleado",
                         column: x => x.id_empleado,
-                        principalTable: "Empleados",
+                        principalTable: "tb_empleado",
                         principalColumn: "cod_empleado",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user",
+                name: "tb_user",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -352,11 +351,11 @@ namespace backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user", x => x.Id);
+                    table.PrimaryKey("PK_tb_user", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_user_Empleados_cod_empleado",
+                        name: "FK_tb_user_tb_empleado_cod_empleado",
                         column: x => x.cod_empleado,
-                        principalTable: "Empleados",
+                        principalTable: "tb_empleado",
                         principalColumn: "cod_empleado",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -389,7 +388,7 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "user_claim",
+                name: "tb_user_claim",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -400,17 +399,17 @@ namespace backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_claim", x => x.Id);
+                    table.PrimaryKey("PK_tb_user_claim", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_user_claim_user_UserId",
+                        name: "FK_tb_user_claim_tb_user_UserId",
                         column: x => x.UserId,
-                        principalTable: "user",
+                        principalTable: "tb_user",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user_login",
+                name: "tb_user_login",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(nullable: false),
@@ -420,17 +419,17 @@ namespace backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_login", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_tb_user_login", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_user_login_user_UserId",
+                        name: "FK_tb_user_login_tb_user_UserId",
                         column: x => x.UserId,
-                        principalTable: "user",
+                        principalTable: "tb_user",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user_role",
+                name: "tb_user_role",
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
@@ -438,23 +437,23 @@ namespace backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_role", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_tb_user_role", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_user_role_role_RoleId",
+                        name: "FK_tb_user_role_tb_role_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "role",
+                        principalTable: "tb_role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_user_role_user_UserId",
+                        name: "FK_tb_user_role_tb_user_UserId",
                         column: x => x.UserId,
-                        principalTable: "user",
+                        principalTable: "tb_user",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user_token",
+                name: "tb_user_token",
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
@@ -464,11 +463,11 @@ namespace backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_token", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_tb_user_token", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_user_token_user_UserId",
+                        name: "FK_tb_user_token_tb_user_UserId",
                         column: x => x.UserId,
-                        principalTable: "user",
+                        principalTable: "tb_user",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -484,11 +483,6 @@ namespace backend.Migrations
                 column: "id_producto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Empleados_cod_puesto",
-                table: "Empleados",
-                column: "cod_puesto");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_kardex_id_proveedor",
                 table: "kardex",
                 column: "id_proveedor");
@@ -497,22 +491,6 @@ namespace backend.Migrations
                 name: "IX_Permisos_rol_cod_permiso",
                 table: "Permisos_rol",
                 column: "cod_permiso");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Permisos_rol_cod_rol",
-                table: "Permisos_rol",
-                column: "cod_rol");
-
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "role",
-                column: "NormalizedName",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_role_claim_RoleId",
-                table: "role_claim",
-                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_detalle_factura_id_factura",
@@ -535,6 +513,11 @@ namespace backend.Migrations
                 column: "id_unidad_medida");
 
             migrationBuilder.CreateIndex(
+                name: "IX_tb_empleado_cod_puesto",
+                table: "tb_empleado",
+                column: "cod_puesto");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tb_factura_id_cliente",
                 table: "tb_factura",
                 column: "id_cliente");
@@ -550,35 +533,46 @@ namespace backend.Migrations
                 column: "id_categoria");
 
             migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "tb_role",
+                column: "NormalizedName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tb_role_claim_RoleId",
+                table: "tb_role_claim",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                table: "user",
+                table: "tb_user",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                table: "user",
+                table: "tb_user",
                 column: "NormalizedUserName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_user_cod_empleado",
-                table: "user",
+                name: "IX_tb_user_cod_empleado",
+                table: "tb_user",
                 column: "cod_empleado",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_user_claim_UserId",
-                table: "user_claim",
+                name: "IX_tb_user_claim_UserId",
+                table: "tb_user_claim",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_user_login_UserId",
-                table: "user_login",
+                name: "IX_tb_user_login_UserId",
+                table: "tb_user_login",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_user_role_RoleId",
-                table: "user_role",
+                name: "IX_tb_user_role_RoleId",
+                table: "tb_user_role",
                 column: "RoleId");
         }
 
@@ -591,9 +585,6 @@ namespace backend.Migrations
                 name: "Permisos_rol");
 
             migrationBuilder.DropTable(
-                name: "role_claim");
-
-            migrationBuilder.DropTable(
                 name: "tareas");
 
             migrationBuilder.DropTable(
@@ -603,16 +594,19 @@ namespace backend.Migrations
                 name: "tb_dimension");
 
             migrationBuilder.DropTable(
-                name: "user_claim");
+                name: "tb_role_claim");
 
             migrationBuilder.DropTable(
-                name: "user_login");
+                name: "tb_user_claim");
 
             migrationBuilder.DropTable(
-                name: "user_role");
+                name: "tb_user_login");
 
             migrationBuilder.DropTable(
-                name: "user_token");
+                name: "tb_user_role");
+
+            migrationBuilder.DropTable(
+                name: "tb_user_token");
 
             migrationBuilder.DropTable(
                 name: "kardex");
@@ -630,10 +624,10 @@ namespace backend.Migrations
                 name: "tb_unidad_medida");
 
             migrationBuilder.DropTable(
-                name: "role");
+                name: "tb_role");
 
             migrationBuilder.DropTable(
-                name: "user");
+                name: "tb_user");
 
             migrationBuilder.DropTable(
                 name: "tb_proveedor");
@@ -645,7 +639,7 @@ namespace backend.Migrations
                 name: "tb_categoria");
 
             migrationBuilder.DropTable(
-                name: "Empleados");
+                name: "tb_empleado");
 
             migrationBuilder.DropTable(
                 name: "tb_puesto");

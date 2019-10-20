@@ -29,8 +29,8 @@ export class PermisosService {
     );
   }
 
-  findbyId(item: number): Observable<Roles> {
-    return this.http.get<Roles>(APPCONFIG.BASE_URL+"/roles/BuscarRol/"+item);
+  permisosRol(item: number): Observable<Permiso[]> {
+    return this.http.get<Permiso[]>(APPCONFIG.BASE_URL+"/permisos/Role/"+item);
   }
 
   guardar(item: Roles): Observable<Roles> {

@@ -1,0 +1,74 @@
+<div class="container col-md-8 offset-md-2 mt-2">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="h3 col text-center"><b>Asignar Permisos al rol <b>{{rol.name}}</b> </b></h3>
+    </div>
+    
+    <div class="form-group col-md-8 offset-md-2 mt-4">
+      <input  id="roles" type="checkbox" [(ngModel)]="nombre_permiso.admin_roles " class="mr-2">
+      <label for="roles" class="mr-4"><b>Administracion de Roles</b></label>
+    </div>
+
+    <div class="form-group col-md-8 offset-md-2">
+      <input id="empleado" type="checkbox" [(ngModel)]="nombre_permiso.admin_empleados " class="mr-2">
+      <label for="empleado" class="mr-4"><b>Administracion de Empleados</b></label>
+    </div>
+
+    <div class="form-group col-md-8 offset-md-2">
+      <input id="cat" type="checkbox" [(ngModel)]="nombre_permiso.admin_categorias " class="mr-2">
+      <label for="cat" class="mr-4"><b>Administracion de Categorias</b></label>
+    </div>
+
+    <div class="form-group col-md-8 offset-md-2">
+      <input id="cliente" type="checkbox" [(ngModel)]="nombre_permiso.admin_clientes " class="mr-2">
+      <label for="cliente" class="mr-4"><b>Administracion de Clientes</b></label>
+    </div>
+
+    <div class="form-group col-md-8 offset-md-2">
+      <input id="dim" type="checkbox" [(ngModel)]="nombre_permiso.admin_dimensiones " class="mr-2">
+      <label for="dim" class="mr-4"><b>Administracion de Dimensiones</b></label>
+    </div>
+
+    <div class="form-group col-md-8 offset-md-2">
+      <input id="fac" type="checkbox" [(ngModel)]="nombre_permiso.admin_facturas " class="mr-2">
+      <label for="fac" class="mr-4"><b>Administracion de Facturas</b></label>
+    </div>
+
+    <div class="form-group col-md-8 offset-md-2">
+      <input id="prod" type="checkbox" [(ngModel)]="nombre_permiso.admin_productos " class="mr-2">
+      <label for="prod" class="mr-4"><b>Administracion de Productos</b></label>
+    </div>
+
+    <div class="form-group col-md-8 offset-md-2">
+      <input id="prov" type="checkbox" [(ngModel)]="nombre_permiso.admin_proveedores " class="mr-2">
+      <label for="prov" class="mr-4"><b>Administracion de Proveedores</b></label>
+    </div>
+
+    <div class="form-group col-md-8 offset-md-2">
+      <input id="puesto" type="checkbox" [(ngModel)]="nombre_permiso.admin_puestos " class="mr-2">
+      <label for="puesto" class="mr-4"><b>Administracion de Puestos</b></label>
+    </div>
+
+    <div class="form-group col-md-8 offset-md-2">
+      <input id="uni" type="checkbox" [(ngModel)]="nombre_permiso.admin_unidad_medida " class="mr-2">
+      <label for="uni" class="mr-4"><b>Administracion de unidades de Medida</b></label>
+    </div>
+
+    <div class="form-group col-md-8 offset-md-2">
+      <input id="cred" type="checkbox" [(ngModel)]="nombre_permiso.asignar_credenciales " class="mr-2">
+      <label for="cred" class="mr-4"><b>Asignar Credenciales</b></label>
+    </div>
+
+    <div class="form-group col-md-8 offset-md-2">
+      <input id="kar" type="checkbox" [(ngModel)]="nombre_permiso.admin_kardex " class="mr-2">
+      <label for="kar" class="mr-4"><b>Administracion de Kardex</b></label>
+    </div>
+
+    <div class="form-group col text-center">
+      <button class="btn btn-success ml-2" (click)="guardar()">Guardar</button>
+      <button class="btn btn-danger ml-2" [routerLink]="['/roles']">Cancelar</button>
+    </div>
+
+  </div>
+</div>
+
