@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Tarea } from 'src/app/models/tarea';
 import { Observable, throwError, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { APPCONFIG } from '../constantes.module';
-import { Empleado } from '../models/empleado';
 import { Roles } from '../models/roles';
+import { Permiso } from '../models/permisos';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,12 +13,12 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-export class RoleService {
+export class PermisosService {
 
   constructor(private http: HttpClient) { }
 
-  findList(): Observable<Roles[]> {
-    return this.http.get<Roles[]>(APPCONFIG.BASE_URL + "/roles/RolesHabilitados", httpOptions).pipe(
+  findPermisos(): Observable<any[]> {
+    return this.http.get<any[]>(APPCONFIG.BASE_URL + "/permisos/"+localStorage.getItem('usr'), httpOptions).pipe(
       catchError(this.handleError('findList', []))
     );
   }

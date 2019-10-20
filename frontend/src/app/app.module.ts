@@ -16,6 +16,10 @@ import { EmpleadosComponent } from './components/empleados/empleado.component';
 import { CrearEmpleadoComponent } from './components/empleados/crear-empleado.component';
 import { EditarEmpleadoComponent } from './components/empleados/editar-empleado.component';
 import { EmpleadosInComponent } from './components/empleados/empleadoin.component';
+import { RolesComponent } from './components/roles/roles.component';
+import { CrearRolesComponent } from './components/roles/crear-roles.component';
+import { RolesinComponent } from './components/roles/rolesin.component';
+import { EditarRolComponent } from './components/roles/editar-rol.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { EmpleadosInComponent } from './components/empleados/empleadoin.componen
     EmpleadosComponent, 
     CrearEmpleadoComponent,
     EditarEmpleadoComponent, 
-    EmpleadosInComponent
+    EmpleadosInComponent, 
+    RolesComponent, 
+    CrearRolesComponent, 
+    RolesinComponent,
+    EditarRolComponent
   ],
   imports: [
     BrowserModule,

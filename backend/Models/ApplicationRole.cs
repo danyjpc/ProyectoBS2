@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 namespace backend.Models
@@ -6,6 +7,6 @@ namespace backend.Models
     {
         public string descripcion { get; set; }
         public int habilitado { get; set; }
-        
+        public List<PermisoRol> Permiso_rol { get; set; }  
     }
 }
