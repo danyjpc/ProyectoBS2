@@ -12164,11 +12164,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\8vo semestre\\SBD2\\proyecto\\ProyectoBS2\\backend\\backend.csproj",
+      "projectUniqueName": "d:\\8vo semestre\\SBD2\\proyecto\\ProyectoBS2\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "D:\\8vo semestre\\SBD2\\proyecto\\ProyectoBS2\\backend\\backend.csproj",
+      "projectPath": "d:\\8vo semestre\\SBD2\\proyecto\\ProyectoBS2\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-      "outputPath": "D:\\8vo semestre\\SBD2\\proyecto\\ProyectoBS2\\backend\\obj\\",
+      "outputPath": "d:\\8vo semestre\\SBD2\\proyecto\\ProyectoBS2\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12235,13 +12235,5 @@
         "warn": true
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché D:\\8vo semestre\\SBD2\\proyecto\\ProyectoBS2\\backend\\obj\\backend.csproj.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
