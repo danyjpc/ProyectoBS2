@@ -13,6 +13,12 @@ import { CrearRolesComponent } from './components/roles/crear-roles.component';
 import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
 import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
+import { PuestosComponent } from './components/puestos/puestos.component';
+import { CrearPuestoComponent } from './components/puestos/crear-puesto.component';
+import { PuestosInComponent } from './components/puestos/puestosin.component';
+import { EditarPuestoComponent } from './components/puestos/editar-puesto.component';
+import { CambioPassword } from './components/cambio password/cambio.component';
+import { AsignarCredencialesComponent } from './components/empleados/asignar.component';
 
 const routes: Routes = [
   //Se configura el componente de inicio
@@ -27,6 +33,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     //
   },
+  {
+    path: 'cambiar-contrasenia',
+    component: CambioPassword,
+    canActivate: [AuthGuard],
+    //
+  },
+  
   //Administracion de empleados
   {
     path: 'empleado',
@@ -82,6 +95,41 @@ const routes: Routes = [
     component: AsignarPermisosComponent,
     canActivate: [AuthGuard],
     data: { permisos:"1" }
+  },
+
+  //Administracion de Puestos
+  {
+    path: 'puestos',
+    component: PuestosComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"9" }
+  },
+  {
+    path: 'puestosin',
+    component: PuestosInComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"9" }
+  },
+  {
+    path: 'crear-puesto',
+    component: CrearPuestoComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"9" }
+  },
+  {
+    path: 'editar-puesto/:cod_puesto',
+    component: EditarPuestoComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"9" }
+  },
+
+  //Asignar crednciales
+  
+  {
+    path: 'asignar-credenciales/:id',
+    component: AsignarCredencialesComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"11" }
   },
 
 

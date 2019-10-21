@@ -5,6 +5,8 @@ import { Observable, throwError, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { APPCONFIG } from '../constantes.module';
 import { Empleado } from '../models/empleado';
+import { CambioPass } from '../models/cambio';
+import { UserInfo } from '../models/userinfo';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -37,8 +39,16 @@ export class EmpleadoService {
     return this.http.post<Empleado>(APPCONFIG.BASE_URL+"/empleados",item);
   }
 
+  crearuser(item: UserInfo): Observable<UserInfo> {
+    return this.http.post<UserInfo>(APPCONFIG.BASE_URL+"/account/CrearUsuario",item);
+  }
+
   editar(item: Empleado): Observable<Empleado> {
     return this.http.put<Empleado>(APPCONFIG.BASE_URL+"/empleados/"+item.cod_empleado,item);
+  }
+
+  editarPass(item: CambioPass): Observable<CambioPass> {
+    return this.http.put<CambioPass>(APPCONFIG.BASE_URL+"/usuarios/EditarPassword/"+localStorage.getItem('usr'),item);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

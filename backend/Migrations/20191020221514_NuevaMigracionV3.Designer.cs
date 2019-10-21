@@ -9,8 +9,8 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(BdContext))]
-    [Migration("20191020034012_OtraMigraV3")]
-    partial class OtraMigraV3
+    [Migration("20191020221514_NuevaMigracionV3")]
+    partial class NuevaMigracionV3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

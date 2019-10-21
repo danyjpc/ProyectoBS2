@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend.Migrations
 {
-    public partial class OtraMigraV3 : Migration
+    public partial class NuevaMigracionV3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -16,6 +16,7 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        this.perm = new Array();
         const currentUser = this.authenticationService.currentUserValue;
         var p= localStorage.getItem('permisos');
         //console.log(localStorage.getItem('usr'))

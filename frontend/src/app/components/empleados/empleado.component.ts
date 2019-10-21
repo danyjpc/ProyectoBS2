@@ -38,5 +38,9 @@ export class EmpleadosComponent implements OnInit{
         this.router.navigate(['/editar-empleado', value.cod_empleado])
     }
 
+    credenciales(value){
+        this.router.navigate(['/asignar-credenciales', value.cod_empleado])
+    }
+
     
 }

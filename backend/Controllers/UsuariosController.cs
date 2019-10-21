@@ -105,6 +105,15 @@ namespace backend.Controllers
 
             return Ok();
         }
+        //Editar Contraseña
+        [HttpGet]
+        [Route("CodUser/{cod_empleado}")]
+        public async Task<IActionResult> UsuarioCod(int cod_empleado)
+        {
+            var user = await _context.Users.Where(x => x.cod_empleado == cod_empleado).ToListAsync();
+
+            return Ok(user[0]);
+        }
 
         //Editar Contraseña
         [HttpPut]
@@ -134,5 +143,11 @@ namespace backend.Controllers
             await _userManager.UpdateAsync(user);
             return Ok();
         }
+
+
+        
     }
+
+
+    
 }

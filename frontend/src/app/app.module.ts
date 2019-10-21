@@ -21,6 +21,13 @@ import { CrearRolesComponent } from './components/roles/crear-roles.component';
 import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
 import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
+import { PuestosComponent } from './components/puestos/puestos.component';
+import { CrearPuestoComponent } from './components/puestos/crear-puesto.component';
+import { PuestosInComponent } from './components/puestos/puestosin.component';
+import { EditarPuestoComponent } from './components/puestos/editar-puesto.component';
+import {  NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CambioPassword } from './components/cambio password/cambio.component';
+import { AsignarCredencialesComponent } from './components/empleados/asignar.component';
 
 @NgModule({
   declarations: [
@@ -36,11 +43,18 @@ import { AsignarPermisosComponent } from './components/roles/asignar-permisos.co
     CrearRolesComponent, 
     RolesinComponent,
     EditarRolComponent, 
-    AsignarPermisosComponent
+    AsignarPermisosComponent, 
+    PuestosComponent, 
+    CrearPuestoComponent, 
+    PuestosInComponent, 
+    EditarPuestoComponent, 
+    CambioPassword,
+    AsignarCredencialesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
     HttpClientModule,
     FormsModule,
     BrowserModule,

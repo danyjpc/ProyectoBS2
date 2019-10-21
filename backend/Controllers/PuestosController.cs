@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using backend.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace backend.Controllers
 {
@@ -14,8 +17,12 @@ namespace backend.Controllers
     public class PuestosController : ControllerBase
     {
         private readonly BdContext _context;
-        public PuestosController(BdContext bdContext)
+         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
+        public PuestosController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, BdContext bdContext)
         {
+            _userManager = userManager;
+            _roleManager = roleManager;
             _context = bdContext;
         }
 
@@ -38,6 +45,16 @@ namespace backend.Controllers
         public async Task<List<Puesto>> obtenerPuestos()
         {
             return await _context.Puestos.ToListAsync();
+        }
+
+        //OBTENER Puestos DESHABILITADAS
+        //GET: api/Personas/Deshabilitado
+        [Route("Deshabilitado")]
+        [HttpGet]
+        public async Task<List<Empleado>> obtenerPersonasDeshabilitadas()
+        {
+            var personas = await _context.Empleados.Where(x => x.estado_activo == 0).ToListAsync();
+            return personas;
         }
           
         //Crear nuevo puesto

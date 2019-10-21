@@ -94,6 +94,7 @@ namespace backend.Controllers
                 empleadoOld.nombre = empleado.nombre;
                 empleadoOld.direccion = empleado.direccion;
                 empleadoOld.dpi = empleado.dpi;
+                empleadoOld.cod_puesto= empleado.cod_puesto;
                 empleadoOld.estado_activo = empleado.estado_activo;
 
                 _context.Entry(empleadoOld).State = EntityState.Modified;
