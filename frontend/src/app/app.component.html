@@ -1,14 +1,14 @@
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light" *ngIf="currentUser">
   <div class="container">
-    <a class="navbar-brand" href="/">TO DO LIST</a>
+    <a class="navbar-brand" href="/">Amabisca S.A</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item">
+          <button class="btn btn-dark nav-link" [routerLink]="['/proveedores']" routerLinkActive="/proveedores" >proveedores</button>
         </li>
         <!--Administracion de empleados-->
         <li class="nav-item">
@@ -23,6 +23,11 @@
         <li class="nav-item">
           <button class="btn btn-dark nav-link" *ngIf="nombres.admin_puestos" [routerLink]="['/puestos']" routerLinkActive="/puestos">Puestos</button>
         </li>
+
+        <!--Administracion de clientes-->
+        <li class="nav-item">
+            <button class="btn btn-dark nav-link" *ngIf="nombres.admin_clientes" [routerLink]="['/clientes']" routerLinkActive="/clientes">Clientes</button>
+          </li>
 
         <!--Boton de cierre de sesion-->
         <li class="nav-item">

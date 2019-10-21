@@ -4,6 +4,10 @@ import {TareasComponent} from './/components/tareas/tareas.component';
 import { LoginComponent } from './components/login';
 import { AuthGuard } from './components/_guards';
 import { Role } from './models/role';
+import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import {ProductosComponent} from './components/productos/productos.component';
+import  { UmedidaComponent } from './components/productos/umedida.component';
+import  { CatProductoComponent } from './components/productos/cat-producto.component';
 import { EmpleadosComponent } from './components/empleados/empleado.component';
 import { CrearEmpleadoComponent } from './components/empleados/crear-empleado.component';
 import { EditarEmpleadoComponent } from './components/empleados/editar-empleado.component';
@@ -19,6 +23,10 @@ import { PuestosInComponent } from './components/puestos/puestosin.component';
 import { EditarPuestoComponent } from './components/puestos/editar-puesto.component';
 import { CambioPassword } from './components/cambio password/cambio.component';
 import { AsignarCredencialesComponent } from './components/empleados/asignar.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { ClientesInComponent } from './components/clientes/clientesin.component';
+import { CrearClienteComponent } from './components/clientes/crear-cliente.component';
+import { EditarClienteComponent } from './components/clientes/editar-cliente.component';
 
 const routes: Routes = [
   //Se configura el componente de inicio
@@ -131,12 +139,61 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { permisos:"11" }
   },
+  //Administracion de Clientes
+  {
+    path: 'clientes',
+    component: ClientesComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"4" }
+  },
+  {
+    path: 'clientesin',
+    component: ClientesInComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"4" }
+  },
+  {
+    path: 'crear-cliente',
+    component: CrearClienteComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"4" }
+  },
+  {
+    path: 'editar-cliente/:id_cliente',
+    component: EditarClienteComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"4" }
+  },
 
 
   {
     path: 'login',
     component: LoginComponent
-  }
+  },
+  {
+    path: 'proveedores',
+    component: ProveedoresComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"8" }
+  },
+  {
+    path: 'productos',
+    component: ProductosComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"7" }
+  },
+  {
+    path: 'umedida',
+    component: UmedidaComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"10" }
+  },
+  {
+    path: 'cat-producto',
+    component: CatProductoComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"3" }
+  },
 ];
 
 @NgModule({

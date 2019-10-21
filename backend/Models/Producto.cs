@@ -17,7 +17,7 @@ namespace backend.Models
         public string descripcion {get;set;}
         public decimal costo_compra {get;set;}
         public decimal precio_unitario{get;set;}
-        public int cantidad_existente {get;set;}
+        public int habilitado { get; set; }
         [ForeignKey("id_categoria")]
         public int id_categoria{get;set;}
         public Categoria categoria {get;set;}

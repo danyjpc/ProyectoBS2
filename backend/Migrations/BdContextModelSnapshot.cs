@@ -190,6 +190,8 @@ namespace backend.Migrations
                     b.Property<string>("descripcion")
                         .HasColumnType("varchar(150)");
 
+                    b.Property<int>("habilitado");
+
                     b.Property<string>("nombre")
                         .HasColumnType("varchar(50)");
 
@@ -205,6 +207,8 @@ namespace backend.Migrations
 
                     b.Property<string>("direccion")
                         .HasColumnType("varchar(100)");
+
+                    b.Property<int>("habilitado");
 
                     b.Property<string>("nom_cliente")
                         .HasColumnType("varchar(100)");
@@ -261,21 +265,18 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.Dimension", b =>
                 {
-                    b.Property<int>("id_dimension")
-                        .ValueGeneratedOnAdd();
-
                     b.Property<int>("id_producto");
 
                     b.Property<int>("id_unidad_medida");
+
+                    b.Property<int>("habilitado");
 
                     b.Property<string>("nombre_dimension")
                         .HasColumnType("varchar(45)");
 
                     b.Property<decimal>("valor");
 
-                    b.HasKey("id_dimension");
-
-                    b.HasIndex("id_producto");
+                    b.HasKey("id_producto", "id_unidad_medida");
 
                     b.HasIndex("id_unidad_medida");
 
@@ -317,6 +318,8 @@ namespace backend.Migrations
 
                     b.Property<DateTime>("fecha")
                         .HasColumnType("date");
+
+                    b.Property<int>("habilitado");
 
                     b.Property<int>("id_cliente");
 
@@ -368,7 +371,7 @@ namespace backend.Migrations
 
                     b.HasKey("cod_permiso");
 
-                    b.ToTable("Permisos");
+                    b.ToTable("tb_permiso");
                 });
 
             modelBuilder.Entity("backend.Models.PermisoRol", b =>
@@ -391,8 +394,6 @@ namespace backend.Migrations
                     b.Property<int>("id_producto")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("cantidad_existente");
-
                     b.Property<string>("cod_producto")
                         .HasColumnType("varchar(45)");
 
@@ -400,6 +401,8 @@ namespace backend.Migrations
 
                     b.Property<string>("descripcion")
                         .HasColumnType("varchar(150)");
+
+                    b.Property<int>("habilitado");
 
                     b.Property<int>("id_categoria");
 
@@ -422,6 +425,8 @@ namespace backend.Migrations
 
                     b.Property<string>("direccion")
                         .HasColumnType("varchar(100)");
+
+                    b.Property<int>("habilitado");
 
                     b.Property<string>("nom_proveedor")
                         .HasColumnType("varchar(100)");
@@ -472,6 +477,8 @@ namespace backend.Migrations
 
                     b.Property<string>("abreviatura")
                         .HasColumnType("varchar(10)");
+
+                    b.Property<int>("habilitado");
 
                     b.Property<string>("nom_unidad")
                         .HasColumnType("varchar(45)");
