@@ -28,6 +28,9 @@ import { ClientesInComponent } from './components/clientes/clientesin.component'
 import { CrearClienteComponent } from './components/clientes/crear-cliente.component';
 import { EditarClienteComponent } from './components/clientes/editar-cliente.component';
 
+import { NuevaVentaComponent } from './components/ventas/nueva-venta.component'
+
+
 const routes: Routes = [
   //Se configura el componente de inicio
   {
@@ -41,6 +44,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     //
   },
+
   {
     path: 'cambiar-contrasenia',
     component: CambioPassword,
@@ -48,6 +52,17 @@ const routes: Routes = [
     //
   },
   
+
+
+  //Administracion de ventas
+  {
+    path: 'nueva-venta',
+    component: NuevaVentaComponent,
+    //canActivate: [AuthGuard],
+    //data: { permisos:"2" }
+  },
+
+
   //Administracion de empleados
   {
     path: 'empleado',

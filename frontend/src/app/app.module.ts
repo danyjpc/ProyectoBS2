@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -15,7 +15,9 @@ import { ProveedoresComponent } from './components/proveedores/proveedores.compo
 import { ProveedoresService } from 'src/app/services/proveedores.service';
 import { ProductosComponent } from './components/productos/productos.component';
 import { UmedidaComponent } from './components/productos/umedida.component';
+import { UnidadmedidasService } from 'src/app/services/unidadmedidas.service';
 import { CatProductoComponent } from './components/productos/cat-producto.component';
+import { CategoriasService } from 'src/app/services/categorias.service';
 import { APP_BASE_HREF } from '@angular/common';
 import { EmpleadosComponent } from './components/empleados/empleado.component';
 import { CrearEmpleadoComponent } from './components/empleados/crear-empleado.component';
@@ -38,6 +40,10 @@ import { ClientesInComponent } from './components/clientes/clientesin.component'
 import { CrearClienteComponent } from './components/clientes/crear-cliente.component';
 import { EditarClienteComponent } from './components/clientes/editar-cliente.component';
 
+import { NuevaVentaComponent } from './components/ventas/nueva-venta.component';
+import { VentaService } from './services/venta.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +62,7 @@ import { EditarClienteComponent } from './components/clientes/editar-cliente.com
     CrearRolesComponent, 
     RolesinComponent,
     EditarRolComponent, 
+
     AsignarPermisosComponent, 
     PuestosComponent, 
     CrearPuestoComponent, 
@@ -66,8 +73,11 @@ import { EditarClienteComponent } from './components/clientes/editar-cliente.com
     ClientesComponent,
     ClientesInComponent,
     CrearClienteComponent,
-    EditarClienteComponent
+    EditarClienteComponent,
+    NuevaVentaComponent
+
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -88,8 +98,10 @@ import { EditarClienteComponent } from './components/clientes/editar-cliente.com
     //Por ahora se esta usando este back end falso solo para simulacion de que si funciona el jwt, aca iria esta parte
     { provide: APP_BASE_HREF, useValue: '/' },
     //fakeBackendProvider
-
+    VentaService,
     ProveedoresService,
+    CategoriasService,
+    UnidadmedidasService,
   ],
   bootstrap: [AppComponent]
 })

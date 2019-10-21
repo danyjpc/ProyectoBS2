@@ -7,6 +7,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>Productos</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <li><button class="btn btn-dark nav-link" [routerLink]="['/productos']" routerLinkActive="/productos" >Productos</button></li>
+              <li><button class="btn btn-dark nav-link" [routerLink]="['/cat-producto']" routerLinkActive="/productos" >Categoria</button></li>
+              <li><button class="btn btn-dark nav-link" [routerLink]="['/umedida']" routerLinkActive="/productos" >Unidad de medida</button></li>
+            </div>
+        </div>
         <li class="nav-item">
           <button class="btn btn-dark nav-link" [routerLink]="['/proveedores']" routerLinkActive="/proveedores" >proveedores</button>
         </li>
@@ -17,6 +25,7 @@
         </li>
         <!--Administracion de roles-->
         <li class="nav-item">
+<<<<<<< HEAD
           <button class="btn btn-dark nav-link" *ngIf="nombres.admin_roles" [routerLink]="['/roles']" routerLinkActive="/roles">Roles</button>
         </li>
         <!--Administracion de puestos-->
@@ -30,6 +39,14 @@
           </li>
 
         <!--Boton de cierre de sesion-->
+=======
+            <button class="btn btn-dark nav-link" [routerLink]="['/nueva-venta']" routerLinkActive="/roles" >Roles</button>
+        </li>
+        <!--Administracion de ventas-->
+        <li class="nav-item">
+          <button class="btn btn-dark nav-link" [routerLink]="['/nueva-venta']" routerLinkActive="/roles" >Nueva venta</button>
+        </li>
+>>>>>>> 65bc990c37923f4421b6261891f8a9ad36f10841
         <li class="nav-item">
           <div class="row">
             <div class="col">
