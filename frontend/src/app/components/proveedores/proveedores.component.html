@@ -18,18 +18,13 @@
         </tr>
       </thead>
       <tbody>
-        <!--<tr *ngFor="let item of items; index as i">
+        <tr *ngFor="let item of items; index as i">
           <th scope="row">{{ i+1 }}</th>
           <td>{{ item.nom_proveedor }}</td>
           <td>{{ item.direccion }}</td>
-          <td>{{ item.telefono }}</td>-->
-          <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-          <td><button class="btn btn-success btn-sm" title="Editar" (click)="editar(content)" >Editar 
-            <i class="fa fa-edit" aria-hidden="true"></i></button> &nbsp;</td>
+          <td>{{ item.telefono }}</td>
+          <td><button class="btn btn-success btn-sm" title="Editar" (click)="editar(content, item)">Editar
+              <i class="fa fa-edit" aria-hidden="true"></i></button> &nbsp;</td>
         </tr>
       </tbody>
     </table>
@@ -37,71 +32,67 @@
 </div>
 
 <ng-template #crear let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Crear proveedor</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Crear proveedor</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="item.nom_proveedor">
+      </div>
     </div>
-    <div class="modal-body">
-        <form>
-            <div class="form-group row">
-              <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="staticEmail" placeholder="Juan" >
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword" class="col-sm-2 col-form-label">Dirección</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputPassword" placeholder="2av zona 1">
-              </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Teléfono</label>
-                <div class="col-sm-10">
-                  <input type="number" class="form-control" id="inputPassword" placeholder="34567897">
-                </div>
-              </div>
-          </form>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Dirección</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Dirección" [(ngModel)]="item.direccion">
+      </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
-      <button type="button" class="btn btn-outline-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Teléfono</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Número" [(ngModel)]="item.telefono">
+      </div>
     </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
+    <button type="button" class="btn btn-outline-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+  </div>
 </ng-template>
 
 <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Editar proveedor</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Editar proveedor</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Juan" [(ngModel)]="item.nom_proveedor">
+      </div>
     </div>
-    <div class="modal-body">
-        <form>
-            <div class="form-group row">
-              <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="staticEmail" placeholder="Juan" >
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword" class="col-sm-2 col-form-label">Dirección</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputPassword" placeholder="2av zona 1">
-              </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Teléfono</label>
-                <div class="col-sm-10">
-                  <input type="number" class="form-control" id="inputPassword" placeholder="34567897">
-                </div>
-              </div>
-          </form>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Dirección</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="2av zona 1" [(ngModel)]="item.direccion">
+      </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
-      <button type="button" class="btn btn-outline-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Teléfono</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="34567897" [(ngModel)]="item.telefono">
+      </div>
     </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
+    <button type="button" class="btn btn-outline-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+  </div>
 </ng-template>

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
 {
+    [Table("tb_permiso")]
     public class Permiso
     {
        [Key]

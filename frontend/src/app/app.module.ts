@@ -12,17 +12,40 @@ import {TareasService} from 'src/app/services/tareas.service';
 import { LoginComponent } from './components/login';
 import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './components/_helpers';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import { ProveedoresService } from 'src/app/services/proveedores.service';
 import { ProductosComponent } from './components/productos/productos.component';
 import { UmedidaComponent } from './components/productos/umedida.component';
 import { CatProductoComponent } from './components/productos/cat-producto.component';
+import { APP_BASE_HREF } from '@angular/common';
+import { EmpleadosComponent } from './components/empleados/empleado.component';
+import { CrearEmpleadoComponent } from './components/empleados/crear-empleado.component';
+import { EditarEmpleadoComponent } from './components/empleados/editar-empleado.component';
+import { EmpleadosInComponent } from './components/empleados/empleadoin.component';
+import { RolesComponent } from './components/roles/roles.component';
+import { CrearRolesComponent } from './components/roles/crear-roles.component';
+import { RolesinComponent } from './components/roles/rolesin.component';
+import { EditarRolComponent } from './components/roles/editar-rol.component';
+import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     TareasComponent, 
-    LoginComponent, ProveedoresComponent, ProductosComponent, UmedidaComponent,
-    CatProductoComponent
+    LoginComponent, 
+    ProveedoresComponent, 
+    ProductosComponent, 
+    UmedidaComponent,
+    CatProductoComponent,
+    EmpleadosComponent, 
+    CrearEmpleadoComponent,
+    EditarEmpleadoComponent, 
+    EmpleadosInComponent, 
+    RolesComponent, 
+    CrearRolesComponent, 
+    RolesinComponent,
+    EditarRolComponent, 
+    AsignarPermisosComponent
   ],
   imports: [
     BrowserModule,
@@ -34,14 +57,17 @@ import { CatProductoComponent } from './components/productos/cat-producto.compon
     HttpClientModule,
     NgbModule,
     
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     //TareasService
     //Por ahora se esta usando este back end falso solo para simulacion de que si funciona el jwt, aca iria esta parte
-    //{ provide: APP_BASE_HREF, useValue: '/' },
-    fakeBackendProvider
+    { provide: APP_BASE_HREF, useValue: '/' },
+    //fakeBackendProvider
+
+    ProveedoresService,
   ],
   bootstrap: [AppComponent]
 })
