@@ -15,6 +15,7 @@ namespace backend.Models
         public string direccion { get; set; }
         [Column(TypeName = "varchar(8)")]
         public string telefono { get; set; }
+        public int habilitado { get; set; }
         public List<Kardex> kardexs{get;set;}
     }
 }

@@ -13,6 +13,7 @@ namespace backend.Models
         public string nom_unidad{get;set;}
         [Column(TypeName = "varchar(10)")]
         public string abreviatura{get;set;}
+        public int habilitado { get; set; }
         public List<Dimension> dimensiones{get;set;}
     }
 }

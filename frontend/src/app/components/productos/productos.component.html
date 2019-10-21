@@ -1,0 +1,38 @@
+<br>
+<div class="card">
+  <div class="card-body">
+    <br>
+    <h4 class="card-title">Registro de productos</h4>
+    <div class="form-row">
+      <button type="button" class="btn btn-primary btn-sm" >Crear producto</button>
+    </div>
+    <br>
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">Código</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Costo compra</th>
+          <th scope="col">Precio u</th>
+          <th scope="col">Cantidad existe</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items; index as i">
+          <th scope="row">{{ i+1 }}</th>
+          <td>{{ item.cod_producto }}</td>
+          <td>{{ item.nom_producto }}</td>
+          <td>{{ item.descripcion }}</td>
+          <td>{{ item.costo_compra }}</td>
+          <td>{{ item.precio_unitario }}</td>
+          <td>{{ item.cantidad_existente }}</td>
+           <!--<td><button class="btn btn-success btn-sm" title="Editar" (click)="editar(content)" >Editar 
+            <i class="fa fa-edit" aria-hidden="true"></i></button> &nbsp;</td>-->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -13,6 +13,7 @@ namespace backend.Models
         public string nombre { get; set; }
         [Column(TypeName = "varchar(150)")]
         public string descripcion { get; set; }
+        public int habilitado { get; set; }
         public List<Producto> productos{get;set;}
     }
 }
