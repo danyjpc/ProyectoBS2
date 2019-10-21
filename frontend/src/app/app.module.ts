@@ -15,7 +15,9 @@ import { ProveedoresComponent } from './components/proveedores/proveedores.compo
 import { ProveedoresService } from 'src/app/services/proveedores.service';
 import { ProductosComponent } from './components/productos/productos.component';
 import { UmedidaComponent } from './components/productos/umedida.component';
+import { UnidadmedidasService } from 'src/app/services/unidadmedidas.service';
 import { CatProductoComponent } from './components/productos/cat-producto.component';
+import { CategoriasService } from 'src/app/services/categorias.service';
 import { APP_BASE_HREF } from '@angular/common';
 import { EmpleadosComponent } from './components/empleados/empleado.component';
 import { CrearEmpleadoComponent } from './components/empleados/crear-empleado.component';
@@ -68,6 +70,8 @@ import { AsignarPermisosComponent } from './components/roles/asignar-permisos.co
     //fakeBackendProvider
 
     ProveedoresService,
+    CategoriasService,
+    UnidadmedidasService,
   ],
   bootstrap: [AppComponent]
 })

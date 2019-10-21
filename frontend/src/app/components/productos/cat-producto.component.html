@@ -17,16 +17,11 @@
         </tr>
       </thead>
       <tbody>
-        <!--<tr *ngFor="let item of items; index as i">
+        <tr *ngFor="let item of items; index as i">
           <th scope="row">{{ i+1 }}</th>
-          <td>{{ item.nom_proveedor }}</td>
-          <td>{{ item.direccion }}</td>
-          <td>{{ item.telefono }}</td>-->
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td><button class="btn btn-success btn-sm" title="Editar" (click)="editar(content)" >Editar 
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.descripcion}}</td>
+          <td><button class="btn btn-success btn-sm" title="Editar" (click)="editar(content, item)" >Editar 
             <i class="fa fa-edit" aria-hidden="true"></i></button> &nbsp;</td>
         </tr>
       </tbody>
@@ -42,20 +37,18 @@
     </button>
   </div>
   <div class="modal-body">
-    <form>
       <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="staticEmail" placeholder="Metros">
+          <input type="text" class="form-control" id="staticEmail" placeholder="Nombre" [(ngModel)]="item.nombre">
         </div>
       </div>
       <div class="form-group row">
         <label for="inputPassword" class="col-sm-2 col-form-label">Descripción</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="inputPassword" placeholder="m">
+          <input type="text" class="form-control" id="inputPassword" placeholder="Descripción" [(ngModel)]="item.descripcion">
         </div>
       </div>
-    </form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
@@ -71,20 +64,18 @@
           </button>
         </div>
         <div class="modal-body">
-            <form>
                 <div class="form-group row">
                   <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="staticEmail" placeholder="Metros" >
+                    <input type="text" class="form-control" id="staticEmail" placeholder="Nombre" [(ngModel)]="item.nombre" >
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Descripción</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPassword" placeholder="m">
+                    <input type="text" class="form-control" id="inputPassword" placeholder="Descripción" [(ngModel)]="item.descripcion">
                   </div>
                 </div>
-              </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>

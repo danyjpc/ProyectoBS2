@@ -7,6 +7,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>Productos</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <li><button class="btn btn-dark nav-link" [routerLink]="['/productos']" routerLinkActive="/productos" >Productos</button></li>
+              <li><button class="btn btn-dark nav-link" [routerLink]="['/cat-producto']" routerLinkActive="/productos" >Categoria</button></li>
+              <li><button class="btn btn-dark nav-link" [routerLink]="['/umedida']" routerLinkActive="/productos" >Unidad de medida</button></li>
+            </div>
+        </div>
         <li class="nav-item">
           <button class="btn btn-dark nav-link" [routerLink]="['/proveedores']" routerLinkActive="/proveedores" >proveedores</button>
         </li>
