@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\Dany\Desktop\to do list\backend\bin\Debug\netcoreapp2.2\backend.deps.json
 C:\Users\Dany\Desktop\to do list\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
 C:\Users\Dany\Desktop\to do list\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
@@ -27,22 +26,6 @@ d:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backen
 d:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
 d:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
 d:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
-=======
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.dll
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.pdb
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csprojAssemblyReference.cache
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csproj.CoreCompileInputs.cache
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cache
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cs
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfoInputs.cache
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfo.cs
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
-D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
->>>>>>> 2aea7aa513c8edd1ac2a5b1607c2beafd062857b
 C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
 C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
 C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
@@ -71,4 +54,21 @@ C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\Proyect
 C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
 C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
 C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
+<<<<<<< HEAD
 >>>>>>> dbc716326f23d9112785d27ed4dcadb2cb48b39a
+=======
+D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
+D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
+D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
+d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.dll
+d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.pdb
+d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csprojAssemblyReference.cache
+d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csproj.CoreCompileInputs.cache
+d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cache
+d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cs
+d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfoInputs.cache
+d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfo.cs
+d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
+d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
+d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
+>>>>>>> 2ff8fca357d783bf58f0da6381117e05fb7c7cc3

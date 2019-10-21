@@ -22,6 +22,7 @@ import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
 import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { PedidosComponent } from './components/pedidos/pedidos.component';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    
+    NgbModule
     
   ],
   providers: [

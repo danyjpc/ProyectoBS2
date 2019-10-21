@@ -17,6 +17,7 @@ namespace backend.Models
         public Producto producto{get;set;}
         [ForeignKey("id_unidad_medida")]
         public int id_unidad_medida {get;set;}
+        public int habilitado { get; set; }
         public Unidad_medida unidad_medida {get;set;}
     }
 }

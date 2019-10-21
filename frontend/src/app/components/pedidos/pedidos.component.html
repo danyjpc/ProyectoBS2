@@ -6,20 +6,34 @@
         </div>
         
         <div class="card-body">
-            <table>
-                <thead>
+            <table class="table table-hover">
+                <thead class="thead-dark">
                     <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th scope="col">No.</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Operacion</th>
+                        <th scope="col">Proveedor</th>
+                        <th scope="col">Opciones</th>
                     </tr>
                 </thead>
-                <tbody>
-
+                <tbody *ngIf="kardexList.length != 0">
+                    <tr *ngFor="let item of kardexList">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">Editar</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
+
+            <p *ngIf="kardexList.length == 0">
+                <ngb-alert [dismissible]="false" class="text-center">
+                    <h6>No hay registros</h6>
+                </ngb-alert>
+            </p>
         </div>
     </div>
         
