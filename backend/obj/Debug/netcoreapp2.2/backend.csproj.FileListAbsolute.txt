@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
 D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
 D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
@@ -12,3 +13,19 @@ d:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backen
 d:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
 d:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
 d:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
+=======
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.dll
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.pdb
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csprojAssemblyReference.cache
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csproj.CoreCompileInputs.cache
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cache
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cs
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfoInputs.cache
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfo.cs
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
+C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
+>>>>>>> dbc716326f23d9112785d27ed4dcadb2cb48b39a

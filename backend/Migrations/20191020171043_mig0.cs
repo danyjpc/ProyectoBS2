@@ -201,7 +201,8 @@ namespace backend.Migrations
                 columns: table => new
                 {
                     cod_rol = table.Column<int>(nullable: false),
-                    cod_permiso = table.Column<int>(nullable: false)
+                    cod_permiso = table.Column<int>(nullable: false),
+                    id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

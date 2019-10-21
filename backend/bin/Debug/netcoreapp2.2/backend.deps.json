@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "8c9e1e5163addd14ecd15e5a0f299f0750f9bab6"
+    "signature": "8a40cdff513a43cad6aa61995390ede6968dbc0c"
   },
   "compilationOptions": {
     "defines": [
@@ -29,6 +29,7 @@
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.EntityFrameworkCore": "2.2.6",
           "Microsoft.NETCore.App": "2.2.0",
+          "MySqlConnector": "0.60.0",
           "Pomelo.EntityFrameworkCore.MySql": "2.2.6"
         },
         "runtime": {
@@ -253,11 +254,11 @@
       },
       "Microsoft.NETCore.Platforms/2.2.0": {},
       "Microsoft.NETCore.Targets/2.0.0": {},
-      "MySqlConnector/0.59.2": {
+      "MySqlConnector/0.60.0": {
         "runtime": {
           "lib/netcoreapp2.1/MySqlConnector.dll": {
-            "assemblyVersion": "0.59.2.0",
-            "fileVersion": "0.59.2.0"
+            "assemblyVersion": "0.60.0.0",
+            "fileVersion": "0.60.0.0"
           }
         },
         "compile": {
@@ -272,7 +273,7 @@
       "Pomelo.EntityFrameworkCore.MySql/2.2.6": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "2.2.6",
-          "MySqlConnector": "0.59.2",
+          "MySqlConnector": "0.60.0",
           "Pomelo.JsonObject": "2.2.0"
         },
         "runtime": {
@@ -3362,12 +3363,12 @@
       "path": "microsoft.netcore.targets/2.0.0",
       "hashPath": "microsoft.netcore.targets.2.0.0.nupkg.sha512"
     },
-    "MySqlConnector/0.59.2": {
+    "MySqlConnector/0.60.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-GU999Wx9wpsjP2GANNn0WKp1iTb9drHh0fgn+7nCefS4KWYQoYAuvWvhD65dm09pqL0aa1mXPT4wWGrRMoN+gg==",
-      "path": "mysqlconnector/0.59.2",
-      "hashPath": "mysqlconnector.0.59.2.nupkg.sha512"
+      "sha512": "sha512-7twaXeouPLPg8CCoWoKNimaH5hGVvEPu7jip+bTfQGuQPK5YS7a/X2c71UCk+DOR2nBokSLUFm+ua/OY4POoZA==",
+      "path": "mysqlconnector/0.60.0",
+      "hashPath": "mysqlconnector.0.60.0.nupkg.sha512"
     },
     "NETStandard.Library/2.0.3": {
       "type": "package",

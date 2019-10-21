@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
+                    localStorage.setItem('usr',this.f.username.value);
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {

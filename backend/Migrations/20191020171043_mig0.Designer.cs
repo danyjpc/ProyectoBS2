@@ -9,7 +9,7 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(BdContext))]
-    [Migration("20191020164138_mig0")]
+    [Migration("20191020171043_mig0")]
     partial class mig0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -378,6 +378,8 @@ namespace backend.Migrations
                     b.Property<int>("cod_rol");
 
                     b.Property<int>("cod_permiso");
+
+                    b.Property<int>("id");
 
                     b.HasKey("cod_rol", "cod_permiso");
 

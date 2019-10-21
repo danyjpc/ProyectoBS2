@@ -1,0 +1,41 @@
+<div class="container col-md-8 offset-md-2 mt-2">
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="h3 col text-center mt-2">Listado de Empleados Inhabilitados</h3>
+          </div>
+          <div class="card-body">
+      
+            <button class="btn btn-success" (click)="crearEmpleado()" >Crear Empleado</button>
+            <button class="btn btn-secondary ml-2" [routerLink]="['/empleado']" routerLinkActive="/empleado" >Empleados Habilitados</button>
+            <table class="table table-striped mt-2">
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">Nombres y Apellidos</th>
+                  <th scope="col">Dirección</th>
+                  <th scope="col">DPI</th>
+                  <th scope="col">Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+      
+                <tr *ngFor="let item of listEmpleado">
+                  <th scope="row">{{item.cod_empleado}}</th>
+                  <td scope="row">{{item.nombre}}</td>
+                  <td scope="row">{{item.direccion}}</td>
+                  <td scope="row">{{item.dpi}}</td>
+                  <td>
+                    <button class="btn btn-sm ml-2 btn-primary" (click)="editarEmpleado(item)">Editar</button>
+                  </td>
+                </tr>
+      
+      
+              </tbody>
+            </table>
+      
+          </div>
+        </div>
+      
+      </div>
+      

@@ -11,6 +11,7 @@ import { User } from './models/user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'frontend';
   currentUser: User;
 

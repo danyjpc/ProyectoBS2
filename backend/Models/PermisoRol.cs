@@ -4,6 +4,8 @@ namespace backend.Models
 {
     public class PermisoRol
     {
+        
+        public int id {get; set; }
         public int cod_rol { get; set; }
         [ForeignKey("cod_rol")]
         public ApplicationRole ApplicationRole { get; set; }

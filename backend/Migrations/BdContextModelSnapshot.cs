@@ -377,6 +377,8 @@ namespace backend.Migrations
 
                     b.Property<int>("cod_permiso");
 
+                    b.Property<int>("id");
+
                     b.HasKey("cod_rol", "cod_permiso");
 
                     b.HasIndex("cod_permiso");

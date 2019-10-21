@@ -1,0 +1,41 @@
+<div class="container col-md-8 offset-md-2 mt-2">
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="h3 col text-center mt-2">Listado de Roles</h3>
+          </div>
+          <div class="card-body">
+      
+            <button class="btn btn-success" (click)="crearRol()" >Crear Rol</button>
+            <button class="btn btn-secondary ml-2" [routerLink]="['/rolesin']" routerLinkActive="rolesin"  >Roles Inhabilitados</button>
+            <table class="table table-striped mt-2">
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">Nombre </th>
+                  <th scope="col">Descripción</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+      
+                <tr *ngFor="let item of listRoles">
+                  <th scope="row">{{item.id}}</th>
+                  <th scope="row">{{item.name}}</th>
+                  <td scope="row">{{item.descripcion}}</td>
+                 
+                  <td>
+                    <button class="btn btn-sm ml-2 btn-primary" *ngIf="item.id > 1" (click)="editarRol(item)">Editar</button>
+                    <button class="btn btn-info btn-sm ml-2" *ngIf="item.id > 1" (click)="asignarPermisos(item)">Asignar permisos</button>
+                  </td>
+                </tr>
+      
+      
+              </tbody>
+            </table>
+      
+          </div>
+        </div>
+      
+      </div>
+      
