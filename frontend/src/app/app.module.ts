@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -11,7 +11,12 @@ import { TareasComponent } from './components/tareas/tareas.component';
 import {TareasService} from 'src/app/services/tareas.service';
 import { LoginComponent } from './components/login';
 import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './components/_helpers';
-import { APP_BASE_HREF } from '@angular/common';
+import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import { ProveedoresService } from 'src/app/services/proveedores.service';
+import { ProductosComponent } from './components/productos/productos.component';
+import { UmedidaComponent } from './components/productos/umedida.component';
+import { CatProductoComponent } from './components/productos/cat-producto.component';
+import { APP_BASE_HREF, DatePipe } from '@angular/common';
 import { EmpleadosComponent } from './components/empleados/empleado.component';
 import { CrearEmpleadoComponent } from './components/empleados/crear-empleado.component';
 import { EditarEmpleadoComponent } from './components/empleados/editar-empleado.component';
@@ -22,14 +27,19 @@ import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
 import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditarPedidoComponent } from './components/pedidos/editar-pedido.component';
+import { NuevoPedidoComponent } from './components/pedidos/nuevo-pedido.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     TareasComponent, 
-    LoginComponent,
+    LoginComponent, 
+    ProveedoresComponent, 
+    ProductosComponent, 
+    UmedidaComponent,
+    CatProductoComponent,
     EmpleadosComponent, 
     CrearEmpleadoComponent,
     EditarEmpleadoComponent, 
@@ -39,7 +49,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RolesinComponent,
     EditarRolComponent, 
     AsignarPermisosComponent,
-    PedidosComponent
+    PedidosComponent,
+    NuevoPedidoComponent,
+    EditarPedidoComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +71,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     //Por ahora se esta usando este back end falso solo para simulacion de que si funciona el jwt, aca iria esta parte
     { provide: APP_BASE_HREF, useValue: '/' },
     //fakeBackendProvider
+
+    ProveedoresService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

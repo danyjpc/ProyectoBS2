@@ -79,6 +79,10 @@ namespace backend.Models
             .WithMany(pr => pr.detalles_kardex)
             .HasForeignKey(dka => dka.id_producto);
 
+            //Llave compuesta, Dimension
+            modelBuilder.Entity<Dimension>()
+            .HasKey(x => new {x.id_producto, x.id_unidad_medida});
+
             //Un producto, muchas dimension
             modelBuilder.Entity<Dimension>()
             .HasOne(dim => dim.producto)

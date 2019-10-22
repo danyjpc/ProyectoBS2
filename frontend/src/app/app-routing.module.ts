@@ -4,6 +4,10 @@ import {TareasComponent} from './/components/tareas/tareas.component';
 import { LoginComponent } from './components/login';
 import { AuthGuard } from './components/_guards';
 import { Role } from './models/role';
+import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import {ProductosComponent} from './components/productos/productos.component';
+import  { UmedidaComponent } from './components/productos/umedida.component';
+import  { CatProductoComponent } from './components/productos/cat-producto.component';
 import { EmpleadosComponent } from './components/empleados/empleado.component';
 import { CrearEmpleadoComponent } from './components/empleados/crear-empleado.component';
 import { EditarEmpleadoComponent } from './components/empleados/editar-empleado.component';
@@ -14,6 +18,8 @@ import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
 import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { EditarPedidoComponent } from './components/pedidos/editar-pedido.component';
+import { NuevoPedidoComponent } from './components/pedidos/nuevo-pedido.component';
 
 const routes: Routes = [
   //Se configura el componente de inicio
@@ -93,6 +99,38 @@ const routes: Routes = [
   { 
     path: 'pedidos', 
     component: PedidosComponent 
+  },
+  {
+    path: 'editar-pedido/:id_kardex',
+    component: EditarPedidoComponent
+  },
+  {
+    path: 'nuevo-pedido',
+    component: NuevoPedidoComponent
+  },
+  {
+    path: 'proveedores',
+    component: ProveedoresComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+  },
+  {
+    path: 'productos',
+    component: ProductosComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+  },
+  {
+    path: 'umedida',
+    component: UmedidaComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+  },
+  {
+    path: 'cat-producto',
+    component: CatProductoComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
   },
 ];
 

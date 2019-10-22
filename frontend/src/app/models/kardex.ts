@@ -4,5 +4,6 @@ export class Kardex{
     num_factura: number;
     serie_factura: string;
     tipo_operacion: number;
+    validado: number;
     id_proveedor: number;
 }
