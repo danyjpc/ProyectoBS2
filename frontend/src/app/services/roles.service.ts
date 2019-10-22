@@ -6,6 +6,9 @@ import { tap, catchError } from 'rxjs/operators';
 import { APPCONFIG } from '../constantes.module';
 import { Empleado } from '../models/empleado';
 import { Roles } from '../models/roles';
+import { UserRoles } from '../models/user_role';
+import { User } from '../models/user';
+import { UserInfo } from '../models/userinfo';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -36,6 +39,14 @@ export class RoleService {
 
   guardar(item: Roles): Observable<Roles> {
     return this.http.post<Roles>(APPCONFIG.BASE_URL+"/roles/CrearRol",item);
+  }
+
+  rolesUser(item: UserRoles): Observable<UserRoles> {
+    return this.http.post<UserRoles>(APPCONFIG.BASE_URL+"/roles/AsignarRolesUsuario",item);
+  }
+
+  idUser(item: number): Observable<UserInfo> {
+    return this.http.get<UserInfo>(APPCONFIG.BASE_URL+"/usuarios/CodUser/"+item,httpOptions);
   }
 
   editar(item: Roles): Observable<Roles> {

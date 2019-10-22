@@ -31,7 +31,7 @@ namespace backend.Controllers
         [HttpGet("{id_unidad_medida}")]
         public async Task<ActionResult<Unidad_medida>> ObtenerUnidadMedida(int id_unidad_medida)
         {
-            var unidad_medida = await _context.Clientes.FindAsync(id_unidad_medida);
+            var unidad_medida = await _context.Unidad_Medidas.FindAsync(id_unidad_medida);
 
             if(unidad_medida == null)
             {

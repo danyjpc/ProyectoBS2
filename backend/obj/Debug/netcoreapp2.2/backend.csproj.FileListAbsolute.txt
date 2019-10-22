@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 C:\Users\Dany\Desktop\to do list\backend\bin\Debug\netcoreapp2.2\backend.deps.json
 C:\Users\Dany\Desktop\to do list\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
 C:\Users\Dany\Desktop\to do list\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
@@ -12,6 +17,7 @@ C:\Users\Dany\Desktop\to do list\backend\obj\Debug\netcoreapp2.2\backend.Assembl
 C:\Users\Dany\Desktop\to do list\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
 C:\Users\Dany\Desktop\to do list\backend\obj\Debug\netcoreapp2.2\backend.dll
 C:\Users\Dany\Desktop\to do list\backend\obj\Debug\netcoreapp2.2\backend.pdb
+>>>>>>> 01022682974daea97061733f54f07dff0f09f922
 D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
 D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
 D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
@@ -27,6 +33,7 @@ d:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backen
 d:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
 d:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
 <<<<<<< HEAD
+<<<<<<< HEAD
 C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
 C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
 C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
@@ -41,6 +48,10 @@ C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 
 C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
 C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
 C:\Users\hugui\OneDrive\Escritorio\HDMC\Cunor\2do. Semestre 2019\Bases de Datos 2\Proyecto - Primera fase\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
+=======
+=======
+>>>>>>> 65bc990c37923f4421b6261891f8a9ad36f10841
+>>>>>>> 69ff210c3f7a90c5d4a682918585bf03d09e1cc6
 C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
 C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
 C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
@@ -55,6 +66,7 @@ C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\Proyect
 C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
 C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
 C:\Users\emanu\Desktop\Proyectos de cursos\Bases de datos\Proyecto Final\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
+<<<<<<< HEAD
 >>>>>>> dbc716326f23d9112785d27ed4dcadb2cb48b39a
 =======
 D:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
@@ -72,6 +84,12 @@ d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj
 d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
 d:\MIS DOCUMENTOS\2019 - Octavo ciclo\BDD\PROY_REPUESTOS\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
 >>>>>>> 2ff8fca357d783bf58f0da6381117e05fb7c7cc3
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> dbc716326f23d9112785d27ed4dcadb2cb48b39a
+=======
+>>>>>>> 69ff210c3f7a90c5d4a682918585bf03d09e1cc6
 C:\Users\Dany\Desktop\ProyectoBD2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
 C:\Users\Dany\Desktop\ProyectoBD2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
 C:\Users\Dany\Desktop\ProyectoBD2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
@@ -86,4 +104,23 @@ c:\Users\Dany\Desktop\ProyectoBD2\backend\obj\Debug\netcoreapp2.2\backend.Assemb
 c:\Users\Dany\Desktop\ProyectoBD2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
 c:\Users\Dany\Desktop\ProyectoBD2\backend\obj\Debug\netcoreapp2.2\backend.dll
 c:\Users\Dany\Desktop\ProyectoBD2\backend\obj\Debug\netcoreapp2.2\backend.pdb
+<<<<<<< HEAD
 >>>>>>> b19a7282c4bfba32d50ec7c3fcd183523581dbe5
+=======
+C:\Users\Dany\Desktop\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
+C:\Users\Dany\Desktop\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
+C:\Users\Dany\Desktop\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
+c:\Users\Dany\Desktop\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.dll
+c:\Users\Dany\Desktop\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.pdb
+c:\Users\Dany\Desktop\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csprojAssemblyReference.cache
+c:\Users\Dany\Desktop\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csproj.CoreCompileInputs.cache
+c:\Users\Dany\Desktop\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cache
+c:\Users\Dany\Desktop\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cs
+c:\Users\Dany\Desktop\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfoInputs.cache
+c:\Users\Dany\Desktop\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfo.cs
+c:\Users\Dany\Desktop\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
+c:\Users\Dany\Desktop\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
+c:\Users\Dany\Desktop\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
+>>>>>>> 01022682974daea97061733f54f07dff0f09f922
+>>>>>>> 65bc990c37923f4421b6261891f8a9ad36f10841
+>>>>>>> 69ff210c3f7a90c5d4a682918585bf03d09e1cc6

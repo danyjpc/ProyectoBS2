@@ -21,19 +21,14 @@
         </tr>
       </thead>
       <tbody>
-        <!--<tr *ngFor="let item of items; index as i">
+        <tr *ngFor="let item of items; index as i">
           <th scope="row">{{ i+1 }}</th>
-          <td>{{ item.nom_proveedor }}</td>
-          <td>{{ item.direccion }}</td>
-          <td>{{ item.telefono }}</td>-->
-          <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+          <td>{{ item.cod_producto }}</td>
+          <td>{{ item.nom_producto }}</td>
+          <td>{{ item.descripcion }}</td>
+          <td>{{ item.costo_compra }}</td>
+          <td>{{ item.precio_unitario }}</td>
+          <td>{{ item.cantidad_existente }}</td>
            <!--<td><button class="btn btn-success btn-sm" title="Editar" (click)="editar(content)" >Editar 
             <i class="fa fa-edit" aria-hidden="true"></i></button> &nbsp;</td>-->
         </tr>

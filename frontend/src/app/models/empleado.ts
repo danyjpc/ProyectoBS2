@@ -4,4 +4,5 @@ export class Empleado{
     direccion: string;
     dpi: string;
     estado_activo: number;
+    cod_puesto: number;
 }
