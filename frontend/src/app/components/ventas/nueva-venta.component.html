@@ -42,11 +42,11 @@
         <div class = "card-header form-row ">
             <div class = "col-md-8">
                 <label *ngIf="hayProductos" class = "alert alert-warning col 12" role = "alert">No hay productos disponibles</label>
-                <input type="text" class="form-control" placeholder = "Buscar producto..." [(ngModel)]  = "prod" [ngbTypeahead] = "searchprod" [resultFormatter] = "rFormatterProd" [inputFormatter] = "iFormatterProd" (focus) = "focusP$.next($event.target.value)" (click) = "clickP$.next($event.target.value)" #instanceP = "ngbTypeahead">
+                <input type="text" class="form-control" [(ngModel)]  = "prod"[ngbTypeahead] = "searchprod" [resultFormatter] = "rFormatterProd" [inputFormatter] = "iFormatterProd" (focus) = "focusP$.next($event.target.value)"(click) = "clickP$.next($event.target.value)" #instanceP = "ngbTypeahead">
                 <!--[(ngModel)]  = "prod" [ngbTypeahead] = "searchprod" [resultFormatter] = "rFormatterProd" [inputFormatter] = "iFormatterProd" (focus) = "focusP$.next($event.target.value)" (click) = "clickP$.next($event.target.value)" #instanceP = "ngbTypeahead"-->
             </div>
             <div class = "col-md-4">
-                    <button type="button" class="btn btn-primary">Agregar producto</button>
+                    <button type="button" class="btn btn-primary" (click) = "agregarProducto(aggPro)">Agregar producto</button>
             </div>
         </div>
         
@@ -76,4 +76,24 @@
         </div>
     </div>
 </div>
-      
+
+<ng-template #aggPro let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Agregar {{prod.nom_producto}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label" >Cantidad</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" placeholder="Cantidad" [(ngModel)]="detf.cantidad" min = "1" max = "{{prod.cantidad_existente}}">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
+      <button type="button" class="btn btn-outline-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+    </div>
+  </ng-template>

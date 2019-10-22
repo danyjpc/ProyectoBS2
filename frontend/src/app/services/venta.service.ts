@@ -5,6 +5,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { APPCONFIG } from '../constantes.module';
 import { Producto } from '../models/producto';
+import { Detalle_factura } from '../models/detalle_factura';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,6 +15,9 @@ const httpOptions = {
 })
 
 export class VentaService {
+    guardar(item: any) {
+        throw new Error("Method not implemented.");
+    }
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +26,10 @@ export class VentaService {
       catchError(this.handleError('findList', []))
     );
   }
+
+/*  nuevoDetalleFactura(): Observable<Detalle_factura>{
+    return this.http.post<Detalle_factura>(APPCONFIG.BASE_URL + "venta/adddetalle", httpOptions);
+  }*/
 
   /*findListIn(): Observable<Empleado[]> {
     return this.http.get<Empleado[]>(APPCONFIG.BASE_URL + "/empleados/deshabilitado", httpOptions).pipe(

@@ -9,20 +9,6 @@ namespace backend.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Permisos",
-                columns: table => new
-                {
-                    cod_permiso = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nom_permiso = table.Column<string>(type: "varchar(60)", nullable: true),
-                    habilitado = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permisos", x => x.cod_permiso);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "tareas",
                 columns: table => new
                 {
@@ -42,7 +28,8 @@ namespace backend.Migrations
                     id_categoria = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     nombre = table.Column<string>(type: "varchar(50)", nullable: true),
-                    descripcion = table.Column<string>(type: "varchar(150)", nullable: true)
+                    descripcion = table.Column<string>(type: "varchar(150)", nullable: true),
+                    habilitado = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,11 +44,26 @@ namespace backend.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     nom_cliente = table.Column<string>(type: "varchar(100)", nullable: true),
                     direccion = table.Column<string>(type: "varchar(100)", nullable: true),
-                    telefono = table.Column<string>(type: "varchar(8)", nullable: true)
+                    telefono = table.Column<string>(type: "varchar(8)", nullable: true),
+                    habilitado = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_cliente", x => x.id_cliente);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tb_permiso",
+                columns: table => new
+                {
+                    cod_permiso = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    nom_permiso = table.Column<string>(type: "varchar(60)", nullable: true),
+                    habilitado = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tb_permiso", x => x.cod_permiso);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,7 +74,8 @@ namespace backend.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     nom_proveedor = table.Column<string>(type: "varchar(100)", nullable: true),
                     direccion = table.Column<string>(type: "varchar(100)", nullable: true),
-                    telefono = table.Column<string>(type: "varchar(8)", nullable: true)
+                    telefono = table.Column<string>(type: "varchar(8)", nullable: true),
+                    habilitado = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,7 +121,8 @@ namespace backend.Migrations
                     id_unidad_medida = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     nom_unidad = table.Column<string>(type: "varchar(45)", nullable: true),
-                    abreviatura = table.Column<string>(type: "varchar(10)", nullable: true)
+                    abreviatura = table.Column<string>(type: "varchar(10)", nullable: true),
+                    habilitado = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -137,6 +141,7 @@ namespace backend.Migrations
                     costo_compra = table.Column<decimal>(nullable: false),
                     precio_unitario = table.Column<decimal>(nullable: false),
                     cantidad_existente = table.Column<int>(nullable: false),
+                    habilitado = table.Column<int>(nullable: false),
                     id_categoria = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -208,9 +213,9 @@ namespace backend.Migrations
                 {
                     table.PrimaryKey("PK_Permisos_rol", x => new { x.cod_rol, x.cod_permiso });
                     table.ForeignKey(
-                        name: "FK_Permisos_rol_Permisos_cod_permiso",
+                        name: "FK_Permisos_rol_tb_permiso_cod_permiso",
                         column: x => x.cod_permiso,
-                        principalTable: "Permisos",
+                        principalTable: "tb_permiso",
                         principalColumn: "cod_permiso",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -246,16 +251,15 @@ namespace backend.Migrations
                 name: "tb_dimension",
                 columns: table => new
                 {
-                    id_dimension = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    id_producto = table.Column<int>(nullable: false),
+                    id_unidad_medida = table.Column<int>(nullable: false),
                     nombre_dimension = table.Column<string>(type: "varchar(45)", nullable: true),
                     valor = table.Column<decimal>(nullable: false),
-                    id_producto = table.Column<int>(nullable: false),
-                    id_unidad_medida = table.Column<int>(nullable: false)
+                    habilitado = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tb_dimension", x => x.id_dimension);
+                    table.PrimaryKey("PK_tb_dimension", x => new { x.id_producto, x.id_unidad_medida });
                     table.ForeignKey(
                         name: "FK_tb_dimension_tb_producto_id_producto",
                         column: x => x.id_producto,
@@ -307,7 +311,8 @@ namespace backend.Migrations
                     fecha = table.Column<DateTime>(type: "date", nullable: false),
                     estado = table.Column<sbyte>(type: "tinyint", nullable: false),
                     id_cliente = table.Column<int>(nullable: false),
-                    id_empleado = table.Column<int>(nullable: false)
+                    id_empleado = table.Column<int>(nullable: false),
+                    habilitado = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -503,11 +508,6 @@ namespace backend.Migrations
                 column: "id_producto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_dimension_id_producto",
-                table: "tb_dimension",
-                column: "id_producto");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_tb_dimension_id_unidad_medida",
                 table: "tb_dimension",
                 column: "id_unidad_medida");
@@ -612,7 +612,7 @@ namespace backend.Migrations
                 name: "kardex");
 
             migrationBuilder.DropTable(
-                name: "Permisos");
+                name: "tb_permiso");
 
             migrationBuilder.DropTable(
                 name: "tb_factura");

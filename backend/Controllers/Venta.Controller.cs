@@ -35,6 +35,20 @@ namespace backend.Controllers
             return items;
         }
 
+        //POST: api/Empleados
+        [HttpPost("adddetalle")]
+        public async Task<ActionResult> aniadirDetalle(Detalle_factura detalle)
+        {
+            await _context.Detalles_facturas.AddAsync(detalle);
+            await _context.SaveChangesAsync();
+
+            int id = detalle.id_detalle_factura;
+
+            var nuevoDetalle = _context.Detalles_facturas.Where(det => det.id_detalle_factura == id);
+
+            return Ok(nuevoDetalle); //return id detalle_factura creada
+        }
+
 
 /*
         //OBTENER PERSONAS DESHABILITADAS

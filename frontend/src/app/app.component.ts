@@ -4,6 +4,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
 import { Role } from './models/role';
 import { User } from './models/user';
+import { Cliente } from './models/cliente';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent {
 
   title = 'frontend';
   currentUser: User;
+
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
