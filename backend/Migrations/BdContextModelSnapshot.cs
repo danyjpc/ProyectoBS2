@@ -210,6 +210,9 @@ namespace backend.Migrations
 
                     b.Property<int>("habilitado");
 
+                    b.Property<string>("nit")
+                        .HasColumnType("varchar(15)");
+
                     b.Property<string>("nom_cliente")
                         .HasColumnType("varchar(100)");
 
@@ -351,6 +354,8 @@ namespace backend.Migrations
 
                     b.Property<sbyte>("tipo_operacion")
                         .HasColumnType("tinyint");
+
+                    b.Property<byte>("validado");
 
                     b.HasKey("id_kardex");
 

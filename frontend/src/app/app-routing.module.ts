@@ -17,6 +17,9 @@ import { CrearRolesComponent } from './components/roles/crear-roles.component';
 import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
 import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { EditarPedidoComponent } from './components/pedidos/editar-pedido.component';
+import { NuevoPedidoComponent } from './components/pedidos/nuevo-pedido.component';
 import { PuestosComponent } from './components/puestos/puestos.component';
 import { CrearPuestoComponent } from './components/puestos/crear-puesto.component';
 import { PuestosInComponent } from './components/puestos/puestosin.component';
@@ -184,6 +187,18 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  { 
+    path: 'pedidos', 
+    component: PedidosComponent 
+  },
+  {
+    path: 'editar-pedido/:id_kardex',
+    component: EditarPedidoComponent
+  },
+  {
+    path: 'nuevo-pedido',
+    component: NuevoPedidoComponent
   },
   {
     path: 'proveedores',

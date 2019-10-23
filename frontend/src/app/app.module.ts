@@ -2,12 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { TareasComponent } from './components/tareas/tareas.component';
-
 import {TareasService} from 'src/app/services/tareas.service';
 import { LoginComponent } from './components/login';
 import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './components/_helpers';
@@ -17,8 +16,8 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { UmedidaComponent } from './components/productos/umedida.component';
 import { UnidadmedidasService } from 'src/app/services/unidadmedidas.service';
 import { CatProductoComponent } from './components/productos/cat-producto.component';
-import { CategoriasService } from 'src/app/services/categorias.service';
 import { APP_BASE_HREF, DatePipe } from '@angular/common';
+import { CategoriasService } from 'src/app/services/categorias.service';
 import { EmpleadosComponent } from './components/empleados/empleado.component';
 import { CrearEmpleadoComponent } from './components/empleados/crear-empleado.component';
 import { EditarEmpleadoComponent } from './components/empleados/editar-empleado.component';
@@ -28,6 +27,9 @@ import { CrearRolesComponent } from './components/roles/crear-roles.component';
 import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
 import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { EditarPedidoComponent } from './components/pedidos/editar-pedido.component';
+import { NuevoPedidoComponent } from './components/pedidos/nuevo-pedido.component';
 import { PuestosComponent } from './components/puestos/puestos.component';
 import { CrearPuestoComponent } from './components/puestos/crear-puesto.component';
 import { PuestosInComponent } from './components/puestos/puestosin.component';
@@ -62,8 +64,10 @@ import { VentaService } from './services/venta.service';
     CrearRolesComponent, 
     RolesinComponent,
     EditarRolComponent, 
-
-    AsignarPermisosComponent, 
+    AsignarPermisosComponent,
+    PedidosComponent,
+    NuevoPedidoComponent,
+    EditarPedidoComponent,
     PuestosComponent, 
     CrearPuestoComponent, 
     PuestosInComponent, 
@@ -87,8 +91,7 @@ import { VentaService } from './services/venta.service';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule,
-    
+    NgbModule
     
   ],
   providers: [
@@ -100,6 +103,7 @@ import { VentaService } from './services/venta.service';
     //fakeBackendProvider
     VentaService,
     ProveedoresService,
+    DatePipe,
     CategoriasService,
     UnidadmedidasService,
     DatePipe

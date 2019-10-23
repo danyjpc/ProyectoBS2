@@ -9,8 +9,8 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(BdContext))]
-    [Migration("20191021174227_OtraMigracion44")]
-    partial class OtraMigracion44
+    [Migration("20191023142951_mig0")]
+    partial class mig0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -212,6 +212,9 @@ namespace backend.Migrations
 
                     b.Property<int>("habilitado");
 
+                    b.Property<string>("nit")
+                        .HasColumnType("varchar(15)");
+
                     b.Property<string>("nom_cliente")
                         .HasColumnType("varchar(100)");
 
@@ -354,6 +357,8 @@ namespace backend.Migrations
                     b.Property<sbyte>("tipo_operacion")
                         .HasColumnType("tinyint");
 
+                    b.Property<byte>("validado");
+
                     b.HasKey("id_kardex");
 
                     b.HasIndex("id_proveedor");
@@ -395,6 +400,8 @@ namespace backend.Migrations
                 {
                     b.Property<int>("id_producto")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("cantidad_existente");
 
                     b.Property<string>("cod_producto")
                         .HasColumnType("varchar(45)");

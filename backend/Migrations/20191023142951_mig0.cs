@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend.Migrations
 {
-    public partial class OtraMigracion44 : Migration
+    public partial class mig0 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,7 +45,8 @@ namespace backend.Migrations
                     nom_cliente = table.Column<string>(type: "varchar(100)", nullable: true),
                     direccion = table.Column<string>(type: "varchar(100)", nullable: true),
                     telefono = table.Column<string>(type: "varchar(8)", nullable: true),
-                    habilitado = table.Column<int>(nullable: false)
+                    habilitado = table.Column<int>(nullable: false),
+                    nit = table.Column<string>(type: "varchar(15)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -140,6 +141,7 @@ namespace backend.Migrations
                     descripcion = table.Column<string>(type: "varchar(150)", nullable: true),
                     costo_compra = table.Column<decimal>(nullable: false),
                     precio_unitario = table.Column<decimal>(nullable: false),
+                    cantidad_existente = table.Column<int>(nullable: false),
                     habilitado = table.Column<int>(nullable: false),
                     id_categoria = table.Column<int>(nullable: false)
                 },
@@ -164,6 +166,7 @@ namespace backend.Migrations
                     num_factura = table.Column<int>(nullable: false),
                     serie_factura = table.Column<string>(type: "varchar(45)", nullable: true),
                     tipo_operacion = table.Column<sbyte>(type: "tinyint", nullable: false),
+                    validado = table.Column<byte>(nullable: false),
                     id_proveedor = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

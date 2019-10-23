@@ -7,6 +7,8 @@ import { APPCONFIG } from '../constantes.module';
 import { Producto } from '../models/producto';
 import { Detalle_factura } from '../models/detalle_factura';
 import { Clientes } from '../models/clientes';
+import { DetalleKardex } from '../models/detalle_kardex';
+import { Factura } from '../models/factura';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,9 +18,6 @@ const httpOptions = {
 })
 
 export class VentaService {
-    guardar(item: any) {
-        throw new Error("Method not implemented.");
-    }
 
   constructor(private http: HttpClient) { }
 
@@ -32,10 +31,23 @@ export class VentaService {
       catchError(this.handleError('findList', []))
     );
   }
+  obtenerDetallesFacxProd(): Observable<Detalle_factura[]> {
+    return this.http.get<Detalle_factura[]>(APPCONFIG.BASE_URL + "/venta/getdetxprod", httpOptions).pipe(
+      catchError(this.handleError('findList', []))
+    );
+  }
+  obtenerDetallesKarxProd(): Observable<DetalleKardex[]> {
+    return this.http.get<DetalleKardex[]>(APPCONFIG.BASE_URL + "/venta/getdetkxprod", httpOptions).pipe(
+      catchError(this.handleError('findList', []))
+    );
+  }
+  guardarFactura(item: Factura): Observable<Factura[]> {
+    return this.http.post<Factura[]>(APPCONFIG.BASE_URL+"/venta",item);
+  }
 
-/*  nuevoDetalleFactura(): Observable<Detalle_factura>{
-    return this.http.post<Detalle_factura>(APPCONFIG.BASE_URL + "venta/adddetalle", httpOptions);
-  }*/
+  guardarDetalleFactura(item: Detalle_factura[], fac: Factura): Observable<Detalle_factura[]>{
+    return this.http.post<Detalle_factura[]>(APPCONFIG.BASE_URL + "/venta/adddetalle/" + fac.id_factura, item);
+  }
 
   /*findListIn(): Observable<Empleado[]> {
     return this.http.get<Empleado[]>(APPCONFIG.BASE_URL + "/empleados/deshabilitado", httpOptions).pipe(

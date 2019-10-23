@@ -48,19 +48,39 @@ namespace backend.Controllers
             var items = await _context.Detalles_facturas.ToListAsync();
             return items;
         }
-
-        //POST: api/Empleados
-        [HttpPost("adddetalle")]
-        public async Task<ActionResult> aniadirDetalle(Detalle_factura detalle)
+        [HttpGet("getdetkxprod")]
+        public async Task<ActionResult<IEnumerable<Detalle_kardex>>> obtenerDetallesK()
         {
-            await _context.Detalles_facturas.AddAsync(detalle);
+            var items = await _context.Detalles_kardex.Where(dk => dk.kardex.validado == 1) .ToListAsync();
+            return items;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> crearFactura( Factura factura)
+        {
+            await _context.Facturas.AddAsync(factura);
             await _context.SaveChangesAsync();
 
-            int id = detalle.id_detalle_factura;
+            int id = factura.id_factura;
 
-            var nuevoDetalle = _context.Detalles_facturas.Where(det => det.id_detalle_factura == id);
+            var nuevaFactura = _context.Facturas.Where(x => x.id_factura == id);
 
-            return Ok(nuevoDetalle); //return id detalle_factura creada
+            return Ok(nuevaFactura);
+        }
+
+        [HttpPost("adddetalle/{id_factura}")]
+        public async Task<ActionResult> aniadirDetalle(Detalle_factura[] detalles, int id_factura)
+        {
+            for(int i=0; i<detalles.Length; i++)
+            {
+                detalles[i].id_factura = id_factura;
+            await _context.Detalles_facturas.AddAsync(detalles[i]);
+            await _context.SaveChangesAsync();
+
+           // int id = detalles[i].id_detalle_factura;
+            }
+
+            return Ok(); //return id detalle_factura creada
         }
 
 
