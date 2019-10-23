@@ -394,6 +394,8 @@ namespace backend.Migrations
                     b.Property<int>("id_producto")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("cantidad_existente");
+
                     b.Property<string>("cod_producto")
                         .HasColumnType("varchar(45)");
 

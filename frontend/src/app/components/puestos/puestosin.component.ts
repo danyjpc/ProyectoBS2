@@ -34,7 +34,7 @@ export class PuestosInComponent implements OnInit{
     }
 
     editarPuesto(value){
-        this.router.navigate(['/editar-puesto', value.id])
+        this.router.navigate(['/editar-puesto', value.cod_puesto])
     }
 
 

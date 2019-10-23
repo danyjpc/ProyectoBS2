@@ -140,6 +140,7 @@ namespace backend.Migrations
                     descripcion = table.Column<string>(type: "varchar(150)", nullable: true),
                     costo_compra = table.Column<decimal>(nullable: false),
                     precio_unitario = table.Column<decimal>(nullable: false),
+                    cantidad_existente = table.Column<int>(nullable: false),
                     habilitado = table.Column<int>(nullable: false),
                     id_categoria = table.Column<int>(nullable: false)
                 },
