@@ -33,7 +33,49 @@ export class AsignarPermisosComponent implements OnInit {
   }
 
   guardar() {
-      //Solo falta verificar cuales estan en true para subirlos al array y enviarlo
+    this.permiso_rol = new PermisosRol();
+      this.permiso_rol.cod_rol = this.rol.id;
+      if(this.nombre_permiso.admin_roles == true){
+        this.permiso_rol.cod_permisos.push(1);
+      }
+      if(this.nombre_permiso.admin_empleados == true){
+        this.permiso_rol.cod_permisos.push(2);
+      }
+      if(this.nombre_permiso.admin_categorias){
+        this.permiso_rol.cod_permisos.push(3);
+      }
+      if(this.nombre_permiso.admin_clientes){
+        this.permiso_rol.cod_permisos.push(4);
+      }
+      if(this.nombre_permiso.admin_dimensiones){
+        this.permiso_rol.cod_permisos.push(5);
+      }
+      if(this.nombre_permiso.admin_facturas){
+        this.permiso_rol.cod_permisos.push(6);
+      }
+      if(this.nombre_permiso.admin_productos){
+        this.permiso_rol.cod_permisos.push(7);
+      }
+      if(this.nombre_permiso.admin_proveedores){
+        this.permiso_rol.cod_permisos.push(8);
+      }
+      if(this.nombre_permiso.admin_puestos){
+        this.permiso_rol.cod_permisos.push(9);
+      }
+      if(this.nombre_permiso.admin_unidad_medida){
+        this.permiso_rol.cod_permisos.push(10);
+      }
+      if(this.nombre_permiso.asignar_credenciales){
+        this.permiso_rol.cod_permisos.push(11);
+      }
+      if(this.nombre_permiso.admin_kardex){
+        this.permiso_rol.cod_permisos.push(12);
+      }
+      this.service.permisosARol(this.permiso_rol).subscribe(
+        items=>{
+          this.router.navigate(['/roles'])
+        }
+      );
   }
 
   cargar(id: number) {

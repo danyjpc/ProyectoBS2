@@ -1,0 +1,37 @@
+<div class="container col-md-8 offset-md-2 mt-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="h3 col text-center"><b>Asignar Credenciales</b></h3>
+          </div>
+          <div class="card-body">
+            <div class="form-group col-md-8 offset-md-2">
+              <label for=""><b>Email *</b></label>
+              <input type="email" class="form-control" [(ngModel)]="user.email">
+            </div>
+            <div class="form-group col-md-8 offset-md-2">
+              <label for=""><b>Contraseña *</b></label>
+              <input type="password" class="form-control" [(ngModel)]="user.password">
+            </div>
+            <div class="form-group col-md-8 offset-md-2">
+              <label for=""><b>Confirmar Contraseña  *</b></label>
+              <input type="password" class="form-control" [(ngModel)]="user.password_confirmar">
+            </div>
+            
+            <div class="form-group col-md-8 offset-md-2">
+              <label> <b>Seleccionar Rol*</b> </label>
+              <input id="typeahead-focus" type="text" class="form-control" [(ngModel)]="model" [inputFormatter]="formatter"
+                [ngbTypeahead]="search" [resultFormatter]="formatter" (focus)="focus$.next($event.target.value)"
+                (click)="click$.next($event.target.value)" #instance="ngbTypeahead" />
+      
+            </div>
+            <div class="alert alert-danger col text-center" *ngIf="estado"><p>Las contraseñas no coinciden</p></div>
+      
+            <div class="form-group col text-center">
+              <button class="btn btn-success ml-2" (click)="guardar()">Guardar</button>
+              <button class="btn btn-danger ml-2" [routerLink]="['/empleado']">Cancelar</button>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+      

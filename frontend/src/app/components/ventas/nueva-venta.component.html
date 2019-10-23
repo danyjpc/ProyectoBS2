@@ -1,0 +1,79 @@
+<div class="container col-md-8 offset-md-2 mt-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="h3 col text-center"><b>Nueva venta</b></h3>
+            <h6 class="h6 col text-left"><b>Nombre de la empresa</b></h6>
+            <h6 class="h6 col text-left"><b>Dirección</b></h6>
+            <h6 class="h6 col text-left"><b>Teléfono</b></h6>
+            <h6 class="h6 col text-left"><b>E-mail</b></h6>
+          </div>
+
+        <div class="card-header">
+            <div>
+                 <button type="button" class="btn btn-primary">Crear cliente</button>
+            </div>
+            <br>
+            <div class="form-row" placement = "center">
+                <div class = "col-4">
+                    <h6 class="h6 text-left"><b>Cliente</b></h6>
+                    <input type="text" class="form-control" placeholder="Cliente">
+                </div>
+                <div class = "col-4 ">
+                    <h6 class="h6 text-left"><b>NIT</b></h6>
+                    <input type="text" class="form-control" placeholder="NIT">
+                </div>
+                <div class = "col-4">
+                        <h6 class="h6 text-left"><b>Dirección</b></h6>
+                        <input type="text" class="form-control" placeholder="Dirección">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class = "col-4">
+                    <h6 class="h6 text-left"><b>Teléfono</b></h6>
+                    <input type="text" class="form-control" placeholder="Teléfono">
+                </div>
+                    <div class = "col-4">
+                    <h6 class="h6 text-left"><b>Fecha</b></h6>
+                    <input type="text" class="form-control" placeholder="Fecha">
+                </div>
+            </div>            
+        </div>
+        
+        <div class = "card-header form-row ">
+            <div class = "col-md-8">
+                <label *ngIf="hayProductos" class = "alert alert-warning col 12" role = "alert">No hay productos disponibles</label>
+                <input type="text" class="form-control" placeholder = "Buscar producto..." [(ngModel)]  = "prod" [ngbTypeahead] = "searchprod" [resultFormatter] = "rFormatterProd" [inputFormatter] = "iFormatterProd" (focus) = "focusP$.next($event.target.value)" (click) = "clickP$.next($event.target.value)" #instanceP = "ngbTypeahead">
+                <!--[(ngModel)]  = "prod" [ngbTypeahead] = "searchprod" [resultFormatter] = "rFormatterProd" [inputFormatter] = "iFormatterProd" (focus) = "focusP$.next($event.target.value)" (click) = "clickP$.next($event.target.value)" #instanceP = "ngbTypeahead"-->
+            </div>
+            <div class = "col-md-4">
+                    <button type="button" class="btn btn-primary">Agregar producto</button>
+            </div>
+        </div>
+        
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <!-- <tr *ngFor="let item of items |  paginate: {itemsPerPage: 10, currentPage: paginaActual}; index as i">
+                        <td class="align-middle">{{ i+1 }}</td>
+                        <td class="align-middle">{{ item.nombre }}</td>
+                        <td class="align-middle">{{ item.cod_carrera_ref }}</td>
+                        <td class="align-middle" *ngIf = "item.habilitado" > Sí </td>
+                        <td class="align-middle" *ngIf = "!item.habilitado" > No </td>
+                        <button class="btn btn-primary" (click)="editarRegistro(item)"> <i class="fa fa-edit" aria-hidden="true"></i></button> &nbsp;
+                        <button class="btn btn-danger" (click)="eliminarRegistro(content, item)"><i class="fa fa-trash"></i></button>
+                    </tr>-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+      

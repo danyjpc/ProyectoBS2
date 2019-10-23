@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using backend.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +26,15 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<ActionResult> ObtenerClientes()
         {
-            var clientes = await _context.Clientes.ToListAsync();
+            var clientes = await _context.Clientes.Where(x => x.habilitado==1).ToListAsync();
+            return Ok(clientes);
+        }
+
+        //Inhabilitados
+        [HttpGet("Inhabilitados")]
+        public async Task<ActionResult> ObtenerClientesIN()
+        {
+            var clientes = await _context.Clientes.Where(x => x.habilitado==0).ToListAsync();
             return Ok(clientes);
         }
 
