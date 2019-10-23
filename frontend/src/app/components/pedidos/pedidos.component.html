@@ -1,0 +1,185 @@
+<div class="container col-md-8 offset-md-2 mt-2">
+    
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title" style="color: black;">Pedidos</h3>
+            <button class="btn btn-sm btn-dark" (click)="nuevoPedido()">Nuevo pedido</button>
+        </div>
+        
+        <div class="card-body">
+            <table class="table table-sm table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Operacion</th>
+                        <th scope="col">Proveedor</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="kardexList.length != 0">
+                    <tr *ngFor="let item of kardexList; index as i">
+                        <td style="color: black;">{{i+1}}</td>
+                        <td style="color: black;">{{item.fecha_fac | date:'dd/MM/yyyy'}}</td>
+                        <td *ngIf="item.tipo_operacion == 0" style="color: black;">Pedido</td>
+                        <td *ngIf="item.tipo_operacion == 1" style="color: black;">Devolucion</td>
+                        <td style="color: black;">{{item.nom_proveedor}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-success" (click)="verDetalles(modalDetalles, item)">Detalles</button>
+                            <button *ngIf="item.validado == 0" class="btn btn-sm" style="background-color: royalblue; color: white;" (click)="editar(item)">Editar</button>
+                            <button *ngIf="item.validado == 0" class="btn btn-sm btn-warning" (click)="validar(modalValidar, modalAdvertencia, item)">Validar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p *ngIf="kardexList.length == 0">
+                <ngb-alert [dismissible]="false" class="text-center">
+                    <h6>No hay registros</h6>
+                </ngb-alert>
+            </p>
+        </div>
+    </div>
+        
+</div>  
+
+<ng-template #modalAdvertencia let-modal>
+    <div class="modal-header" style="background-color: rgb(65, 65, 65);">
+        <input type="text" style="display:none;" />
+        <div class="row col-12 justify-content-center">
+            <h4 class="modal-title" style="color: white;">Advertencia <i class="fas fa-exclamation-triangle" style="color: rgb(255, 196, 0);"></i></h4>
+        </div>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span style="color: white;" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <br>
+        <h4>El pedido no tiene productos agregados.</h4>
+        <h4>No es posible validar.</h4>
+        <br>
+    </div>
+
+    <div class="modal-footer justify-content-center" style="background-color: rgb(65, 65, 65);">
+        <button type="button" class="btn btn-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+    </div>
+</ng-template>
+
+<ng-template #modalValidar let-modal>
+    <div class="modal-header" style="background-color: rgb(65, 65, 65);">
+        <input type="text" style="display:none;" />
+        <h4 class="modal-title" style="color: white;">Validar pedido</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span style="color: white;" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+    <div class="modal-body">
+        <div>
+            <h5>Al aceptar la validacion confirma que el pedido, o devolucion, de los productos se ha hecho efectivo.</h5>
+             
+            <h5>Una vez confirmada, no se podra editar el pedido.</h5>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <h4>¿Confirmar la validacion?</h4>
+        </div>
+    </div>
+    
+    <div class="modal-footer" style="background-color: rgb(65, 65, 65);">
+        <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
+        <button type="button" class="btn btn-warning btn-sm" (click)="modal.dismiss('Cancelar')">Cancelar</button>
+    </div>
+</ng-template>
+
+<ng-template #modalDetalles let-modal>
+    <div class="modal-header" style="background-color: rgb(65, 65, 65);">
+        <input type="text" style="display: none;">
+        <h4 *ngIf="operacion == 0" class="modal-title" style="color: white;">Detalle de pedido <span class="badge badge-{{tipoBadge}}">{{mensajeValidacion}}</span></h4>
+        <h4 *ngIf="operacion == 1" class="modal-title" style="color: white;">Detalle de devolucion <span class="badge badge-{{tipoBadge}}">{{mensajeValidacion}}</span></h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span style="color: white;" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="form-row col-12">
+
+            <div class="col-6">
+                <div class="row col-12">
+                    <span style="color: black; font-weight: 900; margin-right: 10px; font-size: medium;">FECHA: </span>
+                    <span style="color: black; font-size: medium;">{{kardex.fecha_fac | date: 'MM/dd/yyyy'}}</span>
+                </div>
+
+                <div class="row col-12">
+                    <span style="color: black; font-weight: 900; margin-right: 10px; font-size: medium;">NO. FACTURA: </span>
+                    <span style="color: black; font-size: medium;">{{kardex.num_factura}}</span>
+                </div>
+
+                <div class="row col-12">
+                    <span style="color: black; font-weight: 900; margin-right: 10px; font-size: medium;">SERIE FACTURA: </span>
+                    <span style="color: black; font-size: medium;">{{kardex.serie_factura.toUpperCase()}}</span>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="row col-12">
+                    <span style="color: black; font-weight: 900; margin-right: 10px; font-size: medium;">PROVEEDOR: </span>
+                    <span style="color: black; font-size: medium;">{{proveedorDetalle.nom_proveedor.toUpperCase()}}</span>
+                </div>
+
+                <div class="row col-12">
+                    <span style="color: black; font-weight: 900; margin-right: 10px; font-size: medium;">- DIRECCION: </span>
+                    <span style="color: black; font-size: medium;">{{proveedorDetalle.direccion.toUpperCase()}}</span>
+                </div>
+
+                <div class="row col-12">
+                    <span style="color: black; font-weight: 900; margin-right: 10px; font-size: medium;">- TELEFONO: </span>
+                    <span style="color: black; font-size: medium;">{{proveedorDetalle.telefono.toUpperCase()}}</span>
+                </div>
+            </div>
+            
+        </div>
+
+        <hr>
+        
+        <table class="table table-sm table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio unitario</th>
+                    <th scope="col">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="detalleKardexList.length != 0">
+                <tr *ngFor="let item of detalleKardexList; index as i">
+                    <td style="color: black;">{{i + 1}}</td>
+                    <td style="color: black;">{{"[" + item.cod_producto + "] " + item.nom_producto + " - " + item.categoria}}</td>
+                    <td style="color: black;">{{item.cantidad}}</td>
+                    <td style="color: black;">{{item.precio_unitario}}</td>
+                    <td style="color: black;">{{item.cantidad * item.precio_unitario}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"></td>
+                    <td style="color: black; font-weight: 1000;"><strong>TOTAL:</strong></td>
+                    <td style="color: black; font-weight: 900;">{{calcularTotal()}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p *ngIf="detalleKardexList.length == 0">
+            <ngb-alert [dismissible]="false" class="text-center">
+                <h6>No hay registros</h6>
+            </ngb-alert>
+        </p>
+    </div>
+
+    <div class="modal-footer" style="background-color: rgb(65, 65, 65);">
+        <button type="button" class="btn btn-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+    </div>
+</ng-template>
+

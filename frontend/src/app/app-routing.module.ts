@@ -5,7 +5,8 @@ import { LoginComponent } from './components/login';
 import { AuthGuard } from './components/_guards';
 import { Role } from './models/role';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
-import {ProductosComponent} from './components/productos/productos.component';
+import { ProductosComponent } from './components/productos/productos.component';
+import { CrearProductosComponent } from './components/productos/crear-producto.component';
 import  { UmedidaComponent } from './components/productos/umedida.component';
 import  { CatProductoComponent } from './components/productos/cat-producto.component';
 import { EmpleadosComponent } from './components/empleados/empleado.component';
@@ -17,6 +18,9 @@ import { CrearRolesComponent } from './components/roles/crear-roles.component';
 import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
 import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { EditarPedidoComponent } from './components/pedidos/editar-pedido.component';
+import { NuevoPedidoComponent } from './components/pedidos/nuevo-pedido.component';
 import { PuestosComponent } from './components/puestos/puestos.component';
 import { CrearPuestoComponent } from './components/puestos/crear-puesto.component';
 import { PuestosInComponent } from './components/puestos/puestosin.component';
@@ -185,6 +189,18 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+  { 
+    path: 'pedidos', 
+    component: PedidosComponent 
+  },
+  {
+    path: 'editar-pedido/:id_kardex',
+    component: EditarPedidoComponent
+  },
+  {
+    path: 'nuevo-pedido',
+    component: NuevoPedidoComponent
+  },
   {
     path: 'proveedores',
     component: ProveedoresComponent,
@@ -196,6 +212,12 @@ const routes: Routes = [
     component: ProductosComponent,
     canActivate: [AuthGuard],
     data: { permisos:"7" }
+  },
+  {
+    path: 'crear-producto',
+    component: CrearProductosComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
   },
   {
     path: 'umedida',

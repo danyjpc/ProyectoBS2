@@ -37,8 +37,10 @@
         <li class="nav-item">
             <button class="btn btn-dark nav-link" *ngIf="nombres.admin_clientes" [routerLink]="['/clientes']" routerLinkActive="/clientes">Clientes</button>
           </li>
-            
-        
+        <!-- Pedidos -->
+        <li class="nav-item">
+            <button class="btn btn-dark nav-link" [routerLink]="'/pedidos'" routerLinkActive="/pedidos" >Pedidos</button>
+          </li>
         <!--Administracion de ventas-->
         <li class="nav-item">
           <button class="btn btn-dark nav-link" [routerLink]="['/nueva-venta']" routerLinkActive="/roles" >Nueva venta</button>

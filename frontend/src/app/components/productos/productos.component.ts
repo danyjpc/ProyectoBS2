@@ -27,4 +27,12 @@ export class ProductosComponent implements OnInit {
     );
   }
 
+  crearProducto(){
+    this.router.navigate(['/crear-producto'])
+  }
+
+  editar(){
+    this.router.navigate(['/crear-producto'])
+  }
+
 }
