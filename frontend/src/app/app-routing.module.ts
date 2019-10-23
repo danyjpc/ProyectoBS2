@@ -17,6 +17,16 @@ import { CrearRolesComponent } from './components/roles/crear-roles.component';
 import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
 import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
+import { PuestosComponent } from './components/puestos/puestos.component';
+import { CrearPuestoComponent } from './components/puestos/crear-puesto.component';
+import { PuestosInComponent } from './components/puestos/puestosin.component';
+import { EditarPuestoComponent } from './components/puestos/editar-puesto.component';
+import { CambioPassword } from './components/cambio password/cambio.component';
+import { AsignarCredencialesComponent } from './components/empleados/asignar.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { ClientesInComponent } from './components/clientes/clientesin.component';
+import { CrearClienteComponent } from './components/clientes/crear-cliente.component';
+import { EditarClienteComponent } from './components/clientes/editar-cliente.component';
 
 import { NuevaVentaComponent } from './components/ventas/nueva-venta.component'
 
@@ -35,6 +45,15 @@ const routes: Routes = [
     //
   },
 
+  {
+    path: 'cambiar-contrasenia',
+    component: CambioPassword,
+    canActivate: [AuthGuard],
+    //
+  },
+  
+
+
   //Administracion de ventas
   {
     path: 'nueva-venta',
@@ -42,6 +61,7 @@ const routes: Routes = [
     //canActivate: [AuthGuard],
     //data: { permisos:"2" }
   },
+
 
   //Administracion de empleados
   {
@@ -100,6 +120,66 @@ const routes: Routes = [
     data: { permisos:"1" }
   },
 
+  //Administracion de Puestos
+  {
+    path: 'puestos',
+    component: PuestosComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"9" }
+  },
+  {
+    path: 'puestosin',
+    component: PuestosInComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"9" }
+  },
+  {
+    path: 'crear-puesto',
+    component: CrearPuestoComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"9" }
+  },
+  {
+    path: 'editar-puesto/:cod_puesto',
+    component: EditarPuestoComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"9" }
+  },
+
+  //Asignar crednciales
+  
+  {
+    path: 'asignar-credenciales/:id',
+    component: AsignarCredencialesComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"11" }
+  },
+  //Administracion de Clientes
+  {
+    path: 'clientes',
+    component: ClientesComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"4" }
+  },
+  {
+    path: 'clientesin',
+    component: ClientesInComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"4" }
+  },
+  {
+    path: 'crear-cliente',
+    component: CrearClienteComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"4" }
+  },
+  {
+    path: 'editar-cliente/:id_cliente',
+    component: EditarClienteComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"4" }
+  },
+
 
   {
     path: 'login',
@@ -109,25 +189,25 @@ const routes: Routes = [
     path: 'proveedores',
     component: ProveedoresComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    data: { permisos:"8" }
   },
   {
     path: 'productos',
     component: ProductosComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    data: { permisos:"7" }
   },
   {
     path: 'umedida',
     component: UmedidaComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    data: { permisos:"10" }
   },
   {
     path: 'cat-producto',
     component: CatProductoComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    data: { permisos:"3" }
   },
 ];
 

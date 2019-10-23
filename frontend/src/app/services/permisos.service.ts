@@ -5,6 +5,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { APPCONFIG } from '../constantes.module';
 import { Roles } from '../models/roles';
 import { Permiso } from '../models/permisos';
+import { PermisosRol } from '../models/permiso_rol';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -33,9 +34,16 @@ export class PermisosService {
     return this.http.get<Permiso[]>(APPCONFIG.BASE_URL+"/permisos/Role/"+item);
   }
 
+  permisosARol(item: PermisosRol): Observable<PermisosRol> {
+    console.log(item)
+    return this.http.post<PermisosRol>(APPCONFIG.BASE_URL+"/permisos/AsignarARol",item);
+  }
+
   guardar(item: Roles): Observable<Roles> {
     return this.http.post<Roles>(APPCONFIG.BASE_URL+"/roles/CrearRol",item);
   }
+
+  
 
   editar(item: Roles): Observable<Roles> {
     return this.http.put<Roles>(APPCONFIG.BASE_URL+"/roles/Editar/"+item.id,item);

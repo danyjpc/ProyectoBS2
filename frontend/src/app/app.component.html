@@ -20,19 +20,44 @@
         </li>
         <!--Administracion de empleados-->
         <li class="nav-item">
-          <button class="btn btn-dark nav-link" [routerLink]="['/empleado']" routerLinkActive="/empleado" >Empleados</button>
+          <button class="btn btn-dark nav-link" *ngIf="nombres.admin_empleados" [routerLink]="['/empleado']"
+            routerLinkActive="/empleado">Empleados</button>
         </li>
         <!--Administracion de roles-->
         <li class="nav-item">
-            <button class="btn btn-dark nav-link" [routerLink]="['/roles']" routerLinkActive="/roles" >Roles</button>
+
+          <button class="btn btn-dark nav-link" *ngIf="nombres.admin_roles" [routerLink]="['/roles']" routerLinkActive="/roles">Roles</button>
         </li>
+        <!--Administracion de puestos-->
+        <li class="nav-item">
+          <button class="btn btn-dark nav-link" *ngIf="nombres.admin_puestos" [routerLink]="['/puestos']" routerLinkActive="/puestos">Puestos</button>
+        </li>
+
+        <!--Administracion de clientes-->
+        <li class="nav-item">
+            <button class="btn btn-dark nav-link" *ngIf="nombres.admin_clientes" [routerLink]="['/clientes']" routerLinkActive="/clientes">Clientes</button>
+          </li>
+            <button class="btn btn-dark nav-link" [routerLink]="['/nueva-venta']" routerLinkActive="/roles" >Roles</button>
+        
         <!--Administracion de ventas-->
         <li class="nav-item">
-          <button class="btn btn-dark nav-link" [routerLink]="['/nueva-venta']" routerLinkActive="/roles" >Nueva venta</button>
+          <button class="btn btn-dark"  [routerLink]="['/nueva-venta']" routerLinkActive="/nueva-venta"  >Nueva venta</button>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" (click)="logout()">Cerrar Sesion</a>
+          <div class="row">
+            <div class="col">
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-ligth" id="dropdownBasic1" ngbDropdownToggle>{{user}}</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button class="btn btn-secondary" [routerLink]="['/cambiar-contrasenia']" routerLinkActive="/cambiar-contrasenia" >Cambiar Contraseña</button>
+                  <button class="btn btn-secondary col" (click)="logout()">Cerrar Sesion</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </li>
+
       </ul>
     </div>
   </div>
@@ -41,3 +66,41 @@
   <router-outlet></router-outlet>
 </div>
 
+<ng-template #aggCli let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Datos de cliente a facturar</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="form-group row">
+          <label for="inputPassword" class="col-sm-2 col-form-label">NIT</label>
+          <div class="col-sm-10">
+            <!--<input type="text" class="form-control" placeholder="NIT" [(ngModel)]="cli.nit">-->            
+          </div>
+        </div>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="cli.nom_cliente">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Dirección</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Dirección" [(ngModel)]="cli.direccion">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Teléfono</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Teléfono" [(ngModel)]="cli.telefono">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
+    <button type="button" class="btn btn-outline-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+  </div>
+</ng-template>

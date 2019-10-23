@@ -18,7 +18,7 @@ import { UmedidaComponent } from './components/productos/umedida.component';
 import { UnidadmedidasService } from 'src/app/services/unidadmedidas.service';
 import { CatProductoComponent } from './components/productos/cat-producto.component';
 import { CategoriasService } from 'src/app/services/categorias.service';
-import { APP_BASE_HREF } from '@angular/common';
+import { APP_BASE_HREF, DatePipe } from '@angular/common';
 import { EmpleadosComponent } from './components/empleados/empleado.component';
 import { CrearEmpleadoComponent } from './components/empleados/crear-empleado.component';
 import { EditarEmpleadoComponent } from './components/empleados/editar-empleado.component';
@@ -28,6 +28,17 @@ import { CrearRolesComponent } from './components/roles/crear-roles.component';
 import { RolesinComponent } from './components/roles/rolesin.component';
 import { EditarRolComponent } from './components/roles/editar-rol.component';
 import { AsignarPermisosComponent } from './components/roles/asignar-permisos.component';
+import { PuestosComponent } from './components/puestos/puestos.component';
+import { CrearPuestoComponent } from './components/puestos/crear-puesto.component';
+import { PuestosInComponent } from './components/puestos/puestosin.component';
+import { EditarPuestoComponent } from './components/puestos/editar-puesto.component';
+
+import { CambioPassword } from './components/cambio password/cambio.component';
+import { AsignarCredencialesComponent } from './components/empleados/asignar.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { ClientesInComponent } from './components/clientes/clientesin.component';
+import { CrearClienteComponent } from './components/clientes/crear-cliente.component';
+import { EditarClienteComponent } from './components/clientes/editar-cliente.component';
 
 import { NuevaVentaComponent } from './components/ventas/nueva-venta.component';
 import { VentaService } from './services/venta.service';
@@ -51,13 +62,26 @@ import { VentaService } from './services/venta.service';
     CrearRolesComponent, 
     RolesinComponent,
     EditarRolComponent, 
-    AsignarPermisosComponent,
+
+    AsignarPermisosComponent, 
+    PuestosComponent, 
+    CrearPuestoComponent, 
+    PuestosInComponent, 
+    EditarPuestoComponent, 
+    CambioPassword,
+    AsignarCredencialesComponent,
+    ClientesComponent,
+    ClientesInComponent,
+    CrearClienteComponent,
+    EditarClienteComponent,
     NuevaVentaComponent
+
   ],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
     HttpClientModule,
     FormsModule,
     BrowserModule,
@@ -78,6 +102,7 @@ import { VentaService } from './services/venta.service';
     ProveedoresService,
     CategoriasService,
     UnidadmedidasService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

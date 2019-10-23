@@ -14,27 +14,30 @@
             </div>
             <br>
             <div class="form-row" placement = "center">
-                <div class = "col-4">
-                    <h6 class="h6 text-left"><b>Cliente</b></h6>
-                    <input type="text" class="form-control" placeholder="Cliente">
-                </div>
                 <div class = "col-4 ">
                     <h6 class="h6 text-left"><b>NIT</b></h6>
-                    <input type="text" class="form-control" placeholder="NIT">
+                    <input type="text" class="form-control" [(ngModel)]  = "cli" [ngbTypeahead] = "searchcli" [resultFormatter] = "rFormatterCli" [inputFormatter] = "iFormatterCli" (focus) = "focusC$.next($event.target.value)"(click) = "clickC$.next($event.target.value)" #instanceC = "ngbTypeahead">
                 </div>
                 <div class = "col-4">
+                    <h6 class="h6 text-left"><b>Cliente</b></h6>
+                    <input type="text" class="form-control" placeholder="Cliente"  [(ngModel)]="cli.nom_cliente">
+                </div>
+
+                <div class = "col-4">
                         <h6 class="h6 text-left"><b>Dirección</b></h6>
-                        <input type="text" class="form-control" placeholder="Dirección">
+                        <input type="text" class="form-control" placeholder="Dirección"  [(ngModel)]="cli.direccion">
                 </div>
             </div>
             <div class="form-row">
                 <div class = "col-4">
                     <h6 class="h6 text-left"><b>Teléfono</b></h6>
-                    <input type="text" class="form-control" placeholder="Teléfono">
+                    <input type="text" class="form-control" placeholder="Teléfono"  [(ngModel)]="cli.telefono">
                 </div>
                     <div class = "col-4">
                     <h6 class="h6 text-left"><b>Fecha</b></h6>
-                    <input type="text" class="form-control" placeholder="Fecha">
+                    <label > {{ fecha | date:'dd/MM/yyyy'}}</label>
+                   
+                  <!--  <input type="date" class="form-control" [ngModel] = "fecha | date:'dd/MM/yyyy'"  value="date" >-->
                 </div>
             </div>            
         </div>

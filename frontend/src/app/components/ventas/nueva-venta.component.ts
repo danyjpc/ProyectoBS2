@@ -9,6 +9,7 @@ import { NgbTypeahead, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { debounceTime, distinctUntilChanged, filter,  map } from 'rxjs/operators';
 import { Observable, Subject, merge } from 'rxjs';
 import { Detalle_factura } from 'src/app/models/detalle_factura';
+import { Clientes } from 'src/app/models/clientes';
 
 @Component({
     selector: 'nueva-venta',
@@ -26,17 +27,26 @@ export class NuevaVentaComponent implements OnInit
 
     public listDetalleFactura: Detalle_factura[];
     public detf: Detalle_factura = new Detalle_factura();
+
+    public clientes: Clientes[] = new Array(); 
+    public cli: Clientes = new Clientes();
+    public hayClientes: boolean;
+
+    public fecha:Date;
+    
     
     constructor(
     private service: VentaService,
     private http2: HttpClient,
-    //private datePipe: DatePipe,
+    private datePipe: DatePipe,
     private modalService: NgbModal,
     private router: Router, 
     private route: ActivatedRoute
     ){}
     ngOnInit(): void {
         this.obtenerProductos();
+        this.obtenerClientes();
+        this.fecha = this.hoyFecha();
     }
 
     obtenerProductos(){
@@ -62,8 +72,33 @@ export class NuevaVentaComponent implements OnInit
     }
     rFormatterProd = (result: {nom_producto: string}) => result.nom_producto; 
     iFormatterProd = (x: {nom_producto:string}) => x.nom_producto;
+
+    obtenerClientes(){
+      this.service.obtenerClientes().subscribe(items =>{
+           this.clientes = items;
+           if(items!=null && items.length!=0) this.hayClientes = true; else; this.hayClientes = false;
+          
+       });
+       
+   }
+  
+   @ViewChild('instanceC') instanceC: NgbTypeahead;
+   focusC$ = new Subject<string>()
+   clickC$ = new Subject<string>()
+   searchcli = (text$: Observable<string>) => {
+       const debouncedTextCli$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+       const clickWithClosedPopupCli$ = this.clickC$;/* .pipe(filter(() => !this.instanceC.isPopupOpen())); */
+       const inputFocusCli$ = this.focusC$; 
+       return merge(debouncedTextCli$, inputFocusCli$, clickWithClosedPopupCli$).pipe(
+           map(term => (term === ""? this.clientes
+           :this.clientes.filter(v => v.nit.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0,10)
+           )
+       )
+   }
+   rFormatterCli = (result: {nit: string}) => result.nit; 
+   iFormatterCli = (x: {nit:string}) => x.nit;
     
-  /*  agregarProducto(content)
+    agregarProducto(content)
     {
         this.detf = new Detalle_factura();
         if(this.verificarNombreProducto)
@@ -75,7 +110,7 @@ export class NuevaVentaComponent implements OnInit
           
               });
         }
-    }*/
+    }
 
     verificarNombreProducto(): boolean{
         if(typeof this.prod == 'string'){
@@ -83,6 +118,14 @@ export class NuevaVentaComponent implements OnInit
         }else{
           return true;
         }
+      }
+
+      hoyFecha(){
+        var hoy = new Date();
+            var dd = hoy.getDate();
+            var mm = hoy.getMonth()+1;
+            var yyyy = hoy.getFullYear();
+            return hoy;
       }
  
 }

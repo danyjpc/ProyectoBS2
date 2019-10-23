@@ -6,6 +6,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { APPCONFIG } from '../constantes.module';
 import { Producto } from '../models/producto';
 import { Detalle_factura } from '../models/detalle_factura';
+import { Clientes } from '../models/clientes';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,6 +24,11 @@ export class VentaService {
 
   obtenerProductos(): Observable<Producto[]> {
     return this.http.get<Producto[]>(APPCONFIG.BASE_URL + "/venta/dropproductos", httpOptions).pipe(
+      catchError(this.handleError('findList', []))
+    );
+  }
+  obtenerClientes(): Observable<Clientes[]> {
+    return this.http.get<Clientes[]>(APPCONFIG.BASE_URL + "/venta/dropclientes", httpOptions).pipe(
       catchError(this.handleError('findList', []))
     );
   }

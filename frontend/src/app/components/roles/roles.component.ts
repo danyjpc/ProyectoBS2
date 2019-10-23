@@ -22,7 +22,7 @@ export class RolesComponent implements OnInit{
         this.service.findList().subscribe(
             items=>{
                 this.listRoles= items;
-                console.log(items)
+                
             }, 
             err=>{
                 console.log(err);

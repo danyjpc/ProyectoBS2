@@ -35,6 +35,20 @@ namespace backend.Controllers
             return items;
         }
 
+        [HttpGet("dropclientes")]
+        public async Task<ActionResult<IEnumerable<Cliente>>> obtenerClientes()
+        {
+            var items = await _context.Clientes.ToListAsync();
+            return items;
+        }
+
+        [HttpGet("getdetxprod")]
+        public async Task<ActionResult<IEnumerable<Detalle_factura>>> obtenerDetalles()
+        {
+            var items = await _context.Detalles_facturas.ToListAsync();
+            return items;
+        }
+
         //POST: api/Empleados
         [HttpPost("adddetalle")]
         public async Task<ActionResult> aniadirDetalle(Detalle_factura detalle)
