@@ -7,4 +7,5 @@ export class Producto{
     precio_unitario:number;
     cantidad_existente: number;
     habilitado: number;
+    id_categoria: number;
 }

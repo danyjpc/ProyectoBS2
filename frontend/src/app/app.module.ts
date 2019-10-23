@@ -14,6 +14,7 @@ import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './compone
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import { ProveedoresService } from 'src/app/services/proveedores.service';
 import { ProductosComponent } from './components/productos/productos.component';
+import { CrearProductosComponent} from './components/productos/crear-producto.component';
 import { UmedidaComponent } from './components/productos/umedida.component';
 import { UnidadmedidasService } from 'src/app/services/unidadmedidas.service';
 import { CatProductoComponent } from './components/productos/cat-producto.component';
@@ -37,6 +38,7 @@ import { AsignarPermisosComponent } from './components/roles/asignar-permisos.co
     LoginComponent, 
     ProveedoresComponent, 
     ProductosComponent, 
+    CrearProductosComponent,
     UmedidaComponent,
     CatProductoComponent,
     EmpleadosComponent, 

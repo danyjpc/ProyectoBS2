@@ -5,7 +5,8 @@ import { LoginComponent } from './components/login';
 import { AuthGuard } from './components/_guards';
 import { Role } from './models/role';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
-import {ProductosComponent} from './components/productos/productos.component';
+import { ProductosComponent } from './components/productos/productos.component';
+import { CrearProductosComponent } from './components/productos/crear-producto.component';
 import  { UmedidaComponent } from './components/productos/umedida.component';
 import  { CatProductoComponent } from './components/productos/cat-producto.component';
 import { EmpleadosComponent } from './components/empleados/empleado.component';
@@ -102,6 +103,12 @@ const routes: Routes = [
   {
     path: 'productos',
     component: ProductosComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+  },
+  {
+    path: 'crear-producto',
+    component: CrearProductosComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] }
   },
