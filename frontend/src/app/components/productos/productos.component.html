@@ -1,10 +1,11 @@
 <br>
+<div class="container ">
 <div class="card">
   <div class="card-body">
     <br>
     <h4 class="card-title">Registro de productos</h4>
     <div class="form-row">
-      <button type="button" class="btn btn-primary btn-sm" >Crear producto</button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="crearProducto()" >Crear producto</button>
     </div>
     <br>
     <table class="table table-sm table-hover">
@@ -29,10 +30,11 @@
           <td>{{ item.costo_compra }}</td>
           <td>{{ item.precio_unitario }}</td>
           <td>{{ item.cantidad_existente }}</td>
-           <!--<td><button class="btn btn-success btn-sm" title="Editar" (click)="editar(content)" >Editar 
-            <i class="fa fa-edit" aria-hidden="true"></i></button> &nbsp;</td>-->
+          <td><button class="btn btn-success btn-sm" title="Editar" (click)="editar()" >Editar 
+            <i class="fa fa-edit" aria-hidden="true"></i></button> &nbsp;</td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
 </div>
