@@ -17,6 +17,8 @@ namespace backend.Models
         [Column(TypeName = "varchar(8)")]
         public string telefono {get;set;}
         public int habilitado { get; set; }
+        [Column(TypeName = "varchar(15)")]
+        public string nit {get;set;}
         public List<Factura> facturas{get;set;}
     }
 }

@@ -108,6 +108,7 @@ import { VentaService } from './services/venta.service';
     DatePipe,
     CategoriasService,
     UnidadmedidasService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

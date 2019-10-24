@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
 import { Role } from './models/role';
 import { User } from './models/user';
 import { NombrePermisos } from './models/nombre_permisos';
+import { Clientes } from './models/clientes';
+import { NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { VentaService } from './services/venta.service';
+import { Subject, Observable, merge } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +23,8 @@ export class AppComponent implements OnInit {
   public nombres: NombrePermisos = new NombrePermisos();
 
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) {
+
+  constructor(private router: Router, private authenticationService: AuthenticationService, private modalService: NgbModal, private service: VentaService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.user= localStorage.getItem('usr');
     
@@ -32,6 +38,7 @@ export class AppComponent implements OnInit {
     if(perms.indexOf("1") != -1){
       this.nombres.admin_roles = true;
     }
+    
     if(perms.indexOf("2") !=-1){
       this.nombres.admin_empleados=true;
     }
@@ -67,6 +74,16 @@ export class AppComponent implements OnInit {
     }
     }
   }
+
+ /* aggCliente(content){
+    this.cli=new Clientes();
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {     
+    }, (reason) => {
+      console.log("Cancelar");
+      
+    });
+  }*/
+
 
   get isAdmin() {
     //Verifico si el usuario esta logeado, ya que si lo esta tiene que cargar su current en el local storage
