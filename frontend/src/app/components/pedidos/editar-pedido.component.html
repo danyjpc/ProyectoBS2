@@ -55,7 +55,7 @@
 
                 <div class="form-group col-6">
                     <label for="">Tipo de operacion</label>
-                    <select class="custom-select custom-select-sm" [(ngModel)]="kardexActual.tipo_operacion" (change)="prueba()">
+                    <select class="custom-select custom-select-sm" [(ngModel)]="kardexActual.tipo_operacion">
                         <option [ngValue]="pedido">Pedido</option>
                         <option [ngValue]="devolucion">Devolucion</option>
                     </select>
@@ -109,7 +109,7 @@
                             </tr>
                         </thead>
                         <tbody *ngIf="detallesKardexList.length != 0">
-                            <tr *ngFor="let item of detallesKardexList; index as i">
+                            <tr *ngFor="let item of detallesKardexList | slice: (paginaActual-1) * tamanioPagina : (paginaActual-1) * tamanioPagina + tamanioPagina; index as i">
                                 <td>{{i + 1}}</td>
                                 <td *ngIf="item.nom_producto != null">{{"[" + item.cod_producto + "] " + item.nom_producto + " - " + item.categoria}}</td>
                                 <td *ngIf="item.nom_producto == null">{{buscarProductoParaDetalle(item)}}</td>
@@ -137,6 +137,8 @@
                             <h6>No hay registros</h6>
                         </ngb-alert>
                     </p>
+                    
+                    <ngb-pagination *ngIf="detallesKardexList.length != 0" [(page)]="paginaActual" [pageSize]="tamanioPagina" [collectionSize]="detallesKardexList.length"></ngb-pagination>
 
                 </div>
             </div>

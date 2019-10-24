@@ -3,6 +3,7 @@ using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace backend.Controllers
 {
@@ -29,7 +30,7 @@ namespace backend.Controllers
                 validado = m.validado,
                 id_proveedor = m.id_proveedor,
                 nom_proveedor = m.proveedor.nom_proveedor,
-            }).ToArrayAsync();
+            }).OrderBy(n => n.id_kardex).Take(5).ToArrayAsync();
 
             return Ok(items);
         }
@@ -103,6 +104,20 @@ namespace backend.Controllers
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
+            var detsKardex = _context.Detalles_kardex.Where(dk => dk.id_kardex == id_kardex).Select(m => new {
+                producto = m.producto,
+                cantidad = m.cantidad
+            }).ToList();
+
+            Producto obj = new Producto();
+            for (int i = 0; i < detsKardex.Count; i++)
+            {
+                obj = detsKardex.ElementAt(i).producto;
+                obj.cantidad_existente = obj.cantidad_existente + detsKardex.ElementAt(i).cantidad;
+                _context.Entry(obj);
+                await _context.SaveChangesAsync();
+            }
+
             return NoContent();
         }
 
@@ -163,7 +178,67 @@ namespace backend.Controllers
         public async Task<ActionResult> verificarValidacion(int id_kardex){
             var items = await _context.Detalles_kardex.Where(dk => dk.id_kardex == id_kardex).ToArrayAsync();
 
-            return Ok(items.Length != 0);
+            var kardex = await _context.Kardexs.FindAsync(id_kardex);
+
+            bool datosFactura = kardex.num_factura != null && kardex.serie_factura != null && kardex.serie_factura != "";
+            
+            int ret = 3;
+
+            if(datosFactura){
+                if(items.Length != 0){
+                    ret = 1;
+                }else{
+                    ret = 2;
+                }
+            }else{
+                ret = 3;
+            }
+
+            return Ok(ret);
+        }
+
+        [HttpGet("cantidaditems")]
+        public async Task<ActionResult> obtenerTotalKardexs(){
+            var items = await _context.Kardexs.ToArrayAsync();
+
+            return Ok(items.Length);
+        }
+
+        [HttpGet("pedidospaginacion/{pagina}")]
+        public async Task<ActionResult> obtenerKardexsPaginacion(int pagina){
+            var items = await _context.Kardexs.Select(m => new {
+                id_kardex = m.id_kardex,
+                fecha_fac = m.fecha_fac,
+                num_factura = m.num_factura,
+                serie_factura = m.serie_factura,
+                tipo_operacion = m.tipo_operacion,
+                validado = m.validado,
+                id_proveedor = m.id_proveedor,
+                nom_proveedor = m.proveedor.nom_proveedor,
+            }).OrderBy(n => n.id_kardex).ToListAsync();
+
+            var kardexs = await _context.Kardexs.Select(m => new {
+                id_kardex = m.id_kardex,
+                fecha_fac = m.fecha_fac,
+                num_factura = m.num_factura,
+                serie_factura = m.serie_factura,
+                tipo_operacion = m.tipo_operacion,
+                validado = m.validado,
+                id_proveedor = m.id_proveedor,
+                nom_proveedor = m.proveedor.nom_proveedor,
+            }).OrderBy(n => n.id_kardex).Take(0).ToListAsync();
+
+            int inicio = (pagina * 5) - 5;
+            int final = pagina * 5;
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                if(i >= inicio && i < final){
+                    kardexs.Add(items.ElementAt(i));
+                }
+            }
+
+            return Ok(kardexs);
         }
     }
 }

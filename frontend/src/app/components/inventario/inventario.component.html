@@ -1,0 +1,166 @@
+<div class="container col-md-8 offset-md-2 mt-2 mb-4">
+    
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title" style="color: black;">Inventario</h3>
+            <!-- <button class="btn btn-sm btn-dark" (click)="nuevoPedido()">Nuevo pedido</button> -->
+        </div>
+        
+        <div class="card-body">
+            <table class="table table-sm table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Nombre producto</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Existencias</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="productos.length != 0">
+                    <tr *ngFor="let item of productos; index as i">
+                        <td style="color: black;">{{i+1}}</td>
+                        <td style="color: black;">{{item.cod_producto}}</td>
+                        <td style="color: black;">{{item.nom_producto}}</td>
+                        <td style="color: black;">{{item.categoria}}</td>
+                        <td style="color: black;">{{item.pedidos - item.ventas}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" style="background-color: royalblue; color: white;" (click)="descripcion(modalDetalle, item)">Descripcion</button>
+                            <button class="btn btn-success btn-sm" style="color: white;" (click)="pedidos(modalPedidos, item)">Pedidos</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p *ngIf="productos.length == 0">
+                <ngb-alert [dismissible]="false" class="text-center">
+                    <h6>No hay registros</h6>
+                </ngb-alert>
+            </p>
+
+            <!-- <ngb-pagination *ngIf="kardexList.length != 0" class="d-flex justify-content-center" [collectionSize]="cantidadItems" [(page)]="paginaActual" [maxSize]="5" [boundaryLinks]="true" (pageChange)="obtenerRegistros()"></ngb-pagination> -->
+        </div>
+    </div>
+        
+</div>  
+
+<ng-template #modalDetalle let-modal>
+    <div class="modal-header" style="background-color: rgb(65, 65, 65);">
+        <input type="text" style="display: none;">
+        <h4 class="modal-title" style="color: white;">Descripcion de producto</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span style="color: white;" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+    <div class="modal-body">
+    
+        <div class="form-row col-12">
+    
+            <div class="col-6">
+                <div class="row col-12">
+                    <span class="row col-12" style="color: black; font-weight: 900; margin-right: 10px; font-size: large;">NOMBRE: </span>
+                    <span class="col-12" style="color: black; font-size: medium;">{{productoDescripcion.nom_producto.toUpperCase()}}</span>
+                </div>
+
+                <div class="row col-12">
+                    <span class="row col-12" style="color: black; font-weight: 900; margin-right: 10px; font-size: large;">CATEGORIA: </span>
+                    <span class="col-12" style="color: black; font-size: medium;">{{productoDescripcion.categoria.toUpperCase()}}</span>
+                </div>
+
+                <div class="row col-12">
+                    <span class="row col-12" style="color: black; font-weight: 900; margin-right: 10px; font-size: large;">CODIGO: </span>
+                    <span class="col-12" style="color: black; font-size: medium;">{{productoDescripcion.cod_producto.toUpperCase()}}</span>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="row col-12">
+                    <span class="row col-12" style="color: black; font-weight: 900; margin-right: 10px; font-size: large;">EXISTENCIAS: </span>
+                    <span class="col-12" style="color: black; font-size: medium;">{{productoDescripcion.pedidos - productoDescripcion.ventas}}</span>
+                </div>
+
+                <div class="row col-12">
+                    <span class="row col-12" style="color: black; font-weight: 900; margin-right: 10px; font-size: large;">COSTO COMPRA: </span>
+                    <span class="col-12" style="color: black; font-size: medium;">{{productoDescripcion.costo_compra}}</span>
+                </div>
+                
+                <div class="row col-12">
+                    <span class="row col-12" style="color: black; font-weight: 900; margin-right: 10px; font-size: large;">PRECIO UNITARIO: </span>
+                    <span class="col-12" style="color: black; font-size: medium;">{{productoDescripcion.precio_unitario}}</span>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="col-12">
+            <span style="color: black; font-weight: 900; margin-right: 10px; font-size: large;">DESCRIPCION: </span>
+            <p style="color: black; font-size: medium;">{{productoDescripcion.descripcion.toUpperCase()}}</p>
+        </div>
+                
+        
+    </div>
+    
+    <div class="modal-footer justify-content-center" style="background-color: rgb(65, 65, 65);">
+        <button type="button" class="btn btn-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+    </div>
+</ng-template>
+
+<ng-template #modalPedidos let-modal>
+    <div class="modal-header" style="background-color: rgb(65, 65, 65);">
+        <input type="text" style="display: none;">
+        <h4 class="modal-title" style="color: white;">Pedidos de {{productoPedidos.nom_producto}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span style="color: white;" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+    <div class="modal-body">
+
+        <div class="row col-12">
+            <button type="button" class="btn btn-primary btn-sm" (click)="pedidosPorProducto(productoPedidos)">Todos</button>
+            <button type="button" class="btn btn-success btn-sm" (click)="pedidosPorProductoValidados(productoPedidos)">Validados</button>
+            <button type="button" class="btn btn-warning btn-sm" (click)="pedidosPorProductoSinValidar(productoPedidos)">Sin validar</button>
+        </div>
+
+        <hr>
+            
+        <table class="table table-sm table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio unitario</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="pedidosProducto.length != 0">
+                <tr *ngFor="let item of pedidosProducto; index as i">
+                    <td style="color: black;">{{i + 1}}</td>
+                    <td style="color: black;">{{item.fecha_fac | date: 'dd/MM/yyyy'}}</td>
+                    <td style="color: black;">{{item.cod_producto}}</td>
+                    <td style="color: black;">{{item.nom_producto}}</td>
+                    <td style="color: black;">{{item.precio_unitario}}</td>
+                    <td *ngIf="item.validado == 1" style="color: black;">{{item.cantidad}} <span class="badge badge-success">Validado</span></td>
+                    <td *ngIf="item.validado == 0" style="color: black;">{{item.cantidad}} <span class="badge badge-warning">Sin validar</span></td>
+                    <td style="color: black;">{{item.cantidad * item.precio_unitario}}</td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <p *ngIf="pedidosProducto.length == 0">
+            <ngb-alert [dismissible]="false" class="text-center">
+                <h6>No hay registros</h6>
+            </ngb-alert>
+        </p>
+    </div>
+    
+    <div class="modal-footer" style="background-color: rgb(65, 65, 65);">
+        <button type="button" class="btn btn-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+    </div>
+</ng-template>

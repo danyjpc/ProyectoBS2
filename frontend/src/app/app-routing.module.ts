@@ -5,8 +5,7 @@ import { LoginComponent } from './components/login';
 import { AuthGuard } from './components/_guards';
 import { Role } from './models/role';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
-import { ProductosComponent } from './components/productos/productos.component';
-import { CrearProductosComponent } from './components/productos/crear-producto.component';
+import {ProductosComponent} from './components/productos/productos.component';
 import  { UmedidaComponent } from './components/productos/umedida.component';
 import  { CatProductoComponent } from './components/productos/cat-producto.component';
 import { EmpleadosComponent } from './components/empleados/empleado.component';
@@ -33,6 +32,8 @@ import { CrearClienteComponent } from './components/clientes/crear-cliente.compo
 import { EditarClienteComponent } from './components/clientes/editar-cliente.component';
 
 import { NuevaVentaComponent } from './components/ventas/nueva-venta.component'
+import { InventarioService } from './services/inventario.service';
+import { InventarioComponent } from './components/inventario/inventario.component';
 
 
 const routes: Routes = [
@@ -214,12 +215,6 @@ const routes: Routes = [
     data: { permisos:"7" }
   },
   {
-    path: 'crear-producto',
-    component: CrearProductosComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
-  },
-  {
     path: 'umedida',
     component: UmedidaComponent,
     canActivate: [AuthGuard],
@@ -231,6 +226,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { permisos:"3" }
   },
+  {
+    path: 'inventario',
+    component: InventarioComponent
+  }
 ];
 
 @NgModule({

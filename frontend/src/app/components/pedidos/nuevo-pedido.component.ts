@@ -37,6 +37,9 @@ export class NuevoPedidoComponent implements OnInit {
     private idProductoEditar: number;
     private cantidadProductoEditar: number;
     private precioProductoEditar: number;
+
+    private paginaActual: number = 1;
+    private tamanioPagina: number = 5;
     constructor(private router: Router, private service: PedidosService, private modalService: NgbModal) { }
 
     ngOnInit() { 
@@ -230,13 +233,7 @@ export class NuevoPedidoComponent implements OnInit {
         return total;
     }
 
-    hoyFecha(){
-        var hoy = new Date();
-          var dd = hoy.getDate();
-          var mm = hoy.getMonth()+1;
-          var yyyy = hoy.getFullYear();
-          return hoy;
-    }
+    
 
 
 }

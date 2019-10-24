@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Kardex } from 'src/app/models/kardex';
 import { PedidosService } from 'src/app/services/pedidos.service';
@@ -21,6 +21,9 @@ export class PedidosComponent implements OnInit {
     private kardex: any;
     private mensajeValidacion: string = "";
     private tipoBadge: string = "";
+    private textoAdvertencia: string = "";
+    private paginaActual: number = 1;
+    private cantidadItems: number;
 
     constructor(private router: Router, private route: ActivatedRoute, private service: PedidosService,
         private modalService: NgbModal, private proveedorService: ProveedoresService, private datePipe: DatePipe) { }
@@ -30,7 +33,12 @@ export class PedidosComponent implements OnInit {
             this.kardexList = items;
         }, err => {
             console.log(err);
-        })
+        });
+        this.service.obtenerTotalKardexs().subscribe(cant => {
+            this.cantidadItems = cant * 2;
+        }, err => {
+            console.log(err);
+        });
     }
 
     nuevoPedido(){
@@ -77,10 +85,10 @@ export class PedidosComponent implements OnInit {
 
     validar(modalValidacion, modalAdvertencia, item){
         this.service.verificarValidacion(item.id_kardex).subscribe(validar => {
-            if(validar){
+            if(validar == 1){
                 var kardexActualizar: Kardex = new Kardex();
                 kardexActualizar.id_kardex = item.id_kardex;
-                kardexActualizar.fecha_fac = item.fecha_fac;
+                kardexActualizar.fecha_fac = item.fecha_fac != null ? item.fecha_fac : this.hoyFecha();
                 kardexActualizar.num_factura = item.num_factura;
                 kardexActualizar.serie_factura = item.serie_factura;
                 kardexActualizar.tipo_operacion = item.tipo_operacion;
@@ -89,18 +97,47 @@ export class PedidosComponent implements OnInit {
                 this.modalService.open(modalValidacion).result.then((result) => {
                     this.service.validarKardex(kardexActualizar).subscribe(kar => {
                         this.kardexList = new Array();
-                        this.ngOnInit();
+                        // this.ngOnInit();
+                        this.obtenerRegistros();
                     }, err => {
                         console.log(err);
                     });
                 }, (reason) => {
                     
                 })
+            }else if(validar == 2){
+                this.textoAdvertencia = "El pedido no tiene productos agregados.";
+                this.modalService.open(modalAdvertencia);
             }else{
+                this.textoAdvertencia = "El pedido no tiene datos de facturacion.";
                 this.modalService.open(modalAdvertencia);
             }
         }, err => {
             console.log(err);
         })
+    }
+
+    obtenerRegistros(){
+        this.service.obtenerTotalKardexs().subscribe(tot => {
+            this.cantidadItems = tot * 2;
+            this.service.obtenerKardexsPaginacion(this.paginaActual).subscribe(kards => {
+                this.kardexList = new Array();
+                this.kardexList = kards;
+            }, err => {
+                console.log(err);
+            });
+        }, err => {
+            console.log(err);
+        });
+        
+    }
+
+    hoyFecha(){
+        var hoy = new Date();
+        var dd = hoy.getDate();
+        var mm = hoy.getMonth()+1;
+        var yyyy = hoy.getFullYear();
+        
+          return hoy;
     }
 }

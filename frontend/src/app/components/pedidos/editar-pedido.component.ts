@@ -73,7 +73,9 @@ export class EditarPedidoComponent implements OnInit {
     //Variable que guarda el precio unitario inicial del detalle de kardex a editar
     private precioProductoEditar: number;
 
-
+    private paginaActual: number = 1;
+    private tamanioPagina: number = 5;
+    
     constructor(private router: Router, private route: ActivatedRoute, private service: PedidosService, 
         private modalService: NgbModal, private datePipe: DatePipe) { }
 
@@ -83,11 +85,13 @@ export class EditarPedidoComponent implements OnInit {
             this.idKardex = params.id_kardex;
             
             this.service.obtenerKardex(params.id_kardex).subscribe(kard => {
-                console.log(kard.fecha_fac.toString());
-                let fechaTempStr = kard.fecha_fac.toString();
-                fechaTempStr = fechaTempStr + ".000Z"
                 this.kardexActual = kard;
-                this.kardexActual.fecha_fac = new Date(this.analizarFecha(fechaTempStr));
+                if(kard.fecha_fac != null){
+                    let fechaTempStr = kard.fecha_fac.toString();
+                    fechaTempStr = fechaTempStr + ".000Z"
+                    this.kardexActual.fecha_fac = new Date(this.analizarFecha(fechaTempStr));
+                }
+                
                 this.service.obtenerProveedores().subscribe(provs => {
                     this.proveedores = provs;
                     for (let i = 0; i < provs.length; i++) {

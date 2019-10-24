@@ -1,4 +1,4 @@
-<div class="container col-md-8 offset-md-2 mt-2">
+<div class="container col-md-8 offset-md-2 mt-2 mb-4">
     
     <div class="card">
         <div class="card-header">
@@ -20,7 +20,8 @@
                 <tbody *ngIf="kardexList.length != 0">
                     <tr *ngFor="let item of kardexList; index as i">
                         <td style="color: black;">{{i+1}}</td>
-                        <td style="color: black;">{{item.fecha_fac | date:'dd/MM/yyyy'}}</td>
+                        <td *ngIf="item.fecha_fac != null" style="color: black;">{{item.fecha_fac | date:'dd/MM/yyyy'}}</td>
+                        <td *ngIf="item.fecha_fac == null" style="color: black;">Sin fecha</td>
                         <td *ngIf="item.tipo_operacion == 0" style="color: black;">Pedido</td>
                         <td *ngIf="item.tipo_operacion == 1" style="color: black;">Devolucion</td>
                         <td style="color: black;">{{item.nom_proveedor}}</td>
@@ -38,6 +39,8 @@
                     <h6>No hay registros</h6>
                 </ngb-alert>
             </p>
+
+            <ngb-pagination *ngIf="kardexList.length != 0" class="d-flex justify-content-center" [collectionSize]="cantidadItems" [(page)]="paginaActual" [maxSize]="5" [boundaryLinks]="true" (pageChange)="obtenerRegistros()"></ngb-pagination>
         </div>
     </div>
         
@@ -56,7 +59,7 @@
 
     <div class="modal-body">
         <br>
-        <h4>El pedido no tiene productos agregados.</h4>
+        <h4>{{textoAdvertencia}}</h4>
         <h4>No es posible validar.</h4>
         <br>
     </div>
@@ -110,7 +113,7 @@
             <div class="col-6">
                 <div class="row col-12">
                     <span style="color: black; font-weight: 900; margin-right: 10px; font-size: medium;">FECHA: </span>
-                    <span style="color: black; font-size: medium;">{{kardex.fecha_fac | date: 'MM/dd/yyyy'}}</span>
+                    <span style="color: black; font-size: medium;">{{kardex.fecha_fac | date: 'dd/MM/yyyy'}}</span>
                 </div>
 
                 <div class="row col-12">
