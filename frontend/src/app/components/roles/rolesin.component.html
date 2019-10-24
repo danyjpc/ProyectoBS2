@@ -10,7 +10,7 @@
       <button class="btn btn-secondary ml-2" [routerLink]="['/roles']" routerLinkActive="rolesin">Roles
         Habilitados</button>
       <table class="table table-striped mt-2">
-        <thead>
+        <thead class="thead-dark">
           <tr>
             <th scope="col">No.</th>
             <th scope="col">Nombre </th>
@@ -26,16 +26,16 @@
             <td scope="row">{{ item.descripcion }}</td>
 
             <td>
-              
-              <button class="btn btn-sm ml-2 btn-primary"   (click)="editarRol(item)"  >Editar</button>
-              
+
+              <button class="btn btn-sm ml-2 btn-primary" (click)="editarRol(item)">Editar</button>
+
             </td>
           </tr>
 
 
         </tbody>
       </table>
-
+      <div class="alert alert-warning col text-center" *ngIf="roles">No se encuentran registros</div>
     </div>
   </div>
 

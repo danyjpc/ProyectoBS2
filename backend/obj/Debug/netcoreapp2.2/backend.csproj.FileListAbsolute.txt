@@ -1,5 +1,4 @@
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> 69ff210c3f7a90c5d4a682918585bf03d09e1cc6
 C:\Users\Dany\Desktop\to do list\backend\bin\Debug\netcoreapp2.2\backend.deps.json
@@ -92,7 +91,6 @@ c:\Users\Dany\Desktop\ProyectoBD2\backend\obj\Debug\netcoreapp2.2\backend.RazorT
 c:\Users\Dany\Desktop\ProyectoBD2\backend\obj\Debug\netcoreapp2.2\backend.dll
 c:\Users\Dany\Desktop\ProyectoBD2\backend\obj\Debug\netcoreapp2.2\backend.pdb
 >>>>>>> b19a7282c4bfba32d50ec7c3fcd183523581dbe5
-=======
 >>>>>>> 6404f1c7041c5d0729bf5328f6807da44795b30a
 C:\Users\Dany\Desktop\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
 C:\Users\Dany\Desktop\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json

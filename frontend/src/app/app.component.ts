@@ -27,13 +27,14 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private authenticationService: AuthenticationService, private modalService: NgbModal, private service: VentaService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.user= localStorage.getItem('usr');
+    
+    
   }
 
   ngOnInit() {
     var perms = localStorage.getItem('permisos');
-
-
-
+    if(perms){
+      
     if(perms.indexOf("1") != -1){
       this.nombres.admin_roles = true;
     }
@@ -70,6 +71,7 @@ export class AppComponent implements OnInit {
     }
     if(perms.indexOf("12") !=-1){
       this.nombres.admin_kardex=true;
+    }
     }
   }
 

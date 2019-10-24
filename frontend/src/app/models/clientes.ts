@@ -5,6 +5,7 @@ export class Clientes{
     nom_cliente: string;
     direccion: string;
     telefono: string;
+    nit: string;
     habilitado: number;
     nit: string;
     facturas: Array<Factura>;
