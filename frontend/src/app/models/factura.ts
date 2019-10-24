@@ -5,6 +5,5 @@ export class Factura{
     fecha: Date; 
     estado: number; 
     id_cliente: number; 
-    //id_empleado: number;
-    detalles_factura: Array<Detalle_factura>
+    id_empleado: number;
 }

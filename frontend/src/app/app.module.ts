@@ -46,6 +46,7 @@ import { NuevaVentaComponent } from './components/ventas/nueva-venta.component';
 import { VentaService } from './services/venta.service';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { InventarioService } from 'src/app/services/inventario.service';
+import { CrearProductosComponent } from './components/productos/crear-producto.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { InventarioService } from 'src/app/services/inventario.service';
     CrearClienteComponent,
     EditarClienteComponent,
     NuevaVentaComponent,
-    InventarioComponent
+    InventarioComponent,
+    CrearProductosComponent
 
   ],
 

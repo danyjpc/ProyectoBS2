@@ -51,7 +51,7 @@ export class CrearProductosComponent implements OnInit {
 
     guardar(){
         this.item.id_categoria = this.cate.id_categoria;
-        this.item.habilitado = 1;
+        this.item.habilitado = true;
         this.service.guardar(this.item).subscribe(
             items => {
                 this.router.navigate(['/productos']);

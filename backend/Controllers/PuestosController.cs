@@ -51,9 +51,19 @@ namespace backend.Controllers
         //GET: api/Personas/Deshabilitado
         [Route("Deshabilitado")]
         [HttpGet]
-        public async Task<List<Empleado>> obtenerPersonasDeshabilitadas()
+        public async Task<List<Puesto>> obtenerPersonasDeshabilitadas()
         {
-            var personas = await _context.Empleados.Where(x => x.estado_activo == 0).ToListAsync();
+            var personas = await _context.Puestos.Where(x => x.habilitado == 0).ToListAsync();
+            return personas;
+        }
+
+        //OBTENER Puestos DESHABILITADAS
+        //GET: api/Personas/Deshabilitado
+        [Route("habilitado")]
+        [HttpGet]
+        public async Task<List<Puesto>> obtenerPersonashabilitadas()
+        {
+            var personas = await _context.Puestos.Where(x => x.habilitado == 1).ToListAsync();
             return personas;
         }
           

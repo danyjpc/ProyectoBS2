@@ -12,7 +12,7 @@ import { RoleService } from 'src/app/services/roles.service';
 export class RolesinComponent implements OnInit{
     //Aca va la declaracion de variables
     public listRoles: Roles[];
-    
+    public roles: boolean = false;
     constructor(
         private router: Router,
         private service: RoleService
@@ -22,7 +22,9 @@ export class RolesinComponent implements OnInit{
         this.service.findListIn().subscribe(
             items=>{
                 this.listRoles= items;
-                
+                if(this.listRoles.length ==0){
+                    this.roles= true;
+                }
             }, 
             err=>{
                 console.log(err);

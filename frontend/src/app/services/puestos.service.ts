@@ -18,7 +18,7 @@ export class PuestosService {
   constructor(private http: HttpClient) { }
 
   findList(): Observable<Puestos[]> {
-    return this.http.get<Puestos[]>(APPCONFIG.BASE_URL + "/puestos", httpOptions).pipe(
+    return this.http.get<Puestos[]>(APPCONFIG.BASE_URL + "/puestos/habilitado", httpOptions).pipe(
       catchError(this.handleError('findList', []))
     );
   }

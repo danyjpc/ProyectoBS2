@@ -34,6 +34,7 @@ import { EditarClienteComponent } from './components/clientes/editar-cliente.com
 import { NuevaVentaComponent } from './components/ventas/nueva-venta.component'
 import { InventarioService } from './services/inventario.service';
 import { InventarioComponent } from './components/inventario/inventario.component';
+import { CrearProductosComponent } from './components/productos/crear-producto.component';
 
 
 const routes: Routes = [
@@ -63,8 +64,8 @@ const routes: Routes = [
   {
     path: 'nueva-venta',
     component: NuevaVentaComponent,
-    //canActivate: [AuthGuard],
-    //data: { permisos:"2" }
+    canActivate: [AuthGuard],
+    data: { permisos:"6" }
   },
 
 
@@ -229,6 +230,10 @@ const routes: Routes = [
   {
     path: 'inventario',
     component: InventarioComponent
+  },
+  {
+    path: 'crear-producto',
+    component: CrearProductosComponent
   }
 ];
 
