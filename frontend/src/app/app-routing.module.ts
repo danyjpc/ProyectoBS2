@@ -62,8 +62,8 @@ const routes: Routes = [
   {
     path: 'nueva-venta',
     component: NuevaVentaComponent,
-    //canActivate: [AuthGuard],
-    //data: { permisos:"2" }
+    canActivate: [AuthGuard],
+    data: { permisos:"6" }
   },
 
 

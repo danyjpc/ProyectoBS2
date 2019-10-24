@@ -5,14 +5,14 @@
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav" *ngIf="nombres.admin_productos">
       <ul class="navbar-nav ml-auto">
         <div ngbDropdown class="d-inline-block">
           <button class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>Productos</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <li><button class="btn btn-dark nav-link col" [routerLink]="['/productos']" routerLinkActive="/productos" >Productos</button></li>
-              <li><button class="btn btn-dark nav-link col" [routerLink]="['/cat-producto']" routerLinkActive="/productos" >Categoria</button></li>
-              <li><button class="btn btn-dark nav-link col" [routerLink]="['/umedida']" routerLinkActive="/productos" >Unidad de medida</button></li>
+                <li><button class="btn btn-dark nav-link" *ngIf="nombres.admin_productos" [routerLink]="['/productos']" routerLinkActive="/productos" >Productos</button></li>
+              <li><button class="btn btn-dark nav-link" *ngIf="nombres.admin_categorias" [routerLink]="['/cat-producto']" routerLinkActive="/productos" >Categoria</button></li>
+              <li><button class="btn btn-dark nav-link"  *ngIf="nombres.admin_unidad_medida"[routerLink]="['/umedida']" routerLinkActive="/productos" >Unidad de medida</button></li>
             </div>
         </div>
         <li class="nav-item">

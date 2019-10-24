@@ -9,7 +9,7 @@
       <button class="btn btn-success" (click)="crearEmpleado()" >Crear Empleado</button>
       <button class="btn btn-secondary ml-2" [routerLink]="['/empleadoin']" routerLinkActive="empleadoin"  >Empleados Inhabilitados</button>
       <table class="table table-striped mt-2">
-        <thead>
+        <thead class="thead-dark">
           <tr>
             <th scope="col">No.</th>
             <th scope="col">Nombres y Apellidos</th>
@@ -34,7 +34,7 @@
 
         </tbody>
       </table>
-
+      <div class="alert alert-warning col text-center" *ngIf="empleados">No se encuentran registros</div>
     </div>
   </div>
 

@@ -12,7 +12,7 @@ import { Empleado } from 'src/app/models/empleado';
 export class EmpleadosComponent implements OnInit{
     //Aca va la declaracion de variables
     public listEmpleado: Empleado[];
-    
+    public empleados: boolean = false;
     constructor(
         private router: Router,
         private service: EmpleadoService
@@ -22,7 +22,9 @@ export class EmpleadosComponent implements OnInit{
         this.service.findList().subscribe(
             items=>{
                 this.listEmpleado= items;
-                
+                if(this.listEmpleado.length == 0){
+                    this.empleados = true;
+                }
             }, 
             err=>{
                 console.log(err);
