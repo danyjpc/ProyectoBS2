@@ -30,7 +30,7 @@ namespace backend.Controllers
                 validado = m.validado,
                 id_proveedor = m.id_proveedor,
                 nom_proveedor = m.proveedor.nom_proveedor,
-            }).OrderBy(n => n.id_kardex).Take(5).ToArrayAsync();
+            }).OrderByDescending(n => n.fecha_fac).Take(5).ToArrayAsync();
 
             return Ok(items);
         }
@@ -180,7 +180,7 @@ namespace backend.Controllers
 
             var kardex = await _context.Kardexs.FindAsync(id_kardex);
 
-            bool datosFactura = kardex.num_factura != null && kardex.serie_factura != null && kardex.serie_factura != "";
+            bool datosFactura = kardex.num_factura != null && kardex.serie_factura != null && kardex.serie_factura != "" && kardex.id_proveedor != null;
             
             int ret = 3;
 
@@ -215,7 +215,7 @@ namespace backend.Controllers
                 validado = m.validado,
                 id_proveedor = m.id_proveedor,
                 nom_proveedor = m.proveedor.nom_proveedor,
-            }).OrderBy(n => n.id_kardex).ToListAsync();
+            }).OrderByDescending(n => n.fecha_fac).ToListAsync();
 
             var kardexs = await _context.Kardexs.Select(m => new {
                 id_kardex = m.id_kardex,
@@ -226,7 +226,7 @@ namespace backend.Controllers
                 validado = m.validado,
                 id_proveedor = m.id_proveedor,
                 nom_proveedor = m.proveedor.nom_proveedor,
-            }).OrderBy(n => n.id_kardex).Take(0).ToListAsync();
+            }).OrderByDescending(n => n.fecha_fac).Take(0).ToListAsync();
 
             int inicio = (pagina * 5) - 5;
             int final = pagina * 5;
@@ -239,6 +239,19 @@ namespace backend.Controllers
             }
 
             return Ok(kardexs);
+        }
+
+        [HttpDelete("eliminarpedido/{id_kardex}")]
+        public async Task<ActionResult> eliminarPedido(int id_kardex){
+            var item = await _context.Kardexs.FindAsync(id_kardex);
+            if(item == null)
+            {
+                return NotFound();
+            }
+
+            _context.Kardexs.Remove(item);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }

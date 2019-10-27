@@ -70,4 +70,8 @@ export class PedidosService {
     obtenerKardexsPaginacion(pagina: number): Observable<Kardex[]>{
         return this.http.get<Kardex[]>(APPCONFIG.BASE_URL + "/pedidos/pedidospaginacion/" + pagina);
     }
+
+    eliminarPedido(id_kardex: number): Observable<any> {
+        return this.http.delete(APPCONFIG.BASE_URL+"/pedidos/eliminarpedido/"+id_kardex);
+      }
 }
