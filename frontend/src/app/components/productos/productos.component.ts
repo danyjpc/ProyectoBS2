@@ -32,7 +32,7 @@ export class ProductosComponent implements OnInit {
   }
 
   editar(){
-    this.router.navigate(['/crear-producto'])
+    //this.router.navigate(['/crear-producto'])
   }
 
 }

@@ -65,5 +65,15 @@ namespace backend.Controllers
 
             return NoContent();
         }
+
+        //Crear un registro de dimensión
+        [HttpPost("dimension")]
+        public async Task<ActionResult<Producto>> CrearDimension([FromBody] Dimension dimension)
+        {
+            _context.Dimensiones.Add(dimension);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }

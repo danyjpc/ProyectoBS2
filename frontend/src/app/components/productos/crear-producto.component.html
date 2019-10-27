@@ -1,3 +1,9 @@
+<style>
+  label {
+    color: black;
+  }
+
+</style>
 <br>
 <div class="container ">
   <div class="card">
@@ -5,58 +11,110 @@
       <h3 class="h3 col text-center"><b>Crear producto</b></h3>
     </div>
     <div class="card-body">
-        <button class="btn btn-success btn-sm" [routerLink]="['/productos']">Regresar</button>&nbsp;&nbsp;
-        <button class="btn btn-info btn-sm"  (click)="nuevo(crear)" >Agregar dimensión</button>
-        <br>
-        <br>
+      <button class="btn btn-success btn-sm" [routerLink]="['/productos']">Regresar</button>&nbsp;&nbsp;
+      <br>
+      <br>
       <div class="form-row">
         <div class="col-4">
-            <label>Código</label>
-            <input type="text" class="form-control" placeholder="Código" [(ngModel)]="item.cod_producto">
+          <label>Código</label>
+          <input type="text" class="form-control" placeholder="Código" [(ngModel)]="item.cod_producto">
         </div>
         <div class="col-4">
+          <label>Nombre</label>
+          <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="item.nom_producto">
+        </div>
+        <div class="col-4">
+          <label>Descripción</label>
+          <input type="text" class="form-control" placeholder="Descripción" [(ngModel)]="item.descripcion">
+        </div>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col-4">
+          <label>Costo compra</label>
+          <input type="number" class="form-control" placeholder="Costo compra" [(ngModel)]="item.costo_compra">
+        </div>
+        <div class="col-4">
+          <label>Precio unitario</label>
+          <input type="number" class="form-control" placeholder="Precio unitario" [(ngModel)]="item.precio_unitario">
+        </div>
+        <div class="col-4">
+          <label>Cantidad existente</label>
+          <input type="number" class="form-control" placeholder="Cantidad existente"
+            [(ngModel)]="item.cantidad_existente">
+        </div>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col-4">
+          <label>Categoría</label>
+          <input type="text" class="form-control" placeholder="Categoría" [(ngModel)]="cate" [ngbTypeahead]="searchCat"
+            [resultFormatter]="rFormatterCat" [inputFormatter]="iFormatterCat"
+            (focus)="focusCat$.next($event.target.value)" (click)="clickCat$.next($event.target.value)"
+            #instanceAre="ngbTypeahead">
+        </div>
+        <div class="form-group col-3" style="padding-top: 35px;">
+          <button type="button" class="btn btn-info btn-sm" (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+            Agregar dimensión
+          </button>
+        </div>
+      </div>
+      <br>
+      <div id="collapseExample" [ngbCollapse]="isCollapsed">
+        <div class="form-row">
+          <div class="col-3">
             <label>Nombre</label>
-            <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="item.nom_producto">
+            <input type="text" class="form-control" placeholder="Nombre dimensión" [(ngModel)]="itemD.nombre_dimension">
+          </div>
+          <div class="col-3">
+            <label>Valor</label>
+            <input type="number" class="form-control" placeholder="Valor" [(ngModel)]="itemD.valor">
+          </div>
+          <div class="col-3">
+            <label>Unidad</label>
+            <input type="text" class="form-control" placeholder="Unidad de medida" [(ngModel)]="unid"
+              [ngbTypeahead]="searchUni" [resultFormatter]="rFormatterUni" [inputFormatter]="iFormatterUni"
+              (focus)="focusUni$.next($event.target.value)" (click)="clickUni$.next($event.target.value)"
+              #instanceAre="ngbTypeahead">
+          </div>
+          <div class="form-group col-3" style="padding-top: 35px;">
+            <button type="button" class="btn btn-sm btn-primary" (click)="agregarD()"> Agregar + </button>
+          </div>
         </div>
-        <div class="col-4">
-            <label>Descripción</label>
-            <input type="text" class="form-control" placeholder="Descripción" [(ngModel)]="item.descripcion">
+        <br>
+        <div class="card-body">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Unidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listaD; index as i">
+                <td class="align-middle">{{ i+1 }}</td>
+                <td class="align-middle">{{ item.nombre_dimension }}</td>
+                <td class="align-middle">{{ item.valor  }}</td>
+                <td class="align-middle">{{ item.id_unidad_medida}}</td>
+                <button class="btn-sm btn-danger" type="button"> <i class="fa fa-trash"></i></button> &nbsp;
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-      <br>
-      <div class="form-row">
-        <div class="col-4">
-            <label>Costo compra</label>
-            <input type="number" class="form-control" placeholder="Costo compra" [(ngModel)]="item.costo_compra">
-        </div>
-        <div class="col-4">
-            <label>Precio unitario</label>
-            <input type="number" class="form-control" placeholder="Precio unitario" [(ngModel)]="item.precio_unitario">
-        </div>
-        <div class="col-4">
-            <label>Cantidad existente</label>
-            <input type="number" class="form-control" placeholder="Cantidad existente" [(ngModel)]="item.cantidad_existente">
-        </div>
-      </div>
-      <br>
-      <div class="form-row">
-        <div class="col-4">
-            <label>Categoría</label>
-            <input type="text" class="form-control" placeholder="Categoría" [(ngModel)]="cate" [ngbTypeahead]="searchCat" 
-            [resultFormatter]="rFormatterCat" [inputFormatter]="iFormatterCat" (focus)="focusCat$.next($event.target.value)" 
-            (click)="clickCat$.next($event.target.value)" #instanceAre="ngbTypeahead">
-        </div> 
       </div>
       <br>
       <div class="card-footer text-muted">
         <button class="btn btn-success btn-sm" (click)="guardar()">Guardar</button>&nbsp;&nbsp;
         <button class="btn btn-danger btn-sm" [routerLink]="['/productos']">Cancelar</button>
       </div>
-      
+
     </div>
   </div>
 </div>
-
+<!--
 <ng-template #crear let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Agregar dimensión</h4>
@@ -89,3 +147,4 @@
     <button type="button" class="btn btn-outline-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
   </div>
 </ng-template>
+-->
