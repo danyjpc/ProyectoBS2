@@ -47,7 +47,12 @@
         </li>
         <!--Administracion de ventas-->
         <li class="nav-item">
-          <button class="btn btn-dark"  [routerLink]="['/nueva-venta']" routerLinkActive="/nueva-venta"  >Nueva venta</button>
+            <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>Ventas</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <li><button class="btn btn-dark nav-link" *ngIf="nombres.admin_productos" [routerLink]="['/nueva-venta']" routerLinkActive="/nueva-venta" >Nueva venta</button></li>
+                  </div>
+              </div>
         </li>
 
         <li class="nav-item">
