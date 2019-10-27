@@ -4,4 +4,5 @@ export class Dimension{
     valor: number; 
     id_producto: number; 
     id_unidad_medida: number;
+    habilitado: number;
 }

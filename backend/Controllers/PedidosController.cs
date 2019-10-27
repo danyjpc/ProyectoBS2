@@ -180,7 +180,7 @@ namespace backend.Controllers
 
             var kardex = await _context.Kardexs.FindAsync(id_kardex);
 
-            bool datosFactura = kardex.num_factura != null && kardex.serie_factura != null && kardex.serie_factura != "" && kardex.id_proveedor != null;
+            bool datosFactura = kardex.num_factura != null && kardex.serie_factura != null && kardex.serie_factura != "";
             
             int ret = 3;
 

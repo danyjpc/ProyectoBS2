@@ -7,5 +7,4 @@ export class Clientes{
     telefono: string;
     nit: string;
     habilitado: number;
-    facturas: Array<Factura>;
 }
