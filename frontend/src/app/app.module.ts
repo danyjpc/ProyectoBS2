@@ -13,7 +13,6 @@ import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './compone
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import { ProveedoresService } from 'src/app/services/proveedores.service';
 import { ProductosComponent } from './components/productos/productos.component';
-import { CrearProductosComponent} from './components/productos/crear-producto.component';
 import { UmedidaComponent } from './components/productos/umedida.component';
 import { UnidadmedidasService } from 'src/app/services/unidadmedidas.service';
 import { CatProductoComponent } from './components/productos/cat-producto.component';
@@ -45,6 +44,9 @@ import { EditarClienteComponent } from './components/clientes/editar-cliente.com
 
 import { NuevaVentaComponent } from './components/ventas/nueva-venta.component';
 import { VentaService } from './services/venta.service';
+import { InventarioComponent } from './components/inventario/inventario.component';
+import { InventarioService } from 'src/app/services/inventario.service';
+import { CrearProductosComponent } from './components/productos/crear-producto.component';
 
 
 @NgModule({
@@ -55,7 +57,6 @@ import { VentaService } from './services/venta.service';
     LoginComponent, 
     ProveedoresComponent, 
     ProductosComponent, 
-    CrearProductosComponent,
     UmedidaComponent,
     CatProductoComponent,
     EmpleadosComponent, 
@@ -80,7 +81,9 @@ import { VentaService } from './services/venta.service';
     ClientesInComponent,
     CrearClienteComponent,
     EditarClienteComponent,
-    NuevaVentaComponent
+    NuevaVentaComponent,
+    InventarioComponent,
+    CrearProductosComponent
 
   ],
 
@@ -108,7 +111,7 @@ import { VentaService } from './services/venta.service';
     DatePipe,
     CategoriasService,
     UnidadmedidasService,
-    DatePipe
+    InventarioService,
   ],
   bootstrap: [AppComponent]
 })

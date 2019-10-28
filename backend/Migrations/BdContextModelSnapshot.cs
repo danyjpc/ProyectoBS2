@@ -274,12 +274,16 @@ namespace backend.Migrations
 
                     b.Property<int>("habilitado");
 
+                    b.Property<int>("id_dimension");
+
                     b.Property<string>("nombre_dimension")
                         .HasColumnType("varchar(45)");
 
                     b.Property<decimal>("valor");
 
                     b.HasKey("id_producto", "id_unidad_medida");
+
+                    b.HasAlternateKey("id_dimension");
 
                     b.HasIndex("id_unidad_medida");
 
@@ -342,12 +346,12 @@ namespace backend.Migrations
                     b.Property<int>("id_kardex")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("fecha_fac")
+                    b.Property<DateTime?>("fecha_fac")
                         .HasColumnType("date");
 
                     b.Property<int>("id_proveedor");
 
-                    b.Property<int>("num_factura");
+                    b.Property<int?>("num_factura");
 
                     b.Property<string>("serie_factura")
                         .HasColumnType("varchar(45)");

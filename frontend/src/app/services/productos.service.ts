@@ -4,6 +4,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { APPCONFIG } from '../constantes.module';
 import { Producto } from '../models/producto';
+import { Dimension } from '../models/dimension';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -29,6 +30,9 @@ export class ProductosService {
   }
   editar(item: Producto): Observable<Producto> {
     return this.http.put<Producto>(APPCONFIG.BASE_URL+"/productos/"+item.id_producto,item);
+  }
+  guardarD(item: Dimension): Observable<Dimension> {
+    return this.http.post<Dimension>(APPCONFIG.BASE_URL+"/productos/dimension",item);
   }
   /*eliminarPorId(cod_tarea: number): Observable<any> {
     return this.http.delete(APPCONFIG.BASE_URL+"/tareas/"+cod_tarea);

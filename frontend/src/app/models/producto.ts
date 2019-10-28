@@ -12,7 +12,7 @@ export class Producto{
     cantidad_existente: number; 
     id_categoria: number; 
     categoria: Categoria;
-    habilitado: boolean;
+    habilitado: number;
     //detalles_kardex: Array<Detalle_kardex>;
     detalles_factura: Array<Detalle_factura>;
     dimensiones: Array<Dimension>;

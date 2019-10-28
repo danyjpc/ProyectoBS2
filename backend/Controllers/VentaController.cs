@@ -84,73 +84,7 @@ namespace backend.Controllers
         }
 
 
-/*
-        //OBTENER PERSONAS DESHABILITADAS
-        //GET: api/Personas/Deshabilitado
-        [Route("Deshabilitado")]
-        [HttpGet]
-        public async Task<List<Empleado>> obtenerPersonasDeshabilitadas()
-        {
-            var personas = await _context.Empleados.Where(x => x.estado_activo == 0).ToListAsync();
-            return personas;
-        }
 
-        //Obtener a un empleado por su codigo
-        [HttpGet("{cod_empleado}")]
-        public async Task<ActionResult<Empleado>> getItem(int cod_empleado)
-        {
-
-            var item = await _context.Empleados.FindAsync(cod_empleado);
-            //DateTime fecha= new System.DateTime(item.fecha_nacimiento.Day, item.fecha_nacimiento.Month, item.fecha_nacimiento.Year);
-
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return item;
-        }
-
-        //CREAR EMPLEADO
-        //POST: api/Empleados
-        [HttpPost]
-        public async Task<ActionResult> crearEmpleado([FromBody] Empleado empleado)
-        {
-            await _context.Empleados.AddAsync(empleado);
-            await _context.SaveChangesAsync();
-
-            int id = empleado.cod_empleado;
-
-            var nuevoEmpleado = _context.Empleados.Where(x => x.cod_empleado == id);
-
-            return Ok(nuevoEmpleado); //Retorn Id de usuario creado
-        }
-
-        //EDITAR EMPLEADO
-        //Si su estado activo se deshabilita, tambien se deshabilitará su cuenta de usuario.
-        //PUT: api/Personas/4
-        [HttpPut("{cod_empleado}")]
-        public async Task<IActionResult> editarPersona(int cod_empleado, Empleado empleado)
-        {
-            if (cod_empleado != empleado.cod_empleado)
-            {
-                return BadRequest();
-            }
-
-            var empleadoOld = _context.Empleados.Where(x => x.cod_empleado == cod_empleado).FirstOrDefault();
-
-            if (empleadoOld != null) //Si la persona tiene una cuenta de usuario
-            {
-                empleadoOld.nombre = empleado.nombre;
-                empleadoOld.direccion = empleado.direccion;
-                empleadoOld.dpi = empleado.dpi;
-                empleadoOld.estado_activo = empleado.estado_activo;
-
-                _context.Entry(empleadoOld).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-            }
-
-            return NoContent();
-        }*/
 
     }
 }

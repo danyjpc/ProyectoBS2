@@ -1,20 +1,15 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Route } from "@angular/compiler/src/core";
-import { AuthenticationService } from "./services/authentication.service";
-import { Router } from "@angular/router";
-import { Role } from "./models/role";
-import { User } from "./models/user";
-import { NombrePermisos } from "./models/nombre_permisos";
-import { Clientes } from "./models/clientes";
-import { NgbModal, NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
-import { VentaService } from "./services/venta.service";
-import { Subject, Observable, merge } from "rxjs";
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map
-} from "rxjs/operators";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Route } from '@angular/compiler/src/core';
+import { AuthenticationService } from './services/authentication.service';
+import { Router } from '@angular/router';
+import { Role } from './models/role';
+import { User } from './models/user';
+import { NombrePermisos } from './models/nombre_permisos';
+import { Clientes } from './models/clientes';
+import { NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { VentaService } from './services/venta.service';
+import { Subject, Observable, merge } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 @Component({
   selector: "app-root",
@@ -28,16 +23,17 @@ export class AppComponent implements OnInit {
   public x: number = 0;
   public nombres: NombrePermisos = new NombrePermisos();
   public logeado: string;
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService,
-    private modalService: NgbModal,
-    private service: VentaService
-  ) {
-   
-  }
+ 
+
 
   ngOnInit() {
+  }
+
+
+  constructor(private router: Router, private authenticationService: AuthenticationService, private modalService: NgbModal, private service: VentaService) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.user= localStorage.getItem('usr');
+
     
   }
 

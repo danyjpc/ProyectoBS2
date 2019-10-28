@@ -9,29 +9,26 @@
           </div>
 
         <div class="card-header">
-            <div>
-                 <button type="button" class="btn btn-primary" [routerLink]="['/crear-cliente']">Crear cliente</button>
-            </div>
-            <br>
             <div class="form-row" placement = "center">
                 <div class = "col-4 ">
                     <h6 class="h6 text-left"><b>NIT</b></h6>
-                    <input type="text" class="form-control" [(ngModel)]  = "cli" [ngbTypeahead] = "searchcli" [resultFormatter] = "rFormatterCli" [inputFormatter] = "iFormatterCli" (focus) = "focusC$.next($event.target.value)"(click) = "clickC$.next($event.target.value)" #instanceC = "ngbTypeahead">
+                    <input *ngIf="hayClientes" placeholder="Ingrese NIT" type="text" class="form-control" [(ngModel)]  = "cli" (ngModelChange)="borrarCampos()" [ngbTypeahead] = "searchcli" [resultFormatter] = "rFormatterCli" [inputFormatter] = "iFormatterCli" (focus) = "focusC$.next($event.target.value)" (click) = "clickC$.next($event.target.value)" #instanceC = "ngbTypeahead" (selectItem)="autocompletar($event)"> 
                 </div>
+
                 <div class = "col-4">
                     <h6 class="h6 text-left"><b>Cliente</b></h6>
-                    <input type="text" class="form-control" placeholder="Cliente"  [(ngModel)]="cli.nom_cliente">
+                    <input type="text" class="form-control" placeholder="Cliente" [(ngModel)]="nomC">
                 </div>
 
                 <div class = "col-4">
                         <h6 class="h6 text-left"><b>Dirección</b></h6>
-                        <input type="text" class="form-control" placeholder="Dirección"  [(ngModel)]="cli.direccion">
+                        <input type="text" class="form-control" placeholder="Dirección"  [(ngModel)]="dirC">
                 </div>
             </div>
             <div class="form-row">
                 <div class = "col-4">
                     <h6 class="h6 text-left"><b>Teléfono</b></h6>
-                    <input type="text" class="form-control" placeholder="Teléfono"  [(ngModel)]="cli.telefono">
+                    <input type="text" class="form-control" placeholder="Teléfono"  [(ngModel)]="telC">
                 </div>
                     <div class = "col-4">
                     <h6 class="h6 text-left"><b>Fecha</b></h6>
@@ -45,11 +42,11 @@
         <div class = "card-header form-row ">
             <div class = "col-md-8">
                 <label *ngIf="hayProductos" class = "alert alert-warning col 12" role = "alert">No hay productos disponibles</label>
-                <input type="text" class="form-control" [(ngModel)]  = "prod"[ngbTypeahead] = "searchprod" [resultFormatter] = "rFormatterProd" [inputFormatter] = "iFormatterProd" (focus) = "focusP$.next($event.target.value)"(click) = "clickP$.next($event.target.value)" #instanceP = "ngbTypeahead">
-                <!--[(ngModel)]  = "prod" [ngbTypeahead] = "searchprod" [resultFormatter] = "rFormatterProd" [inputFormatter] = "iFormatterProd" (focus) = "focusP$.next($event.target.value)" (click) = "clickP$.next($event.target.value)" #instanceP = "ngbTypeahead"-->
+                <input type="text" placeholder = "Buscar producto..." class="form-control" [(ngModel)]  = "prod"[ngbTypeahead] = "searchprod" [resultFormatter] = "rFormatterProd" [inputFormatter] = "iFormatterProd" (focus) = "focusP$.next($event.target.value)"(click) = "clickP$.next($event.target.value)" #instanceP = "ngbTypeahead">
             </div>
             <div class = "col-md-4">
-                    <button type="button" class="btn btn-primary" (click) = "agregarProducto(aggPro)">Agregar producto</button>
+                    <button type="button" *ngIf="verificarNombreProducto()" class="btn btn-primary" (click) = "agregarProducto(aggPro)">Agregar producto</button>
+                    <button type="button" *ngIf="!verificarNombreProducto()" class="btn btn-primary" (click) = "agregarProducto(aggPro)" disabled>Agregar producto</button>
             </div>
         </div>
         
@@ -80,7 +77,8 @@
             <h3 class="h3 col text-right"><b>Total: {{totalFac}}</b></h3>
         </div>
         <div class = "card-header">              
-            <button type="button" class="btn btn-primary" (click) = "guardarFactura()">Crear factura</button>
+            <button type="button" *ngIf="hayDetallesNuevaFactura && clienteSeleccionado" class="btn btn-primary" (click) = "guardarFactura()">Crear factura</button>
+            <button type="button" *ngIf="!hayDetallesNuevaFactura || !clienteSeleccionado" class="btn btn-primary" (click) = "guardarFactura()" disabled>Crear factura</button>
         </div>
     </div>
 </div>

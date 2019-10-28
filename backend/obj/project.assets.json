@@ -7580,6 +7580,7 @@
       "path": "runtime.native.system.security.cryptography.apple/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -11131,6 +11132,7 @@
       "path": "system.security.principal/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12110,6 +12112,7 @@
       "path": "system.xml.xpath.xdocument/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12161,11 +12164,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Emanuel Rosales\\Desktop\\Escritorio Anterior\\Proyectos de cursos\\Bases de datos\\Proyecto Final\\ProyectoBS2\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\Users\\Emanuel Rosales\\Desktop\\Escritorio Anterior\\Proyectos de cursos\\Bases de datos\\Proyecto Final\\ProyectoBS2\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "c:\\Users\\Emanuel Rosales\\Desktop\\Escritorio Anterior\\Proyectos de cursos\\Bases de datos\\Proyecto Final\\ProyectoBS2\\backend\\backend.csproj",
+      "projectPath": "C:\\Users\\Emanuel Rosales\\Desktop\\Escritorio Anterior\\Proyectos de cursos\\Bases de datos\\Proyecto Final\\ProyectoBS2\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\Emanuel Rosales\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Emanuel Rosales\\Desktop\\Escritorio Anterior\\Proyectos de cursos\\Bases de datos\\Proyecto Final\\ProyectoBS2\\backend\\obj\\",
+      "outputPath": "C:\\Users\\Emanuel Rosales\\Desktop\\Escritorio Anterior\\Proyectos de cursos\\Bases de datos\\Proyecto Final\\ProyectoBS2\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12234,5 +12237,13 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema al leer el archivo de caché C:\\Users\\Emanuel Rosales\\Desktop\\Escritorio Anterior\\Proyectos de cursos\\Bases de datos\\Proyecto Final\\ProyectoBS2\\backend\\obj\\backend.csproj.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

@@ -11,8 +11,8 @@ namespace backend.Models
         [Key]
         public int id_kardex { get; set; }
         [Column(TypeName = "date")]
-        public DateTime fecha_fac { get; set; }
-        public int num_factura { get; set; }
+        public DateTime? fecha_fac { get; set; }
+        public int? num_factura { get; set; }
 
         [Column(TypeName = "varchar(45)")]
         public string serie_factura { get; set; }

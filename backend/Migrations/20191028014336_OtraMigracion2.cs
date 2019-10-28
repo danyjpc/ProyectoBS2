@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend.Migrations
 {
-    public partial class PrimeraMigracion : Migration
+    public partial class OtraMigracion2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -162,8 +162,8 @@ namespace backend.Migrations
                 {
                     id_kardex = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    fecha_fac = table.Column<DateTime>(type: "date", nullable: false),
-                    num_factura = table.Column<int>(nullable: false),
+                    fecha_fac = table.Column<DateTime>(type: "date", nullable: true),
+                    num_factura = table.Column<int>(nullable: true),
                     serie_factura = table.Column<string>(type: "varchar(45)", nullable: true),
                     tipo_operacion = table.Column<sbyte>(type: "tinyint", nullable: false),
                     validado = table.Column<byte>(nullable: false),
@@ -255,6 +255,7 @@ namespace backend.Migrations
                 {
                     id_producto = table.Column<int>(nullable: false),
                     id_unidad_medida = table.Column<int>(nullable: false),
+                    id_dimension = table.Column<int>(nullable: false),
                     nombre_dimension = table.Column<string>(type: "varchar(45)", nullable: true),
                     valor = table.Column<decimal>(nullable: false),
                     habilitado = table.Column<int>(nullable: false)
@@ -262,6 +263,7 @@ namespace backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_dimension", x => new { x.id_producto, x.id_unidad_medida });
+                    table.UniqueConstraint("AK_tb_dimension_id_dimension", x => x.id_dimension);
                     table.ForeignKey(
                         name: "FK_tb_dimension_tb_producto_id_producto",
                         column: x => x.id_producto,

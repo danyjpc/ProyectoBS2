@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { Proveedor } from 'src/app/models/proveedor';
@@ -7,6 +7,7 @@ import { Subject, Observable, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators';
 import { DetalleKardex } from 'src/app/models/detalle_kardex';
 import { Kardex } from 'src/app/models/kardex';
+import { Producto } from 'src/app/models/producto';
 
 @Component({
     selector: 'sel-nuevo-pedido',
@@ -37,6 +38,28 @@ export class NuevoPedidoComponent implements OnInit {
     private idProductoEditar: number;
     private cantidadProductoEditar: number;
     private precioProductoEditar: number;
+
+    private paginaActual: number = 1;
+    private tamanioPagina: number = 5;
+
+    //Variables para validacion
+    private bordeNumFactura: string = "";
+    private bordeSerieFactura: string = "";
+    private bordeFechaFactura: string = "";
+    private bordeProveedor: string = "";
+
+    private bordeProducto: string = "";
+    private bordeCantidad: string = "";
+    private bordePrecio: string = "";
+    private presionoAgregar: boolean;
+
+    private bordeProductoEditar: string = "";
+    private bordePrecioEditar: string = "";
+    private bordeCantidadEditar: string = "";
+
+    private camposInvalidos: boolean = false;
+
+    private tempValidacion: boolean = false;
     constructor(private router: Router, private service: PedidosService, private modalService: NgbModal) { }
 
     ngOnInit() { 
@@ -57,25 +80,35 @@ export class NuevoPedidoComponent implements OnInit {
         this.router.navigate(['/pedidos']);
     }
 
-    guardar(){
-        console.log(this.fecha)
-        this.nuevoKardex.fecha_fac = this.fecha;
-        this.nuevoKardex.validado = 0;
-        this.nuevoKardex.tipo_operacion = this.tipoOperacion;
-        this.nuevoKardex.id_proveedor = this.proveedorSeleccionado.id_proveedor;
-        this.service.guardarKardex(this.nuevoKardex).subscribe(kard => {
-            for (let i = 0; i < this.detalleKardexList.length; i++) {
-                this.detalleKardexList[i].id_kardex = kard.id_kardex;  
-                this.service.guardarDetalleKardex(this.detalleKardexList[i]).subscribe(detkar => {
+    @ViewChild('campinv') alertCamposInvalidos: ElementRef;
 
-                }, err => {
-                    console.log(err);
-                })              
-            }
-            this.router.navigate(['/pedidos']);
-        }, err => {
-            console.log(err);
-        })
+    guardar(){
+        if(this.validacionNumFactura() && this.validacionSerieFactura() 
+        && this.validacionFecha(this.nuevoKardex.fecha_fac) && this.validacionProveedor()){
+            this.camposInvalidos = false;
+            console.log(this.fecha)
+            this.nuevoKardex.fecha_fac = this.fecha;
+            this.nuevoKardex.validado = 0;
+            this.nuevoKardex.tipo_operacion = this.tipoOperacion;
+            this.nuevoKardex.id_proveedor = this.proveedorSeleccionado.id_proveedor;
+            this.service.guardarKardex(this.nuevoKardex).subscribe(kard => {
+                for (let i = 0; i < this.detalleKardexList.length; i++) {
+                    this.detalleKardexList[i].id_kardex = kard.id_kardex;  
+                    this.service.guardarDetalleKardex(this.detalleKardexList[i]).subscribe(detkar => {
+
+                    }, err => {
+                        console.log(err);
+                    })              
+                }
+                this.router.navigate(['/pedidos']);
+            }, err => {
+                console.log(err);
+            })
+        }else{
+            this.camposInvalidos = true;
+            this.alertCamposInvalidos.nativeElement.focus();
+        }
+        
     }
 
     cancelar(){
@@ -120,19 +153,29 @@ export class NuevoPedidoComponent implements OnInit {
     rFormatterProd = (result: {cod_producto: string, nom_producto: string, categoria: string}) => "[" + result.cod_producto + "]" + " " + result.nom_producto + " - " + result.categoria;
     iFormatterProd = (x: {cod_producto: string, nom_producto: string, categoria: string}) => "[" + x.cod_producto + "]" + " " + x.nom_producto + " - " + x.categoria;
 
+    @ViewChild('producto') inputProducto: ElementRef;
+
     agregarProducto(){
-        var obj: DetalleKardex = new DetalleKardex();
-        obj.id_producto = this.productoSeleccionado.id_producto;
-        obj.cantidad = this.cantidad;
-        obj.precio_unitario = this.precio_unitario;
+        if(this.validacionProducto() && this.validacionCantidadProducto() && this.validacionPrecioUnitario()){
+            var obj: DetalleKardex = new DetalleKardex();
+            obj.id_producto = this.productoSeleccionado.id_producto;
+            obj.cantidad = this.cantidad;
+            obj.precio_unitario = this.precio_unitario;
 
-        this.detalleKardexList.push(obj);
+            this.detalleKardexList.push(obj);
 
-        this.cantidad = null;
-        this.precio_unitario = null;
-        this.productoSeleccionado = null;
+            this.cantidad = null;
+            this.precio_unitario = null;
+            this.productoSeleccionado = null;
 
-        console.log(this.detalleKardexList);
+            console.log(this.detalleKardexList);
+
+            this.inputProducto.nativeElement.focus();
+
+            this.bordeProducto = "";
+            this.bordeCantidad = "";
+            this.bordePrecio = "";
+        }
     }
 
     buscarProductoParaDetalle(item): string{
@@ -192,23 +235,44 @@ export class NuevoPedidoComponent implements OnInit {
 
 
     editarProducto(modalEditar, indice){
-        this.idProductoEditar = this.detalleKardexList[indice].id_producto;
-        this.cantidadProductoEditar = this.detalleKardexList[indice].cantidad;
-        this.precioProductoEditar = this.detalleKardexList[indice].precio_unitario;
+        if(!this.tempValidacion){
+            this.idProductoEditar = this.detalleKardexList[indice].id_producto;
+            this.cantidadProductoEditar = this.detalleKardexList[indice].cantidad;
+            this.precioProductoEditar = this.detalleKardexList[indice].precio_unitario;
+            this.productoSeleccionadoEditar = this.buscarProductoParaEditar(this.detalleKardexList[indice]);    
+        }else{
+            this.productoSeleccionadoEditar = null;
+        }
+            
+        
+        
         this.productoEditar = this.detalleKardexList[indice];
-        this.productoSeleccionadoEditar = this.buscarProductoParaEditar(this.detalleKardexList[indice]);
+        
 
         this.modalService.open(modalEditar, {size: 'lg'}).result.then((result) => {
-            this.detalleKardexList[indice].id_producto = this.productoSeleccionadoEditar.id_producto;
-            this.idProductoEditar = this.detalleKardexList[indice].id_producto;
+            if(this.validacionProductoEditar() && this.validacionCantidadEditar() && this.validacionPrecioEditar()){
+                this.tempValidacion = false;
+                this.detalleKardexList[indice].id_producto = this.productoSeleccionadoEditar.id_producto;
+                this.idProductoEditar = this.detalleKardexList[indice].id_producto;
+                
+                this.productoSeleccionadoEditar = null;
+                this.idProductoEditar = null;
+                this.cantidadProductoEditar = null;
+                this.precioProductoEditar = null;
+                this.productoEditar = null;
+
+                this.bordeProductoEditar = "";
+                this.bordeCantidadEditar = "";
+                this.bordePrecioEditar = "";
+            }else{
+                this.tempValidacion = true;
+                this.editarProducto(modalEditar, indice);
+            }
             
-            this.productoSeleccionadoEditar = null;
-            this.idProductoEditar = null;
-            this.cantidadProductoEditar = null;
-            this.precioProductoEditar = null;
-            this.productoEditar = null;
 
         }, (reason) => {
+            this.tempValidacion = false;
+
             this.detalleKardexList[indice].id_producto = this.idProductoEditar;
             this.detalleKardexList[indice].cantidad = this.cantidadProductoEditar;
             this.detalleKardexList[indice].precio_unitario = this.precioProductoEditar;
@@ -218,6 +282,10 @@ export class NuevoPedidoComponent implements OnInit {
             this.cantidadProductoEditar = null;
             this.precioProductoEditar = null;
             this.productoEditar = null;
+
+            this.bordeProductoEditar = "";
+            this.bordeCantidadEditar = "";
+            this.bordePrecioEditar = "";
         });
     }
 
@@ -230,13 +298,121 @@ export class NuevoPedidoComponent implements OnInit {
         return total;
     }
 
-    hoyFecha(){
-        var hoy = new Date();
-          var dd = hoy.getDate();
-          var mm = hoy.getMonth()+1;
-          var yyyy = hoy.getFullYear();
-          return hoy;
+    //Metodos para la validacion de campos
+
+    //Validacion de datso factura
+    validacionNumFactura(): boolean{
+
+        if(this.nuevoKardex.num_factura != null){
+            this.bordeNumFactura = this.nuevoKardex.num_factura >= 0 && this.nuevoKardex.num_factura%1 == 0 && !this.esCadenaVacia(this.nuevoKardex.num_factura.toString()) 
+            ? "border-success" : "border-danger";
+            return this.nuevoKardex.num_factura >= 0 && this.nuevoKardex.num_factura%1 == 0 && !this.esCadenaVacia(this.nuevoKardex.num_factura.toString());
+        }else{
+            this.bordeNumFactura = "";
+            return true;
+        }
     }
+
+    validacionSerieFactura(): boolean{
+        if(this.nuevoKardex.serie_factura != null){
+            this.bordeSerieFactura = !this.esCadenaVacia(this.nuevoKardex.serie_factura)
+            ? "border-success" : "border-danger";
+            return !this.esCadenaVacia(this.nuevoKardex.serie_factura);
+        }else{
+            this.bordeSerieFactura = "";
+            return true;
+        }
+    }
+
+    validacionFecha(fecha): boolean{
+        if(fecha != null){
+            this.bordeFechaFactura = typeof fecha == 'object' ? "border-success" : "border-danger";
+            return typeof fecha == 'object';
+        }else{
+            this.bordeFechaFactura = "";
+            return true;
+        }
+    }
+
+    validacionProveedor(): boolean{
+        if(this.proveedorSeleccionado != null){
+            this.bordeProveedor = this.proveedorSeleccionado.id_proveedor != undefined ? "border-success" : "border-danger";
+            return this.proveedorSeleccionado.id_proveedor != undefined;
+        }else{
+            this.bordeProveedor = "border-danger";
+            return false;
+        }
+        
+    }
+
+
+    //Validacion para agregar producto
+    validacionProducto(): boolean{
+        if(this.productoSeleccionado != null){
+            this.bordeProducto = this.productoSeleccionado.id_producto != undefined ? "border-success" : "border-danger";
+            return this.productoSeleccionado.id_producto != undefined;
+        }else{
+            this.bordeProducto = "border-danger"
+            return false;
+        }
+    }
+
+    validacionCantidadProducto(): boolean{
+        this.bordeCantidad = this.cantidad != null && this.cantidad > 0 ? "border-success" : "border-danger";
+        return this.cantidad != null && this.cantidad > 0;
+    }
+
+    validacionPrecioUnitario(): boolean{
+        this.bordePrecio = this.precio_unitario != null && this.precio_unitario > 0 ? "border-success" : "border-danger";
+        return this.precio_unitario != null && this.precio_unitario > 0;
+    }
+
+    //Validacion editar producto
+    validacionProductoEditar(): boolean{
+        if(this.productoSeleccionadoEditar != null){
+            this.bordeProductoEditar = this.productoSeleccionadoEditar.id_producto != undefined ? "border-success" : "border-danger";
+            return this.productoSeleccionadoEditar.id_producto != undefined;
+        }else{
+            this.productoSeleccionadoEditar = null;
+            this.bordeProductoEditar = "border-danger";
+            return false;
+        }
+    }
+
+    validacionCantidadEditar(): boolean{
+        this.bordeCantidadEditar = this.productoEditar.cantidad != null && this.productoEditar.cantidad > 0 ? "border-success" : "border-danger";
+        return this.productoEditar.cantidad != null && this.productoEditar.cantidad > 0;
+    }
+
+    validacionPrecioEditar(): boolean{
+        this.bordePrecioEditar = this.productoEditar.precio_unitario != null && this.productoEditar.precio_unitario > 0 ? "border-success" : "border-danger";
+        return this.productoEditar.precio_unitario != null && this.productoEditar.precio_unitario > 0;
+    }
+
+    validacionGeneral(): boolean{
+        return this.validacionNumFactura() && this.validacionSerieFactura() 
+        && this.validacionFecha(this.nuevoKardex.fecha_fac) && this.validacionProducto();
+    }
+
+    //True: cadena vacia, False cadena llena
+    esCadenaVacia(str: string): boolean{
+        if(str != undefined){
+            var cont = 0;
+            var arrStr = str.split("");
+            for (let index = 0; index < arrStr.length; index++) {
+                if(arrStr[index] == " "){
+                    cont++;
+                }
+            }
+
+            return cont == arrStr.length;
+
+        }else{
+            return true;
+        }   
+    }
+
+    
 
 
 }

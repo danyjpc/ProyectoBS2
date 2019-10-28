@@ -1,4 +1,4 @@
-<div class="container col-md-8 offset-md-2 mt-2">
+<div class="container col-md-8 offset-md-2 mt-2 mb-4">
     
     <div class="card">
         <div class="card-header">
@@ -20,14 +20,16 @@
                 <tbody *ngIf="kardexList.length != 0">
                     <tr *ngFor="let item of kardexList; index as i">
                         <td style="color: black;">{{i+1}}</td>
-                        <td style="color: black;">{{item.fecha_fac | date:'dd/MM/yyyy'}}</td>
+                        <td *ngIf="item.fecha_fac != null" style="color: black;">{{item.fecha_fac | date:'dd/MM/yyyy'}}</td>
+                        <td *ngIf="item.fecha_fac == null" style="color: black;">Sin fecha</td>
                         <td *ngIf="item.tipo_operacion == 0" style="color: black;">Pedido</td>
                         <td *ngIf="item.tipo_operacion == 1" style="color: black;">Devolucion</td>
                         <td style="color: black;">{{item.nom_proveedor}}</td>
                         <td>
-                            <button class="btn btn-sm btn-success" (click)="verDetalles(modalDetalles, item)">Detalles</button>
-                            <button *ngIf="item.validado == 0" class="btn btn-sm" style="background-color: royalblue; color: white;" (click)="editar(item)">Editar</button>
-                            <button *ngIf="item.validado == 0" class="btn btn-sm btn-warning" (click)="validar(modalValidar, modalAdvertencia, item)">Validar</button>
+                            <button class="btn btn-sm btn-success" style="margin-right: 5px;" (click)="verDetalles(modalDetalles, item)">Detalles</button>
+                            <button *ngIf="item.validado == 0" class="btn btn-sm" style="background-color: royalblue; color: white; margin-right: 5px;" (click)="editar(item)">Editar</button>
+                            <button *ngIf="item.validado == 0" class="btn btn-sm btn-warning" style="margin-right: 5px;" (click)="validar(modalValidar, modalAdvertencia, item)">Validar</button>
+                            <button *ngIf="item.validado == 0" class="btn btn-sm btn-danger" (click)="eliminarPedido(modalEliminar, item)">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -38,6 +40,8 @@
                     <h6>No hay registros</h6>
                 </ngb-alert>
             </p>
+
+            <ngb-pagination *ngIf="kardexList.length != 0" class="d-flex justify-content-center" [collectionSize]="cantidadItems" [(page)]="paginaActual" [maxSize]="5" [boundaryLinks]="true" (pageChange)="obtenerRegistros()"></ngb-pagination>
         </div>
     </div>
         
@@ -56,13 +60,41 @@
 
     <div class="modal-body">
         <br>
-        <h4>El pedido no tiene productos agregados.</h4>
+        <h4>{{textoAdvertencia}}</h4>
         <h4>No es posible validar.</h4>
         <br>
     </div>
 
     <div class="modal-footer justify-content-center" style="background-color: rgb(65, 65, 65);">
         <button type="button" class="btn btn-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+    </div>
+</ng-template>
+
+
+<ng-template #modalEliminar let-modal>
+    <div class="modal-header" style="background-color: rgb(65, 65, 65);">
+        <input type="text" style="display:none;" />
+        <div class="row col-12 justify-content-center">
+            <h4 class="modal-title" style="color: white;">Eliminar pedido <i class="fas fa-exclamation-triangle" style="color: crimson;"></i></h4>
+        </div>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span style="color: white;" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+    <div class="modal-body">
+        <div>
+            <h5>Se eliminara un pedido junto con los productos asociados al mismo.</h5>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <h4>¿Confirmar la eliminacion?</h4>
+        </div>
+    </div>
+    
+    <div class="modal-footer" style="background-color: rgb(65, 65, 65);">
+        <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
+        <button type="button" class="btn btn-warning btn-sm" (click)="modal.dismiss('Cancelar')">Cancelar</button>
     </div>
 </ng-template>
 
@@ -79,7 +111,7 @@
         <div>
             <h5>Al aceptar la validacion confirma que el pedido, o devolucion, de los productos se ha hecho efectivo.</h5>
              
-            <h5>Una vez confirmada, no se podra editar el pedido.</h5>
+            <h5>Una vez confirmada la operacion, no se podra editar el pedido.</h5>
         </div>
         <hr>
         <div class="row justify-content-center">
@@ -110,7 +142,7 @@
             <div class="col-6">
                 <div class="row col-12">
                     <span style="color: black; font-weight: 900; margin-right: 10px; font-size: medium;">FECHA: </span>
-                    <span style="color: black; font-size: medium;">{{kardex.fecha_fac | date: 'MM/dd/yyyy'}}</span>
+                    <span style="color: black; font-size: medium;">{{kardex.fecha_fac | date: 'dd/MM/yyyy'}}</span>
                 </div>
 
                 <div class="row col-12">

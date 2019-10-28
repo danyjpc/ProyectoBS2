@@ -10,6 +10,7 @@ import { DetalleKardex } from '../models/detalle_kardex';
 export class PedidosService {
     constructor(private http: HttpClient) { }
 
+    //Devuelve los primeros 10 registros, ordenados por id_kardex en forma ascendente
     obtenerKardexs(): Observable<Kardex[]>{
         return this.http.get<Kardex[]>(APPCONFIG.BASE_URL + "/pedidos");
     }
@@ -58,7 +59,19 @@ export class PedidosService {
         return this.http.put<Kardex>(APPCONFIG.BASE_URL + "/pedidos/actualizarkardex/" + item.id_kardex, item);
     }
 
-    verificarValidacion(id_kardex: number): Observable<boolean>{
-        return this.http.get<boolean>(APPCONFIG.BASE_URL + "/pedidos/verificarvalidacion/" + id_kardex);
+    verificarValidacion(id_kardex: number): Observable<number>{
+        return this.http.get<number>(APPCONFIG.BASE_URL + "/pedidos/verificarvalidacion/" + id_kardex);
     }
+
+    obtenerTotalKardexs(): Observable<number>{
+        return this.http.get<number>(APPCONFIG.BASE_URL + "/pedidos/cantidaditems");
+    }
+
+    obtenerKardexsPaginacion(pagina: number): Observable<Kardex[]>{
+        return this.http.get<Kardex[]>(APPCONFIG.BASE_URL + "/pedidos/pedidospaginacion/" + pagina);
+    }
+
+    eliminarPedido(id_kardex: number): Observable<any> {
+        return this.http.delete(APPCONFIG.BASE_URL+"/pedidos/eliminarpedido/"+id_kardex);
+      }
 }
