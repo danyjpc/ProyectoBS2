@@ -10,31 +10,34 @@
 
         <div class="card-header">
             <div>
-                 <button type="button" class="btn btn-primary">Crear cliente</button>
+                 <button type="button" class="btn btn-primary" [routerLink]="['/crear-cliente']">Crear cliente</button>
             </div>
             <br>
             <div class="form-row" placement = "center">
-                <div class = "col-4">
-                    <h6 class="h6 text-left"><b>Cliente</b></h6>
-                    <input type="text" class="form-control" placeholder="Cliente">
-                </div>
                 <div class = "col-4 ">
                     <h6 class="h6 text-left"><b>NIT</b></h6>
-                    <input type="text" class="form-control" placeholder="NIT">
+                    <input type="text" class="form-control" [(ngModel)]  = "cli" [ngbTypeahead] = "searchcli" [resultFormatter] = "rFormatterCli" [inputFormatter] = "iFormatterCli" (focus) = "focusC$.next($event.target.value)"(click) = "clickC$.next($event.target.value)" #instanceC = "ngbTypeahead">
                 </div>
                 <div class = "col-4">
+                    <h6 class="h6 text-left"><b>Cliente</b></h6>
+                    <input type="text" class="form-control" placeholder="Cliente"  [(ngModel)]="cli.nom_cliente">
+                </div>
+
+                <div class = "col-4">
                         <h6 class="h6 text-left"><b>Dirección</b></h6>
-                        <input type="text" class="form-control" placeholder="Dirección">
+                        <input type="text" class="form-control" placeholder="Dirección"  [(ngModel)]="cli.direccion">
                 </div>
             </div>
             <div class="form-row">
                 <div class = "col-4">
                     <h6 class="h6 text-left"><b>Teléfono</b></h6>
-                    <input type="text" class="form-control" placeholder="Teléfono">
+                    <input type="text" class="form-control" placeholder="Teléfono"  [(ngModel)]="cli.telefono">
                 </div>
                     <div class = "col-4">
                     <h6 class="h6 text-left"><b>Fecha</b></h6>
-                    <input type="text" class="form-control" placeholder="Fecha">
+                    <label > {{ fecha | date:'dd/MM/yyyy'}}</label>
+                   
+                  <!--  <input type="date" class="form-control" [ngModel] = "fecha | date:'dd/MM/yyyy'"  value="date" >-->
                 </div>
             </div>            
         </div>
@@ -42,11 +45,11 @@
         <div class = "card-header form-row ">
             <div class = "col-md-8">
                 <label *ngIf="hayProductos" class = "alert alert-warning col 12" role = "alert">No hay productos disponibles</label>
-                <input type="text" class="form-control" placeholder = "Buscar producto..." [(ngModel)]  = "prod" [ngbTypeahead] = "searchprod" [resultFormatter] = "rFormatterProd" [inputFormatter] = "iFormatterProd" (focus) = "focusP$.next($event.target.value)" (click) = "clickP$.next($event.target.value)" #instanceP = "ngbTypeahead">
+                <input type="text" class="form-control" [(ngModel)]  = "prod"[ngbTypeahead] = "searchprod" [resultFormatter] = "rFormatterProd" [inputFormatter] = "iFormatterProd" (focus) = "focusP$.next($event.target.value)"(click) = "clickP$.next($event.target.value)" #instanceP = "ngbTypeahead">
                 <!--[(ngModel)]  = "prod" [ngbTypeahead] = "searchprod" [resultFormatter] = "rFormatterProd" [inputFormatter] = "iFormatterProd" (focus) = "focusP$.next($event.target.value)" (click) = "clickP$.next($event.target.value)" #instanceP = "ngbTypeahead"-->
             </div>
             <div class = "col-md-4">
-                    <button type="button" class="btn btn-primary">Agregar producto</button>
+                    <button type="button" class="btn btn-primary" (click) = "agregarProducto(aggPro)">Agregar producto</button>
             </div>
         </div>
         
@@ -57,23 +60,48 @@
                         <th scope="col">No.</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Producto</th>
+                        <th scope="col">Precio unitario</th>
                         <th scope="col">Subtotal</th>
-                        <th scope="col">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                   <!-- <tr *ngFor="let item of items |  paginate: {itemsPerPage: 10, currentPage: paginaActual}; index as i">
+                    <tr *ngFor="let item of listDetalleNuevaFactura; index as i">
                         <td class="align-middle">{{ i+1 }}</td>
-                        <td class="align-middle">{{ item.nombre }}</td>
-                        <td class="align-middle">{{ item.cod_carrera_ref }}</td>
-                        <td class="align-middle" *ngIf = "item.habilitado" > Sí </td>
-                        <td class="align-middle" *ngIf = "!item.habilitado" > No </td>
-                        <button class="btn btn-primary" (click)="editarRegistro(item)"> <i class="fa fa-edit" aria-hidden="true"></i></button> &nbsp;
-                        <button class="btn btn-danger" (click)="eliminarRegistro(content, item)"><i class="fa fa-trash"></i></button>
-                    </tr>-->
+                        <td class="align-middle">{{ item.cantidad }}</td>
+                        <td class="align-middle">{{ nombreProductoDetalle(item.id_producto) }}</td>
+                        <td class="align-middle">{{ precioProductoDetalle(item.id_producto) }}</td>
+                        <td class="align-middle">{{ precioProductoDetalle(item.id_producto) * item.cantidad }}</td>
+                        <button class="btn-sm btn-primary" type = "button" (click)="eliminarDetalle(i, item.id_producto)"> <i class="fa fa-trash" ></i></button> &nbsp;
+                    </tr>
                 </tbody>
             </table>
         </div>
+        <div class = "card-header">              
+            <h3 class="h3 col text-right"><b>Total: {{totalFac}}</b></h3>
+        </div>
+        <div class = "card-header">              
+            <button type="button" class="btn btn-primary" (click) = "guardarFactura()">Crear factura</button>
+        </div>
     </div>
 </div>
-      
+
+<ng-template #aggPro let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Agregar {{prod.nom_producto}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label" >Cantidad</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" placeholder="Cantidad" [(ngModel)]="detf.cantidad" min = "1" max = "{{stock}}">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
+      <button type="button" class="btn btn-outline-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+    </div>
+  </ng-template>

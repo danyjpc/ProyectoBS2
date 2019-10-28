@@ -14,6 +14,7 @@
                   <th scope="col">No.</th>
                   <th scope="col">Nombre </th>
                   <th scope="col">Direccion</th>
+                  <th scope="col">NIT</th>
                   <th scope="col">Teléfono</th>
                   <th scope="col">Opciones</th>
                 </tr>
@@ -24,6 +25,7 @@
                   <th scope="row">{{item.id_cliente}}</th>
                   <th scope="row">{{item.nom_cliente}}</th>
                   <td scope="row">{{item.direccion}}</td>
+                  <td scope="row">{{item.nit}}</td>
                   <td scope="row">{{item.telefono}}</td>
                   <td>
                     <button class="btn btn-sm ml-2 btn-primary" (click)="editarCliente(item)">Editar</button>

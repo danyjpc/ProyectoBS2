@@ -188,18 +188,25 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+    
   },
   { 
     path: 'pedidos', 
-    component: PedidosComponent 
+    component: PedidosComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"12" } 
   },
   {
     path: 'editar-pedido/:id_kardex',
-    component: EditarPedidoComponent
+    component: EditarPedidoComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"12" }
   },
   {
     path: 'nuevo-pedido',
-    component: NuevoPedidoComponent
+    component: NuevoPedidoComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"12" }
   },
   {
     path: 'proveedores',
@@ -217,7 +224,7 @@ const routes: Routes = [
     path: 'crear-producto',
     component: CrearProductosComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    data: { permisos:"7" }
   },
   {
     path: 'umedida',
