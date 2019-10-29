@@ -12,6 +12,9 @@ import { Detalle_factura } from 'src/app/models/detalle_factura';
 import { Clientes } from 'src/app/models/clientes';
 import { DetalleKardex } from 'src/app/models/detalle_kardex';
 import { ClienteService } from 'src/app/services/clientes.service';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
+
 
 @Component({
     selector: 'nueva-venta',
@@ -48,6 +51,8 @@ export class NuevaVentaComponent implements OnInit
     
     public id: number; 
 
+    public datosU: User = new User();
+
     public nomC: string; 
     public dirC: string; 
     public telC: string; 
@@ -55,6 +60,7 @@ export class NuevaVentaComponent implements OnInit
     constructor(
     private service: VentaService,
     private serviceC: ClienteService,
+    private serviceU: UserService,
     private http2: HttpClient,
     private datePipe: DatePipe,
     private modalService: NgbModal,
@@ -62,6 +68,12 @@ export class NuevaVentaComponent implements OnInit
     private route: ActivatedRoute
     ){}
     ngOnInit(): void {
+        /*this.serviceU.getxEmail(localStorage.getItem("usr").toString()).subscribe(
+            item => {
+                this.datosU = item;
+            }
+        );*/
+
         this.obtenerProductos();
         this.obtenerClientes();
         this.obtenerDetallesFactura(); 
@@ -171,6 +183,7 @@ export class NuevaVentaComponent implements OnInit
 
         if(this.verificarNombreProducto)
         {
+            
             this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {            
                this.totalFac = (this.detf.cantidad * this.prod.precio_unitario) + this.totalFac;
                this.detf.id_producto = this.prod.id_producto; 
@@ -287,6 +300,7 @@ export class NuevaVentaComponent implements OnInit
                     this.fac.estado = 1; 
                     this.fac.fecha = this.hoyFecha();
                     this.fac.id_empleado = 1;
+                    this.fac.total = this.totalFac;
                     this.service.guardarFactura(this.fac).subscribe(
                       items => {
                           this.service.guardarDetalleFactura(this.listDetalleNuevaFactura, items[0]).subscribe(
@@ -315,8 +329,8 @@ export class NuevaVentaComponent implements OnInit
             this.fac.id_cliente = this.cli.id_cliente; 
             this.fac.estado = 1; 
             this.fac.fecha = this.hoyFecha();
-            this.fac.id_empleado = 1;
-
+            this.fac.id_empleado = 1; //this.datosU.id;
+            this.fac.total = this.totalFac;
 
             this.service.guardarFactura(this.fac).subscribe(
               items => {

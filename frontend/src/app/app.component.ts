@@ -12,87 +12,225 @@ import { Subject, Observable, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-  title = 'frontend';
+  title = "frontend";
   currentUser: User;
   user: string;
+  public x: number = 0;
   public nombres: NombrePermisos = new NombrePermisos();
+  public logeado: string;
+ 
 
+
+  ngOnInit() {
+  }
 
 
   constructor(private router: Router, private authenticationService: AuthenticationService, private modalService: NgbModal, private service: VentaService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.user= localStorage.getItem('usr');
-    
+
     
   }
 
-  ngOnInit() {
-    var perms = localStorage.getItem('permisos');
-    if(perms){
-      
-    if(perms.indexOf("1") != -1){
-      this.nombres.admin_roles = true;
+  get usuario() {
+    var array = localStorage.getItem("usr");
+    var array2 = localStorage.getItem('permisos')
+    if(array != null && array2 != null){
+      this.logeado=array;
+      return true;
+    }else{
+      return false;
     }
     
-    if(perms.indexOf("2") !=-1){
-      this.nombres.admin_empleados=true;
+  }
+  get admin_roles() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "1") {
+        return true;
+      }
     }
-    if(perms.indexOf("3") !=-1){
-      this.nombres.admin_categorias=true;
-    }
-    if(perms.indexOf("4") !=-1){
-      this.nombres.admin_clientes=true;
-    }
-    if(perms.indexOf("5") !=-1){
-      this.nombres.admin_dimensiones=true;
-    }
-    if(perms.indexOf("6") !=-1){
-      this.nombres.admin_facturas=true;
-    }
-    if(perms.indexOf("7") !=-1){
-      this.nombres.admin_productos=true;
-    }
-    if(perms.indexOf("8") !=-1){
-      this.nombres.admin_proveedores=true;
-    }
-    if(perms.indexOf("9") !=-1){
-      this.nombres.admin_puestos=true;
-    }
-    if(perms.indexOf("10") !=-1){
-      this.nombres.admin_unidad_medida=true;
-    }
-    if(perms.indexOf("11") !=-1){
-      this.nombres.asignar_credenciales=true;
-    }
-    if(perms.indexOf("12") !=-1){
-      this.nombres.admin_kardex=true;
-    }
+    return false;
     }
   }
-
- /* aggCliente(content){
-    this.cli=new Clientes();
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {     
-    }, (reason) => {
-      console.log("Cancelar");
-      
-    });
-  }*/
-
-
-  get isAdmin() {
-    //Verifico si el usuario esta logeado, ya que si lo esta tiene que cargar su current en el local storage
-    return this.currentUser && this.currentUser.role === Role.Admin;
+  get admin_empleados() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "2") {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+  get admin_categorias() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "3") {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+  get admin_clientes() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "4") {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+  get admin_dimensiones() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "5") {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+  get admin_facturas() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "6") {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+  get admin_productos() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "7") {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+  get admin_proveedores() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "8") {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+  get admin_puestos() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "9") {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+  get admin_unidad_medida() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "10") {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+  get asignar_credenciales() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "11") {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+  get admin_kardex() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if(array){
+    array = JSON.parse(array);
+    //array2 = JSON.parse(array2);
+    //array = array + array2;
+    for (var x = 0; x < array.length; x++) {
+      if (array[x] == "12") {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
   logout() {
     this.authenticationService.logout();
     this.router.navigate(["/login"]);
   }
-  
 }

@@ -15,4 +15,8 @@ export class UserService {
     getById(id: number) {
         return this.http.get<User>(`${APP_BASE_HREF}/users/${id}`);
     }
+
+    getxEmail(email: string){
+        return this.http.get<User>(`${APP_BASE_HREF}/users/${email}`);
+    }
 }

@@ -6,4 +6,6 @@ export class Factura{
     estado: number; 
     id_cliente: number; 
     id_empleado: number;
+    habilitado: number; 
+    total: number;
 }

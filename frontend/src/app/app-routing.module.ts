@@ -31,7 +31,9 @@ import { ClientesInComponent } from './components/clientes/clientesin.component'
 import { CrearClienteComponent } from './components/clientes/crear-cliente.component';
 import { EditarClienteComponent } from './components/clientes/editar-cliente.component';
 
-import { NuevaVentaComponent } from './components/ventas/nueva-venta.component'
+import { NuevaVentaComponent } from './components/ventas/nueva-venta.component';
+import { VentasComponent } from './components/ventas/ventas.component';
+
 import { InventarioService } from './services/inventario.service';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { CrearProductosComponent } from './components/productos/crear-producto.component';
@@ -68,6 +70,12 @@ const routes: Routes = [
     data: { permisos:"6" }
   },
 
+  {
+    path: 'ventas',
+    component: VentasComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"6" }
+  },
 
   //Administracion de empleados
   {
@@ -190,18 +198,25 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+    
   },
   { 
     path: 'pedidos', 
-    component: PedidosComponent 
+    component: PedidosComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"12" } 
   },
   {
     path: 'editar-pedido/:id_kardex',
-    component: EditarPedidoComponent
+    component: EditarPedidoComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"12" }
   },
   {
     path: 'nuevo-pedido',
-    component: NuevoPedidoComponent
+    component: NuevoPedidoComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"12" }
   },
   {
     path: 'proveedores',
@@ -216,6 +231,14 @@ const routes: Routes = [
     data: { permisos:"7" }
   },
   {
+
+    path: 'crear-producto',
+    component: CrearProductosComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"7" }
+  },
+  {
+
     path: 'umedida',
     component: UmedidaComponent,
     canActivate: [AuthGuard],

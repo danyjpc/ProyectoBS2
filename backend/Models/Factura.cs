@@ -21,6 +21,7 @@ namespace backend.Models
         public int id_empleado {get;set;}
         public Empleado empleado {get;set;}
         public int habilitado { get; set; }
+        public decimal total {get;set;}
 
         public List<Detalle_factura> detalles_factura{get;set;}
     }

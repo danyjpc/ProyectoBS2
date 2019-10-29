@@ -14,6 +14,9 @@ export class InventarioComponent implements OnInit {
     private pedidosProducto = new Array();
     private productoDescripcion: any;
     private productoPedidos: any;
+
+    private paginaActual: number = 1;
+    private tamanioPagina: number = 5;
     constructor(private router: Router, private route: ActivatedRoute, private service: InventarioService, private modalService: NgbModal) { }
 
     ngOnInit() { 

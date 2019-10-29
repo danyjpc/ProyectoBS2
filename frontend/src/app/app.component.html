@@ -1,67 +1,77 @@
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light" *ngIf="currentUser">
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light" *ngIf="usuario">
   <div class="container">
     <a class="navbar-brand" href="/">Amabisca S.A</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav" *ngIf="nombres.admin_productos">
+    <div class="collapse navbar-collapse" id="navbarNav" >
       <ul class="navbar-nav ml-auto">
         <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>Productos</button>
+          <button class="btn btn-dark" id="dropdownBasic1"  *ngIf="admin_productos || admin_categorias || admin_unidad_medida" ngbDropdownToggle>Productos</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <li><button class="btn btn-dark nav-link col" *ngIf="nombres.admin_productos" [routerLink]="['/productos']" routerLinkActive="/productos" >Productos</button></li>
-              <li><button class="btn btn-dark nav-link col" *ngIf="nombres.admin_categorias" [routerLink]="['/cat-producto']" routerLinkActive="/productos" >Categoria</button></li>
-              <li><button class="btn btn-dark nav-link col"  *ngIf="nombres.admin_unidad_medida"[routerLink]="['/umedida']" routerLinkActive="/productos" >Unidad de medida</button></li>
+                <li><button class="btn btn-dark nav-link col" *ngIf="admin_productos" [routerLink]="['/productos']" routerLinkActive="/productos" >Productos</button></li>
+              <li><button class="btn btn-dark nav-link col" *ngIf="admin_categorias" [routerLink]="['/cat-producto']" routerLinkActive="/productos" >Categoria</button></li>
+              <li><button class="btn btn-dark nav-link col"  *ngIf="admin_unidad_medida"[routerLink]="['/umedida']" routerLinkActive="/productos" >Unidad de medida</button></li>
             </div>
         </div>
+        <!--Admin proveedores-->
         <li class="nav-item">
-          <button class="btn btn-dark nav-link" [routerLink]="['/proveedores']" routerLinkActive="/proveedores" >proveedores</button>
+          <button class="btn btn-dark nav-link" *ngIf="admin_proveedores" [routerLink]="['/proveedores']"
+            routerLinkActive="/proveedores">Proveedores</button>
         </li>
-        <!--Administracion de empleados-->
-        <li class="nav-item">
-          <button class="btn btn-dark nav-link" *ngIf="nombres.admin_empleados" [routerLink]="['/empleado']"
-            routerLinkActive="/empleado">Empleados</button>
-        </li>
-        <!--Administracion de roles-->
-        <li class="nav-item">
-
-          <button class="btn btn-dark nav-link" *ngIf="nombres.admin_roles" [routerLink]="['/roles']" routerLinkActive="/roles">Roles</button>
-        </li>
-        <!--Administracion de puestos-->
-        <li class="nav-item">
-          <button class="btn btn-dark nav-link" *ngIf="nombres.admin_puestos" [routerLink]="['/puestos']" routerLinkActive="/puestos">Puestos</button>
-        </li>
-
         <!--Administracion de clientes-->
         <li class="nav-item">
-            <button class="btn btn-dark nav-link" *ngIf="nombres.admin_clientes" [routerLink]="['/clientes']" routerLinkActive="/clientes">Clientes</button>
-        </li>
-        <!-- Inventario -->
-        <li class="nav-item">
-            <button class="btn btn-dark nav-link" [routerLink]="'/inventario'" routerLinkActive="/inventario" >Inventario</button>
-        </li>
+          <button class="btn btn-dark nav-link" *ngIf="admin_clientes" [routerLink]="['/clientes']"
+            routerLinkActive="/clientes">Clientes</button>
+        </li>        
         <!-- Pedidos -->
         <li class="nav-item">
-            <button class="btn btn-dark nav-link" [routerLink]="'/pedidos'" routerLinkActive="/pedidos" >Pedidos</button>
+          <button class="btn btn-dark nav-link"  *ngIf="admin_kardex" [routerLink]="'/pedidos'" routerLinkActive="/pedidos">Pedidos</button>
         </li>
         <!--Administracion de ventas-->
-        <li class="nav-item">
-            <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>Ventas</button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                      <li><button class="btn btn-dark nav-link" *ngIf="nombres.admin_productos" [routerLink]="['/nueva-venta']" routerLinkActive="/nueva-venta" >Nueva venta</button></li>
-                  </div>
-              </div>
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-dark" id="dropdownBasic1"  *ngIf="admin_facturas" ngbDropdownToggle>Ventas</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <li><button class="btn btn-dark nav-link col" [routerLink]="['/nueva-venta']" routerLinkActive="/nueva-venta">Nueva venta</button></li>
+              <li><button class="btn btn-dark nav-link col" [routerLink]="['/ventas']" routerLinkActive="/ventas">Historial de ventas</button></li>
+            </div>
+        </div>
+
+
+
+        
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-dark" id="dropdownBasic2" *ngIf="admin_roles || admin_puestos || admin_empleados" ngbDropdownToggle>Configuración</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic" class="col">
+            <!--Administracion de roles-->
+            <li>
+              <button class="btn btn-dark nav-link col" *ngIf="admin_roles" [routerLink]="['/roles']"
+                routerLinkActive="/roles">Roles</button>
+            </li>
+            <!--Administracion de puestos-->
+        <li>
+          <button class="btn btn-dark nav-link col" *ngIf="admin_puestos" [routerLink]="['/puestos']"
+            routerLinkActive="/puestos">Puestos</button>
         </li>
+
+        
+        <!--Administracion de empleados-->
+        <li>
+          <button class="btn btn-dark nav-link col" *ngIf="admin_empleados" [routerLink]="['/empleado']"
+            routerLinkActive="/empleado">Empleados</button>
+        </li>
+          </div>
+        </div>
 
         <li class="nav-item">
           <div class="row">
             <div class="col">
               <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-outline-ligth" id="dropdownBasic1" ngbDropdownToggle>{{user}}</button>
+                <button class="btn btn-outline-ligth" id="dropdownBasic1" ngbDropdownToggle>{{logeado}}</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                  <button class="btn btn-secondary" [routerLink]="['/cambiar-contrasenia']" routerLinkActive="/cambiar-contrasenia" >Cambiar Contraseña</button>
+                  <button class="btn btn-secondary" [routerLink]="['/cambiar-contrasenia']"
+                    routerLinkActive="/cambiar-contrasenia">Cambiar Contraseña</button>
                   <button class="btn btn-secondary col" (click)="logout()">Cerrar Sesion</button>
                 </div>
               </div>
@@ -77,41 +87,3 @@
   <router-outlet></router-outlet>
 </div>
 
-<ng-template #aggCli let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Datos de cliente a facturar</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-      <div class="form-group row">
-          <label for="inputPassword" class="col-sm-2 col-form-label">NIT</label>
-          <div class="col-sm-10">
-            <!--<input type="text" class="form-control" placeholder="NIT" [(ngModel)]="cli.nit">-->            
-          </div>
-        </div>
-    <div class="form-group row">
-      <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="cli.nom_cliente">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Dirección</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Dirección" [(ngModel)]="cli.direccion">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Teléfono</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Teléfono" [(ngModel)]="cli.telefono">
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
-    <button type="button" class="btn btn-outline-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
-  </div>
-</ng-template>

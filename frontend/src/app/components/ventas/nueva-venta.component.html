@@ -12,8 +12,9 @@
             <div class="form-row" placement = "center">
                 <div class = "col-4 ">
                     <h6 class="h6 text-left"><b>NIT</b></h6>
-                    <input *ngIf="hayClientes" placeholder="Ingrese NIT" type="text" class="form-control" [(ngModel)]  = "cli" (ngModelChange)="borrarCampos()" [ngbTypeahead] = "searchcli" [resultFormatter] = "rFormatterCli" [inputFormatter] = "iFormatterCli" (focus) = "focusC$.next($event.target.value)" (click) = "clickC$.next($event.target.value)" #instanceC = "ngbTypeahead" (selectItem)="autocompletar($event)"> 
+                    <input  placeholder="Ingrese NIT" type="text" class="form-control" [(ngModel)]  = "cli" (ngModelChange)="borrarCampos()" [ngbTypeahead] = "searchcli" [resultFormatter] = "rFormatterCli" [inputFormatter] = "iFormatterCli" (focus) = "focusC$.next($event.target.value)" (click) = "clickC$.next($event.target.value)" #instanceC = "ngbTypeahead" (selectItem)="autocompletar($event)"> 
                 </div>
+
                 <div class = "col-4">
                     <h6 class="h6 text-left"><b>Cliente</b></h6>
                     <input type="text" class="form-control" placeholder="Cliente" [(ngModel)]="nomC">
@@ -93,12 +94,12 @@
       <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label" >Cantidad</label>
         <div class="col-sm-10">
-          <input type="number" class="form-control" placeholder="Cantidad" [(ngModel)]="detf.cantidad" min = "1" max = "{{stock}}">
+          <input type="number" class="form-control" placeholder="Cantidad" [(ngModel)]="detf.cantidad" min = "1" max = "{{stock}}" required>
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
+      <button type="button" *ngIf="detf.cantidad <= stock "  class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')" (ngModelChange)="agregarProducto(content)">Aceptar</button>
       <button type="button" class="btn btn-outline-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
     </div>
   </ng-template>

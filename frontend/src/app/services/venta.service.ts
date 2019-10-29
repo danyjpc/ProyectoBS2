@@ -36,6 +36,11 @@ export class VentaService {
       catchError(this.handleError('findList', []))
     );
   }
+  obtenerDetallesFacxFac(idfac: number): Observable<Detalle_factura[]> {
+    return this.http.get<Detalle_factura[]>(APPCONFIG.BASE_URL + "/venta/getdetxfac/" + idfac, httpOptions).pipe(
+      catchError(this.handleError('findList', []))
+    );
+  }
   obtenerDetallesKarxProd(): Observable<DetalleKardex[]> {
     return this.http.get<DetalleKardex[]>(APPCONFIG.BASE_URL + "/venta/getdetkxprod", httpOptions).pipe(
       catchError(this.handleError('findList', []))
@@ -47,6 +52,16 @@ export class VentaService {
 
   guardarDetalleFactura(item: Detalle_factura[], fac: Factura): Observable<Detalle_factura[]>{
     return this.http.post<Detalle_factura[]>(APPCONFIG.BASE_URL + "/venta/adddetalle/" + fac.id_factura, item);
+  }
+
+  obtenerFacturas(): Observable<Factura[]>{
+    return this.http.get<Factura[]>(APPCONFIG.BASE_URL + "/venta/getfactura", httpOptions).pipe(
+      catchError(this.handleError('findList', []))
+    );
+  }
+ 
+  obtenerClienteFactura(idcliente: number): Observable<Clientes>{
+    return this.http.get<Clientes>(APPCONFIG.BASE_URL + "/venta/getcliente/" + idcliente, httpOptions)
   }
 
   /*findListIn(): Observable<Empleado[]> {

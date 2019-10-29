@@ -48,11 +48,48 @@ namespace backend.Controllers
             var items = await _context.Detalles_facturas.ToListAsync();
             return items;
         }
+
+        [HttpGet("getdetxfac/{idfac}")]
+        public async Task<ActionResult<IEnumerable<Detalle_factura>>> obtenerDetallesxFac(int idfac)
+        {
+            var items = await _context.Detalles_facturas.Where(itf => itf.id_factura == idfac).Select(
+                df => new{
+                    id_detalle_factura = df.id_detalle_factura, 
+                    cantidad = df.cantidad, 
+                    id_factura = df.id_factura, 
+                    id_producto = df.id_producto,
+                    nom_producto = df.producto.nom_producto,
+                    precio_producto = df.producto.precio_unitario,
+                    subtotal = df.cantidad * df.producto.precio_unitario
+                }
+            ).ToListAsync();
+            return Ok(items);
+        }
+
         [HttpGet("getdetkxprod")]
         public async Task<ActionResult<IEnumerable<Detalle_kardex>>> obtenerDetallesK()
         {
             var items = await _context.Detalles_kardex.Where(dk => dk.kardex.validado == 1) .ToListAsync();
             return items;
+        }
+        [HttpGet("getfactura")]
+        public async Task<ActionResult<IEnumerable<Factura>>> obtenerFacturas()
+        {
+            var items = await _context.Facturas.Select(
+                f => new{
+                    id_factura = f.id_factura,
+                    fecha = f.fecha,
+                    estado = f.estado, 
+                    id_cliente = f.id_cliente,
+                    id_empleado = f.id_empleado, 
+                    habilitado = f.habilitado, 
+                    total = f.total, 
+                    nom_cliente = f.cliente.nom_cliente, 
+                    nom_empleado = f.empleado.nombre,
+                    nit_cliente = f.cliente.nit
+                }
+            ).ToArrayAsync();
+            return Ok(items);
         }
 
         [HttpPost]
@@ -84,73 +121,7 @@ namespace backend.Controllers
         }
 
 
-/*
-        //OBTENER PERSONAS DESHABILITADAS
-        //GET: api/Personas/Deshabilitado
-        [Route("Deshabilitado")]
-        [HttpGet]
-        public async Task<List<Empleado>> obtenerPersonasDeshabilitadas()
-        {
-            var personas = await _context.Empleados.Where(x => x.estado_activo == 0).ToListAsync();
-            return personas;
-        }
 
-        //Obtener a un empleado por su codigo
-        [HttpGet("{cod_empleado}")]
-        public async Task<ActionResult<Empleado>> getItem(int cod_empleado)
-        {
-
-            var item = await _context.Empleados.FindAsync(cod_empleado);
-            //DateTime fecha= new System.DateTime(item.fecha_nacimiento.Day, item.fecha_nacimiento.Month, item.fecha_nacimiento.Year);
-
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return item;
-        }
-
-        //CREAR EMPLEADO
-        //POST: api/Empleados
-        [HttpPost]
-        public async Task<ActionResult> crearEmpleado([FromBody] Empleado empleado)
-        {
-            await _context.Empleados.AddAsync(empleado);
-            await _context.SaveChangesAsync();
-
-            int id = empleado.cod_empleado;
-
-            var nuevoEmpleado = _context.Empleados.Where(x => x.cod_empleado == id);
-
-            return Ok(nuevoEmpleado); //Retorn Id de usuario creado
-        }
-
-        //EDITAR EMPLEADO
-        //Si su estado activo se deshabilita, tambien se deshabilitará su cuenta de usuario.
-        //PUT: api/Personas/4
-        [HttpPut("{cod_empleado}")]
-        public async Task<IActionResult> editarPersona(int cod_empleado, Empleado empleado)
-        {
-            if (cod_empleado != empleado.cod_empleado)
-            {
-                return BadRequest();
-            }
-
-            var empleadoOld = _context.Empleados.Where(x => x.cod_empleado == cod_empleado).FirstOrDefault();
-
-            if (empleadoOld != null) //Si la persona tiene una cuenta de usuario
-            {
-                empleadoOld.nombre = empleado.nombre;
-                empleadoOld.direccion = empleado.direccion;
-                empleadoOld.dpi = empleado.dpi;
-                empleadoOld.estado_activo = empleado.estado_activo;
-
-                _context.Entry(empleadoOld).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-            }
-
-            return NoContent();
-        }*/
 
     }
 }

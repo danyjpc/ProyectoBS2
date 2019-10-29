@@ -165,7 +165,7 @@ namespace backend.Models
                 }
 
                 //PRODUCTOS PRUEBA
-                if(_context.Productos.Count() == 0)
+              /*   if(_context.Productos.Count() == 0)
                 {
                     var producto = new Producto { cod_producto = "tor1", nom_producto = "Tornillo", descripcion = "Tornillo de acero", costo_compra = 0.10m, precio_unitario = 0.50m, cantidad_existente = 800, habilitado = 1, id_categoria = 1 };
                     _context.Productos.Add(producto);
@@ -174,7 +174,7 @@ namespace backend.Models
                     var producto2 = new Producto { cod_producto = "mot47", nom_producto = "Motor", descripcion = "100cc", costo_compra = 1000m, precio_unitario = 1500m, cantidad_existente = 5, habilitado = 1, id_categoria = 1 };
                     _context.Productos.Add(producto);
                     await _context.SaveChangesAsync();
-                }
+                }*/
 
                 //CLIENTES PRUEBA
                 if(_context.Productos.Count() == 0)

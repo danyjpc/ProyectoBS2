@@ -33,6 +33,7 @@ namespace backend.Controllers
         {
             var usuarios = await _userManager.Users.Select(x => new ApplicationUser
             {
+                Id = x.Id,
                 Email = x.Email
             }).ToListAsync();
 

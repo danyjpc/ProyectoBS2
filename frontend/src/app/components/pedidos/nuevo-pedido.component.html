@@ -7,20 +7,32 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title" style="color: black;">Nuevo pedido</h3>
-            <button class="btn btn-sm" style="color:white; background-color: royalblue;" (click)="regresar()">Regresar</button>
+            <button class="btn btn-sm" style="color:white; background-color: royalblue;" (click)="regresar()" #campinv>Regresar</button>
         </div>
 
         <div class="card-body">
+            <p *ngIf="camposInvalidos">
+                <ngb-alert [dismissible]="false" style="background-color: crimson; color: white" >
+                    <strong>Campos invalidos!</strong> Revisa las advertencias...
+                    <button type="button" class="close" aria-label="Close" (click)="camposInvalidos = false">
+                        <span style="color: white;" aria-hidden="true">&times;</span>
+                    </button>
+                </ngb-alert>
+            </p>
             <div class="form-row">
 
                 <div class="form-group col-4">
                     <label for="">Numero de factura</label>
-                    <input type="number" class="form-control form-control-sm" [(ngModel)]="nuevoKardex.num_factura">
+                    <input type="number" class="form-control form-control-sm border {{bordeNumFactura}}" [(ngModel)]="nuevoKardex.num_factura" (ngModelChange)="validacionNumFactura()">
+                    <small *ngIf="bordeNumFactura == 'border-success'" class="form-text text-muted"><p style="color: rgb(7, 170, 7)">Campo valido <i class="fa fa-close"></i></p></small>
+                    <small *ngIf="bordeNumFactura == 'border-danger'" class="form-text text-muted"><p style="color: rgb(255, 0, 0)">Debe ingresar un numero valido <i class="fa fa-close"></i></p></small>
                 </div>
 
                 <div class="form-group col-4">
                     <label for="">Serie de factura</label>
-                    <input type="text" class="form-control form-control-sm" [(ngModel)]="nuevoKardex.serie_factura">
+                    <input type="text" class="form-control form-control-sm border {{bordeSerieFactura}}" [(ngModel)]="nuevoKardex.serie_factura" (ngModelChange)="validacionSerieFactura()">
+                    <small *ngIf="bordeSerieFactura == 'border-success'" class="form-text text-muted"><p style="color: rgb(7, 170, 7)">Campo valido <i class="fa fa-close"></i></p></small>
+                    <small *ngIf="bordeSerieFactura == 'border-danger'" class="form-text text-muted"><p style="color: rgb(255, 0, 0)">Debe ingresar texto <i class="fa fa-close"></i></p></small>
                 </div>
 
                 <div class="form-group">
@@ -29,14 +41,16 @@
                         <form class="form-inline">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control form-control-sm" placeholder="yyyy-mm-dd"
-                                        name="d2" #c2="ngModel" [(ngModel)]="fecha" ngbDatepicker #d2="ngbDatepicker">
+                                    <input class="form-control form-control-sm border {{bordeFechaFactura}}" placeholder="yyyy-mm-dd"
+                                        name="d2" #c2="ngModel" [(ngModel)]="fecha" ngbDatepicker #d2="ngbDatepicker" (ngModelChange)="validacionFecha($event)">
                                     <div class="input-group-append">
                                         <button class="btn btn-sm btn-outline-secondary" (click)="d2.toggle()" ><i class="fa fa-calendar-alt fa-2x"></i></button>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                            
                         </form>
+                        <small *ngIf="bordeFechaFactura == 'border-success'" class="form-text text-muted"><p style="color: rgb(7, 170, 7)">Campo valido <i class="fa fa-close"></i></p></small>
+                        <small *ngIf="bordeFechaFactura == 'border-danger'" class="form-text text-muted"><p style="color: rgb(255, 0, 0)">Fecha invalida <i class="fa fa-close"></i></p></small>
                                                     
                         <!-- <pre>Model: {{ fecha | json }}</pre>
                         <pre>State: {{ c2.status }}</pre> -->
@@ -48,7 +62,10 @@
             <div class="form-row">
                 <div class="form-group col-6">
                     <label for="">Proveedor</label>
-                    <input type="text" class="form-control form-control-sm" [(ngModel)]="proveedorSeleccionado" [ngbTypeahead]="searchProv" [resultFormatter]="rFormatterProv"  [inputFormatter]="iFormatterProv" (focus) = "focusProv$.next($event.target.value)"  (click)="clickProv$.next($event.target.value)" #instanceProv="ngbTypeahead">
+                    <input *ngIf="proveedores.length != 0" type="text" class="form-control form-control-sm border {{bordeProveedor}}" [(ngModel)]="proveedorSeleccionado" (ngModelChange)="validacionProveedor()" [ngbTypeahead]="searchProv" [resultFormatter]="rFormatterProv"  [inputFormatter]="iFormatterProv" (focus) = "focusProv$.next($event.target.value)"  (click)="clickProv$.next($event.target.value)" #instanceProv="ngbTypeahead">
+                    <input *ngIf="proveedores.length == 0" type="text" class="form-control form-control-sm" placeholder="No hay proveedores disponibles" disabled>
+                    <small *ngIf="bordeProveedor == 'border-success'" class="form-text text-muted"><p style="color: rgb(7, 170, 7)">Campo valido <i class="fa fa-close"></i></p></small>
+                    <small *ngIf="bordeProveedor == 'border-danger'" class="form-text text-muted"><p style="color: rgb(255, 0, 0)">Debe seleccionar un proveedor de la lista <i class="fa fa-close"></i></p></small>
                 </div>
 
                 <div class="form-group col-6">
@@ -76,18 +93,24 @@
                         
                         <div class="form-group col-5">
                             <label >Buscar producto...</label>
-                            <input *ngIf="productos.length != 0" type="text" class="form-control form-control-sm" [(ngModel)]="productoSeleccionado" [ngbTypeahead]="searchProd" [resultFormatter]="rFormatterProd"  [inputFormatter]="iFormatterProd" (focus) = "focusProd$.next($event.target.value)"  (click)="clickProd$.next($event.target.value)" #instanceProd="ngbTypeahead">
+                            <input *ngIf="productos.length != 0" type="text" class="form-control form-control-sm border {{bordeProducto}}" [(ngModel)]="productoSeleccionado" (ngModelChange)="validacionProducto()" [ngbTypeahead]="searchProd" [resultFormatter]="rFormatterProd"  [inputFormatter]="iFormatterProd" (focus) = "focusProd$.next($event.target.value)"  (click)="clickProd$.next($event.target.value)" #instanceProd="ngbTypeahead" #producto>
                             <input *ngIf="productos.length == 0" type="text" class="form-control form-control-sm" placeholder="No hay productos disponibles" disabled>
+                            <small *ngIf="bordeProducto == 'border-success'" class="form-text text-muted"><p style="color: rgb(7, 170, 7)">Campo valido <i class="fa fa-close"></i></p></small>
+                            <small *ngIf="bordeProducto == 'border-danger'" class="form-text text-muted"><p style="color: rgb(255, 0, 0)">Debe seleccionar un producto de la lista <i class="fa fa-close"></i></p></small>
                         </div>
 
                         <div class="form-group col-2">
                             <label for="">Cantidad</label>
-                            <input type="number" class="form-control form-control-sm" [(ngModel)]="cantidad">
+                            <input type="number" class="form-control form-control-sm border {{bordeCantidad}}" [(ngModel)]="cantidad" (ngModelChange)="validacionCantidadProducto()">
+                            <small *ngIf="bordeCantidad == 'border-success'" class="form-text text-muted"><p style="color: rgb(7, 170, 7)">Campo valido <i class="fa fa-close"></i></p></small>
+                            <small *ngIf="bordeCantidad == 'border-danger'" class="form-text text-muted"><p style="color: rgb(255, 0, 0)">Debe ingresar una cantidad valida <i class="fa fa-close"></i></p></small>
                         </div>
 
                         <div class="form-group col-2">
                             <label for="">Precio unitario</label>
-                            <input type="number" class="form-control form-control-sm" [(ngModel)]="precio_unitario">
+                            <input type="number" class="form-control form-control-sm border {{bordePrecio}}" [(ngModel)]="precio_unitario" (ngModelChange)="validacionPrecioUnitario()">
+                            <small *ngIf="bordePrecio == 'border-success'" class="form-text text-muted"><p style="color: rgb(7, 170, 7)">Campo valido <i class="fa fa-close"></i></p></small>
+                            <small *ngIf="bordePrecio == 'border-danger'" class="form-text text-muted"><p style="color: rgb(255, 0, 0)">Debe ingresar un precio valido <i class="fa fa-close"></i></p></small>
                         </div>
 
                         <div class="form-group col-3" style="padding-top: 31px;">
@@ -114,7 +137,7 @@
                                 <td>{{item.precio_unitario}}</td>
                                 <td>{{item.cantidad * item.precio_unitario}}</td>
                                 <td>
-                                    <button class="btn btn-sm" style="background-color: royalblue; color: white;" (click)="editarProducto(modalEditar, i)">Editar</button>
+                                    <button class="btn btn-sm" style="background-color: royalblue; color: white; margin-right: 5px;" (click)="editarProducto(modalEditar, i)">Editar</button>
                                     <button class="btn btn-sm btn-danger" (click)="eliminarProducto(modalEliminar, i, item)">Eliminar</button>
                                 </td>
                             </tr>
@@ -182,7 +205,7 @@
 
 <ng-template #modalEditar let-modal>
     <div class="modal-header" style="background-color: rgb(65, 65, 65);">
-        
+        <input type="text" style="display: none;">
         <h4 class="modal-title" style="color: white;" id="modal-basic-title">Editar producto</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span style="color: white;" aria-hidden="true">&times;</span>
@@ -191,21 +214,27 @@
 
     <div class="modal-body">
         <div class="form-row">
-            <input type="text" style="display: none;">
+            
             <div class="form-group col-5">
                 <label >Buscar producto...</label>
-                <input *ngIf="productos.length != 0" type="text" class="form-control form-control-sm" [(ngModel)]="productoSeleccionadoEditar" [ngbTypeahead]="searchProdEditar" [resultFormatter]="rFormatterProdEditar"  [inputFormatter]="iFormatterProdEditar" (focus) = "focusProdEditar$.next($event.target.value)"  (click)="clickProdEditar$.next($event.target.value)" #instanceProdEditar="ngbTypeahead">
+                <input *ngIf="productos.length != 0" type="text" class="form-control form-control-sm border {{bordeProductoEditar}}" [(ngModel)]="productoSeleccionadoEditar" (ngModelChange)="validacionProductoEditar()" [ngbTypeahead]="searchProdEditar" [resultFormatter]="rFormatterProdEditar"  [inputFormatter]="iFormatterProdEditar" (focus) = "focusProdEditar$.next($event.target.value)"  (click)="clickProdEditar$.next($event.target.value)" #instanceProdEditar="ngbTypeahead">
                 <input *ngIf="productos.length == 0" type="text" class="form-control form-control-sm" placeholder="No hay productos disponibles" disabled>
+                <small *ngIf="bordeProductoEditar == 'border-success'" class="form-text text-muted"><p style="color: rgb(7, 170, 7)">Campo valido <i class="fa fa-close"></i></p></small>
+                <small *ngIf="bordeProductoEditar == 'border-danger'" class="form-text text-muted"><p style="color: rgb(255, 0, 0)">Debe seleccionar un producto de la lista <i class="fa fa-close"></i></p></small>
             </div>
 
             <div class="form-group col-2">
                 <label for="">Cantidad</label>
-                <input type="number" class="form-control form-control-sm" [(ngModel)]="productoEditar.cantidad">
+                <input type="number" class="form-control form-control-sm border {{bordeCantidadEditar}}" [(ngModel)]="productoEditar.cantidad" (ngModelChange)="validacionCantidadEditar()">
+                <small *ngIf="bordeCantidadEditar == 'border-success'" class="form-text text-muted"><p style="color: rgb(7, 170, 7)">Campo valido <i class="fa fa-close"></i></p></small>
+                <small *ngIf="bordeCantidadEditar == 'border-danger'" class="form-text text-muted"><p style="color: rgb(255, 0, 0)">Debe ingresar una cantidad valida <i class="fa fa-close"></i></p></small>
             </div>
 
             <div class="form-group col-2">
                 <label for="">Precio unitario</label>
-                <input type="number" class="form-control form-control-sm" [(ngModel)]="productoEditar.precio_unitario">
+                <input type="number" class="form-control form-control-sm border {{bordePrecioEditar}}" [(ngModel)]="productoEditar.precio_unitario" (ngModelChange)="validacionPrecioEditar()">
+                <small *ngIf="bordePrecioEditar == 'border-success'" class="form-text text-muted"><p style="color: rgb(7, 170, 7)">Campo valido <i class="fa fa-close"></i></p></small>
+                <small *ngIf="bordePrecioEditar == 'border-danger'" class="form-text text-muted"><p style="color: rgb(255, 0, 0)">Debe ingresar un precio valido <i class="fa fa-close"></i></p></small>
             </div>
         </div>
 

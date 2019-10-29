@@ -43,7 +43,9 @@ import { CrearClienteComponent } from './components/clientes/crear-cliente.compo
 import { EditarClienteComponent } from './components/clientes/editar-cliente.component';
 
 import { NuevaVentaComponent } from './components/ventas/nueva-venta.component';
+import { VentasComponent } from './components/ventas/ventas.component';
 import { VentaService } from './services/venta.service';
+
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { InventarioService } from 'src/app/services/inventario.service';
 import { CrearProductosComponent } from './components/productos/crear-producto.component';
@@ -82,6 +84,7 @@ import { CrearProductosComponent } from './components/productos/crear-producto.c
     CrearClienteComponent,
     EditarClienteComponent,
     NuevaVentaComponent,
+    VentasComponent,
     InventarioComponent,
     CrearProductosComponent
 

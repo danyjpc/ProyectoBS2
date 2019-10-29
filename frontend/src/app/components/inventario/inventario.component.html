@@ -26,7 +26,7 @@
                         <td style="color: black;">{{item.categoria}}</td>
                         <td style="color: black;">{{item.pedidos - item.ventas}}</td>
                         <td>
-                            <button class="btn btn-primary btn-sm" style="background-color: royalblue; color: white;" (click)="descripcion(modalDetalle, item)">Descripcion</button>
+                            <button class="btn btn-primary btn-sm" style="background-color: royalblue; color: white; margin-right: 5px;" (click)="descripcion(modalDetalle, item)">Descripcion</button>
                             <button class="btn btn-success btn-sm" style="color: white;" (click)="pedidos(modalPedidos, item)">Pedidos</button>
                         </td>
                     </tr>
@@ -104,14 +104,14 @@
     </div>
     
     <div class="modal-footer justify-content-center" style="background-color: rgb(65, 65, 65);">
-        <button type="button" class="btn btn-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+        <button type="button" class="btn btn-warning" (click)="modal.dismiss('Cerrar')">Cerrar</button>
     </div>
 </ng-template>
 
 <ng-template #modalPedidos let-modal>
     <div class="modal-header" style="background-color: rgb(65, 65, 65);">
         <input type="text" style="display: none;">
-        <h4 class="modal-title" style="color: white;">Pedidos de {{productoPedidos.nom_producto}}</h4>
+        <h4 class="modal-title" style="color: white;">Pedidos de "{{productoPedidos.nom_producto}}" / {{productoPedidos.categoria}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span style="color: white;" aria-hidden="true">&times;</span>
         </button>
@@ -120,8 +120,8 @@
     <div class="modal-body">
 
         <div class="row col-12">
-            <button type="button" class="btn btn-primary btn-sm" (click)="pedidosPorProducto(productoPedidos)">Todos</button>
-            <button type="button" class="btn btn-success btn-sm" (click)="pedidosPorProductoValidados(productoPedidos)">Validados</button>
+            <button type="button" style="margin-right: 5px;" class="btn btn-primary btn-sm" (click)="pedidosPorProducto(productoPedidos)">Todos</button>
+            <button type="button" style="margin-right: 5px;" class="btn btn-success btn-sm" (click)="pedidosPorProductoValidados(productoPedidos)">Validados</button>
             <button type="button" class="btn btn-warning btn-sm" (click)="pedidosPorProductoSinValidar(productoPedidos)">Sin validar</button>
         </div>
 
@@ -140,9 +140,10 @@
                 </tr>
             </thead>
             <tbody *ngIf="pedidosProducto.length != 0">
-                <tr *ngFor="let item of pedidosProducto; index as i">
+                <tr *ngFor="let item of pedidosProducto | slice: (paginaActual-1) * tamanioPagina : (paginaActual-1) * tamanioPagina + tamanioPagina; index as i">
                     <td style="color: black;">{{i + 1}}</td>
-                    <td style="color: black;">{{item.fecha_fac | date: 'dd/MM/yyyy'}}</td>
+                    <td *ngIf="item.fecha_fac != null" style="color: black;">{{item.fecha_fac | date: 'dd/MM/yyyy'}}</td>
+                    <td *ngIf="item.fecha_fac == null" style="color: black;">SIN FECHA</td>
                     <td style="color: black;">{{item.cod_producto}}</td>
                     <td style="color: black;">{{item.nom_producto}}</td>
                     <td style="color: black;">{{item.precio_unitario}}</td>
@@ -158,6 +159,8 @@
                 <h6>No hay registros</h6>
             </ngb-alert>
         </p>
+
+        <ngb-pagination *ngIf="pedidosProducto.length != 0" [(page)]="paginaActual" [pageSize]="tamanioPagina" [collectionSize]="pedidosProducto.length"></ngb-pagination>
     </div>
     
     <div class="modal-footer" style="background-color: rgb(65, 65, 65);">
