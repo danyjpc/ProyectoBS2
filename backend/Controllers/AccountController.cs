@@ -50,7 +50,7 @@ namespace backend.Controllers
                 return BadRequest(new {message = "Contraseñas no coinciden"});
             }
 
-            var user = new ApplicationUser {cod_empleado = datos.cod_empleado, UserName = datos.email, Email = datos.email, estado_activo = 1};
+            var user = new ApplicationUser {id_persona = datos.cod_empleado, UserName = datos.email, Email = datos.email, estado_activo = 1};
 
             var result = await _userManager.CreateAsync(user, datos.password);
 

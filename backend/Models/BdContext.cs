@@ -28,9 +28,9 @@ namespace backend.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ApplicationUser>()
-            .HasOne(x=> x.empleado)
-            .WithOne(x => x.usuario);
+         /*   modelBuilder.Entity<ApplicationUser>()
+            .HasOne(x=> x.persona)
+            .WithOne(x => x.usuario);*/
 
             //Cambiando nombres de tablas predeterminadas
             modelBuilder.Entity<ApplicationUser>()
@@ -51,11 +51,11 @@ namespace backend.Models
             modelBuilder.Entity<Empleado>()
             .HasKey(x => x.cod_empleado);
 
-            //Un puesto, muchos empleado
-            modelBuilder.Entity<Empleado>()
+            /*//Un puesto, muchos empleado
+            modelBuilder.Entity<Persona>()
             .HasOne(em => em.puesto)
-            .WithMany(pu => pu.empleados)
-            .HasForeignKey(em => em.cod_puesto);
+            .WithMany(pu => pu.personas)
+            .HasForeignKey(em => em.id_puesto);*/
 
             //Clave compuesta del campo PermisoRol
             modelBuilder.Entity<PermisoRol>()
@@ -113,17 +113,42 @@ namespace backend.Models
             .WithMany(fa => fa.detalles_factura)
             .HasForeignKey(df => df.id_factura);
 
-            //Una cliente, muchas factura
+            //QUITAR: Una cliente, muchas factura
             modelBuilder.Entity<Factura>()
             .HasOne(fa => fa.cliente)
             .WithMany(cl => cl.facturas)
             .HasForeignKey(fa => fa.id_cliente);
+            //AÑADIDO: Un usuario, muchas facturas (cliente)
+            modelBuilder.Entity<Factura>()
+            .HasOne(fa => fa.usuario_cliente)
+            .WithMany(usu => usu.facturas)
+            .HasForeignKey(fa => fa.id_usu_cliente);
 
-            //Un empleado, muchas factura
+            //QUITAR: Un empleado, muchas factura
             modelBuilder.Entity<Factura>()
             .HasOne(fa => fa.empleado)
             .WithMany(em => em.facturas)
             .HasForeignKey(fa => fa.id_empleado);
+            //AÑADIDO: Un usuario, muchas facturas (empleado)
+            modelBuilder.Entity<Factura>()
+            .HasOne(fa => fa.usuario_empleado)
+            .WithMany(usu => usu.facturas)
+            .HasForeignKey(fa => fa.id_usu_empleado);
+
+            //AñADIDO: Una persona, muchos usuarios
+            modelBuilder.Entity<ApplicationUser>()
+            .HasOne(au => au.persona)
+            .WithMany(per => per.usuarios)
+            .HasForeignKey(au => au.id_persona);
+
+            //AÑADIDO: Un puesto, muchas personas
+            modelBuilder.Entity<Persona>()
+            .HasOne(per => per.puesto)
+            .WithMany(pu => pu.personas)
+            .HasForeignKey(per => per.id_puesto);
+
+            //
+
 
         }
     }

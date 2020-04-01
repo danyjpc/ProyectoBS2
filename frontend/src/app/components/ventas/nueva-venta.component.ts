@@ -68,11 +68,11 @@ export class NuevaVentaComponent implements OnInit
     private route: ActivatedRoute
     ){}
     ngOnInit(): void {
-        /*this.serviceU.getxEmail(localStorage.getItem("usr").toString()).subscribe(
+        this.serviceU.getxEmail(localStorage.getItem("usr")).subscribe(
             item => {
                 this.datosU = item;
             }
-        );*/
+        );
 
         this.obtenerProductos();
         this.obtenerClientes();
@@ -329,7 +329,7 @@ export class NuevaVentaComponent implements OnInit
             this.fac.id_cliente = this.cli.id_cliente; 
             this.fac.estado = 1; 
             this.fac.fecha = this.hoyFecha();
-            this.fac.id_empleado = 1; //this.datosU.id;
+            this.fac.id_empleado = this.datosU.id;
             this.fac.total = this.totalFac;
 
             this.service.guardarFactura(this.fac).subscribe(

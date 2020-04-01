@@ -69,7 +69,7 @@ export class CrearProductosComponent implements OnInit {
 
     guardar(){
         this.item.id_categoria = this.cate.id_categoria;
-        //this.item.habilitado = 1;
+        this.item.habilitado = 1;
         this.service.guardar(this.item).subscribe(
             items => {
                 for(var x=0; x<this.listaD.length; x++){

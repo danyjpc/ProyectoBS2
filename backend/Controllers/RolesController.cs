@@ -120,7 +120,7 @@ namespace backend.Controllers
         [HttpGet("ObtenerRolesUs/{cod_empleado}")]
         public  IActionResult ObtenerRolesUs(int cod_empleado)
         {
-            var usuario = _userManager.Users.Where(x=> x.cod_empleado == cod_empleado).Select(x=> x.Id).FirstOrDefault();
+            var usuario = _userManager.Users.Where(x=> x.id_persona == cod_empleado).Select(x=> x.Id).FirstOrDefault();
            // int u=usuario;
             var roles =  from  ur in _context.UserRoles
                          join ro in _context.Roles on ur.RoleId equals ro.Id

@@ -77,7 +77,7 @@ namespace backend
                 app.UseHsts();
             }
             app.UseCors(builder =>
-            builder.WithOrigins("http://localhost:4200")
+            builder.WithOrigins("http://0.0.0.0:4200")
             .AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod());

@@ -48,7 +48,7 @@ namespace backend.Models
                 //USUARIOS
                 if (_userManager.Users.Count() == 0)
                 {
-                    var usuario = new ApplicationUser { UserName = "admin@gmail.com", Email = "admin@gmail.com", cod_empleado = 2, estado_activo = 1 };
+                    var usuario = new ApplicationUser { UserName = "admin@gmail.com", Email = "admin@gmail.com", id_persona = 2, estado_activo = 1 };
 
                     await _userManager.CreateAsync(usuario, "Admin1234");
                 }
@@ -185,7 +185,7 @@ namespace backend.Models
 
                     
                     var cliente2 = new Cliente { nom_cliente = "Josefa", direccion = "Zona 15", telefono = "52458965", habilitado = 1, nit = "487856-5"};
-                    _context.Clientes.Add(cliente);
+                    _context.Clientes.Add(cliente2);
                     await _context.SaveChangesAsync();
                 }
             }
