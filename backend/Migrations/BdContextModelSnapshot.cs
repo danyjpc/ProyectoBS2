@@ -163,11 +163,26 @@ namespace backend.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
-                    b.Property<int>("cod_empleado");
-
                     b.Property<int>("estado_activo");
 
+                    b.Property<DateTime>("fecha_registro")
+                        .HasColumnType("date");
+
+                    b.Property<int>("id_persona");
+
+                    b.Property<int>("id_rol");
+
+                    b.Property<int>("id_usuario");
+
+                    b.Property<string>("nom_usuario")
+                        .HasColumnType("varchar(45)");
+
+                    b.Property<string>("password")
+                        .HasColumnType("varchar(45)");
+
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("id_usuario");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -176,8 +191,7 @@ namespace backend.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex");
 
-                    b.HasIndex("cod_empleado")
-                        .IsUnique();
+                    b.HasIndex("id_persona");
 
                     b.ToTable("tb_user");
                 });
@@ -198,30 +212,6 @@ namespace backend.Migrations
                     b.HasKey("id_categoria");
 
                     b.ToTable("tb_categoria");
-                });
-
-            modelBuilder.Entity("backend.Models.Cliente", b =>
-                {
-                    b.Property<int>("id_cliente")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("direccion")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int>("habilitado");
-
-                    b.Property<string>("nit")
-                        .HasColumnType("varchar(15)");
-
-                    b.Property<string>("nom_cliente")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("telefono")
-                        .HasColumnType("varchar(8)");
-
-                    b.HasKey("id_cliente");
-
-                    b.ToTable("tb_cliente");
                 });
 
             modelBuilder.Entity("backend.Models.Detalle_factura", b =>
@@ -290,31 +280,6 @@ namespace backend.Migrations
                     b.ToTable("tb_dimension");
                 });
 
-            modelBuilder.Entity("backend.Models.Empleado", b =>
-                {
-                    b.Property<int>("cod_empleado")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("cod_puesto");
-
-                    b.Property<string>("direccion")
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<string>("dpi")
-                        .HasColumnType("varchar(13)");
-
-                    b.Property<int>("estado_activo");
-
-                    b.Property<string>("nombre")
-                        .HasColumnType("varchar(100)");
-
-                    b.HasKey("cod_empleado");
-
-                    b.HasIndex("cod_puesto");
-
-                    b.ToTable("tb_empleado");
-                });
-
             modelBuilder.Entity("backend.Models.Factura", b =>
                 {
                     b.Property<int>("id_factura")
@@ -328,17 +293,23 @@ namespace backend.Migrations
 
                     b.Property<int>("habilitado");
 
-                    b.Property<int>("id_cliente");
+                    b.Property<int>("id_usu_cliente");
 
-                    b.Property<int>("id_empleado");
+                    b.Property<int>("id_usu_empleado");
+
+                    b.Property<string>("modo_envio")
+                        .HasColumnType("varchar(60)");
+
+                    b.Property<string>("modo_pago")
+                        .HasColumnType("varchar(60)");
 
                     b.Property<decimal>("total");
 
                     b.HasKey("id_factura");
 
-                    b.HasIndex("id_cliente");
+                    b.HasIndex("id_usu_cliente");
 
-                    b.HasIndex("id_empleado");
+                    b.HasIndex("id_usu_empleado");
 
                     b.ToTable("tb_factura");
                 });
@@ -400,6 +371,37 @@ namespace backend.Migrations
                     b.ToTable("Permisos_rol");
                 });
 
+            modelBuilder.Entity("backend.Models.Persona", b =>
+                {
+                    b.Property<int>("id_persona")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("direccion")
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("dpi")
+                        .HasColumnType("varchar(13)");
+
+                    b.Property<bool>("habilitado");
+
+                    b.Property<int?>("id_puesto");
+
+                    b.Property<string>("nit")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("nom_persona")
+                        .HasColumnType("varchar(120)");
+
+                    b.Property<string>("telefono")
+                        .HasColumnType("varchar(8)");
+
+                    b.HasKey("id_persona");
+
+                    b.HasIndex("id_puesto");
+
+                    b.ToTable("tb_persona");
+                });
+
             modelBuilder.Entity("backend.Models.Producto", b =>
                 {
                     b.Property<int>("id_producto")
@@ -423,6 +425,10 @@ namespace backend.Migrations
                         .HasColumnType("varchar(60)");
 
                     b.Property<decimal>("precio_unitario");
+
+                    b.Property<int>("stock_maximo");
+
+                    b.Property<int>("stock_minimo");
 
                     b.HasKey("id_producto");
 
@@ -548,9 +554,9 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("backend.Models.Empleado", "empleado")
-                        .WithOne("usuario")
-                        .HasForeignKey("backend.Models.ApplicationUser", "cod_empleado")
+                    b.HasOne("backend.Models.Persona", "persona")
+                        .WithMany("usuarios")
+                        .HasForeignKey("id_persona")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -593,24 +599,16 @@ namespace backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("backend.Models.Empleado", b =>
-                {
-                    b.HasOne("backend.Models.Puesto", "puesto")
-                        .WithMany("empleados")
-                        .HasForeignKey("cod_puesto")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("backend.Models.Factura", b =>
                 {
-                    b.HasOne("backend.Models.Cliente", "cliente")
-                        .WithMany("facturas")
-                        .HasForeignKey("id_cliente")
+                    b.HasOne("backend.Models.ApplicationUser", "usuario_cliente")
+                        .WithMany("facturas_cliente")
+                        .HasForeignKey("id_usu_cliente")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("backend.Models.Empleado", "empleado")
-                        .WithMany("facturas")
-                        .HasForeignKey("id_empleado")
+                    b.HasOne("backend.Models.ApplicationUser", "usuario_empleado")
+                        .WithMany("facturas_empleado")
+                        .HasForeignKey("id_usu_empleado")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -633,6 +631,13 @@ namespace backend.Migrations
                         .WithMany("Permiso_rol")
                         .HasForeignKey("cod_rol")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("backend.Models.Persona", b =>
+                {
+                    b.HasOne("backend.Models.Puesto", "puesto")
+                        .WithMany("personas")
+                        .HasForeignKey("id_puesto");
                 });
 
             modelBuilder.Entity("backend.Models.Producto", b =>

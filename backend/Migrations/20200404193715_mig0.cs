@@ -37,23 +37,6 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tb_cliente",
-                columns: table => new
-                {
-                    id_cliente = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nom_cliente = table.Column<string>(type: "varchar(100)", nullable: true),
-                    direccion = table.Column<string>(type: "varchar(100)", nullable: true),
-                    telefono = table.Column<string>(type: "varchar(8)", nullable: true),
-                    habilitado = table.Column<int>(nullable: false),
-                    nit = table.Column<string>(type: "varchar(15)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tb_cliente", x => x.id_cliente);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "tb_permiso",
                 columns: table => new
                 {
@@ -142,6 +125,8 @@ namespace backend.Migrations
                     costo_compra = table.Column<decimal>(nullable: false),
                     precio_unitario = table.Column<decimal>(nullable: false),
                     cantidad_existente = table.Column<int>(nullable: false),
+                    stock_minimo = table.Column<int>(nullable: false),
+                    stock_maximo = table.Column<int>(nullable: false),
                     habilitado = table.Column<int>(nullable: false),
                     id_categoria = table.Column<int>(nullable: false)
                 },
@@ -181,26 +166,28 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tb_empleado",
+                name: "tb_persona",
                 columns: table => new
                 {
-                    cod_empleado = table.Column<int>(nullable: false)
+                    id_persona = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nombre = table.Column<string>(type: "varchar(100)", nullable: true),
-                    direccion = table.Column<string>(type: "varchar(250)", nullable: true),
+                    nom_persona = table.Column<string>(type: "varchar(120)", nullable: true),
                     dpi = table.Column<string>(type: "varchar(13)", nullable: true),
-                    estado_activo = table.Column<int>(nullable: false),
-                    cod_puesto = table.Column<int>(nullable: false)
+                    direccion = table.Column<string>(type: "varchar(150)", nullable: true),
+                    telefono = table.Column<string>(type: "varchar(8)", nullable: true),
+                    nit = table.Column<string>(type: "varchar(10)", nullable: true),
+                    habilitado = table.Column<bool>(nullable: false),
+                    id_puesto = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tb_empleado", x => x.cod_empleado);
+                    table.PrimaryKey("PK_tb_persona", x => x.id_persona);
                     table.ForeignKey(
-                        name: "FK_tb_empleado_tb_puesto_cod_puesto",
-                        column: x => x.cod_puesto,
+                        name: "FK_tb_persona_tb_puesto_id_puesto",
+                        column: x => x.id_puesto,
                         principalTable: "tb_puesto",
                         principalColumn: "cod_puesto",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -307,36 +294,6 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tb_factura",
-                columns: table => new
-                {
-                    id_factura = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    fecha = table.Column<DateTime>(type: "date", nullable: false),
-                    estado = table.Column<sbyte>(type: "tinyint", nullable: false),
-                    id_cliente = table.Column<int>(nullable: false),
-                    id_empleado = table.Column<int>(nullable: false),
-                    habilitado = table.Column<int>(nullable: false),
-                    total = table.Column<decimal>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tb_factura", x => x.id_factura);
-                    table.ForeignKey(
-                        name: "FK_tb_factura_tb_cliente_id_cliente",
-                        column: x => x.id_cliente,
-                        principalTable: "tb_cliente",
-                        principalColumn: "id_cliente",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_tb_factura_tb_empleado_id_empleado",
-                        column: x => x.id_empleado,
-                        principalTable: "tb_empleado",
-                        principalColumn: "cod_empleado",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "tb_user",
                 columns: table => new
                 {
@@ -356,44 +313,55 @@ namespace backend.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    cod_empleado = table.Column<int>(nullable: false),
+                    id_usuario = table.Column<int>(nullable: false),
+                    nom_usuario = table.Column<string>(type: "varchar(45)", nullable: true),
+                    password = table.Column<string>(type: "varchar(45)", nullable: true),
+                    id_persona = table.Column<int>(nullable: false),
+                    fecha_registro = table.Column<DateTime>(type: "date", nullable: false),
+                    id_rol = table.Column<int>(nullable: false),
                     estado_activo = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_user", x => x.Id);
+                    table.UniqueConstraint("AK_tb_user_id_usuario", x => x.id_usuario);
                     table.ForeignKey(
-                        name: "FK_tb_user_tb_empleado_cod_empleado",
-                        column: x => x.cod_empleado,
-                        principalTable: "tb_empleado",
-                        principalColumn: "cod_empleado",
+                        name: "FK_tb_user_tb_persona_id_persona",
+                        column: x => x.id_persona,
+                        principalTable: "tb_persona",
+                        principalColumn: "id_persona",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "tb_detalle_factura",
+                name: "tb_factura",
                 columns: table => new
                 {
-                    id_detalle_factura = table.Column<int>(nullable: false)
+                    id_factura = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    cantidad = table.Column<int>(nullable: false),
-                    id_factura = table.Column<int>(nullable: false),
-                    id_producto = table.Column<int>(nullable: false)
+                    fecha = table.Column<DateTime>(type: "date", nullable: false),
+                    modo_envio = table.Column<string>(type: "varchar(60)", nullable: true),
+                    modo_pago = table.Column<string>(type: "varchar(60)", nullable: true),
+                    estado = table.Column<sbyte>(type: "tinyint", nullable: false),
+                    id_usu_cliente = table.Column<int>(nullable: false),
+                    id_usu_empleado = table.Column<int>(nullable: false),
+                    habilitado = table.Column<int>(nullable: false),
+                    total = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tb_detalle_factura", x => x.id_detalle_factura);
+                    table.PrimaryKey("PK_tb_factura", x => x.id_factura);
                     table.ForeignKey(
-                        name: "FK_tb_detalle_factura_tb_factura_id_factura",
-                        column: x => x.id_factura,
-                        principalTable: "tb_factura",
-                        principalColumn: "id_factura",
+                        name: "FK_tb_factura_tb_user_id_usu_cliente",
+                        column: x => x.id_usu_cliente,
+                        principalTable: "tb_user",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_tb_detalle_factura_tb_producto_id_producto",
-                        column: x => x.id_producto,
-                        principalTable: "tb_producto",
-                        principalColumn: "id_producto",
+                        name: "FK_tb_factura_tb_user_id_usu_empleado",
+                        column: x => x.id_usu_empleado,
+                        principalTable: "tb_user",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -482,6 +450,33 @@ namespace backend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "tb_detalle_factura",
+                columns: table => new
+                {
+                    id_detalle_factura = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    cantidad = table.Column<int>(nullable: false),
+                    id_factura = table.Column<int>(nullable: false),
+                    id_producto = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tb_detalle_factura", x => x.id_detalle_factura);
+                    table.ForeignKey(
+                        name: "FK_tb_detalle_factura_tb_factura_id_factura",
+                        column: x => x.id_factura,
+                        principalTable: "tb_factura",
+                        principalColumn: "id_factura",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_tb_detalle_factura_tb_producto_id_producto",
+                        column: x => x.id_producto,
+                        principalTable: "tb_producto",
+                        principalColumn: "id_producto",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_detalle_kardex_id_kardex",
                 table: "detalle_kardex",
@@ -518,19 +513,19 @@ namespace backend.Migrations
                 column: "id_unidad_medida");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_empleado_cod_puesto",
-                table: "tb_empleado",
-                column: "cod_puesto");
+                name: "IX_tb_factura_id_usu_cliente",
+                table: "tb_factura",
+                column: "id_usu_cliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_factura_id_cliente",
+                name: "IX_tb_factura_id_usu_empleado",
                 table: "tb_factura",
-                column: "id_cliente");
+                column: "id_usu_empleado");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_factura_id_empleado",
-                table: "tb_factura",
-                column: "id_empleado");
+                name: "IX_tb_persona_id_puesto",
+                table: "tb_persona",
+                column: "id_puesto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_producto_id_categoria",
@@ -560,10 +555,9 @@ namespace backend.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_user_cod_empleado",
+                name: "IX_tb_user_id_persona",
                 table: "tb_user",
-                column: "cod_empleado",
-                unique: true);
+                column: "id_persona");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_user_claim_UserId",
@@ -632,19 +626,16 @@ namespace backend.Migrations
                 name: "tb_role");
 
             migrationBuilder.DropTable(
-                name: "tb_user");
-
-            migrationBuilder.DropTable(
                 name: "tb_proveedor");
 
             migrationBuilder.DropTable(
-                name: "tb_cliente");
+                name: "tb_user");
 
             migrationBuilder.DropTable(
                 name: "tb_categoria");
 
             migrationBuilder.DropTable(
-                name: "tb_empleado");
+                name: "tb_persona");
 
             migrationBuilder.DropTable(
                 name: "tb_puesto");

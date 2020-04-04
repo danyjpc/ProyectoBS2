@@ -34,21 +34,21 @@ namespace backend.Models
                 }
 
                 //EMPLEADOS
-                if (_context.Empleados.Count() == 0)
+                if (_context.Personas.Count() == 0)
                 {
-                    var empleado = new Empleado { nombre = "Julio García", direccion = "Carchá", dpi = "1234567890", estado_activo = 1, cod_puesto = 1};
-                    _context.Empleados.Add(empleado);
+                    var empleado = new Persona { nom_persona = "Julio García", direccion = "Carchá", dpi = "1234567890", habilitado = true, id_puesto = 1};
+                    _context.Personas.Add(empleado);
                     await _context.SaveChangesAsync();
 
-                    var empleado2 = new Empleado { nombre = "Manuel Paredes", direccion = "Cobán", dpi = "0987654321", estado_activo = 1, cod_puesto = 1};
-                    _context.Empleados.Add(empleado2);
+                    var empleado2 = new Persona { nom_persona = "Manuel Paredes", direccion = "Cobán", dpi = "0987654321", habilitado = true, id_puesto = 1};
+                    _context.Personas.Add(empleado2);
                     await _context.SaveChangesAsync();
                 }
 
                 //USUARIOS
                 if (_userManager.Users.Count() == 0)
                 {
-                    var usuario = new ApplicationUser { UserName = "admin@gmail.com", Email = "admin@gmail.com", cod_empleado = 2, estado_activo = 1 };
+                    var usuario = new ApplicationUser { UserName = "admin@gmail.com", Email = "admin@gmail.com", id_persona = 2, estado_activo = 1 };
 
                     await _userManager.CreateAsync(usuario, "Admin1234");
                 }
@@ -179,13 +179,13 @@ namespace backend.Models
                 //CLIENTES PRUEBA
                 if(_context.Productos.Count() == 0)
                 {
-                    var cliente = new Cliente { nom_cliente = "Juan", direccion = "Zona 1", telefono = "78787878", habilitado = 1, nit = "444444-4"};
-                    _context.Clientes.Add(cliente);
+                    var cliente = new Persona { nom_persona = "Juan", direccion = "Zona 1", telefono = "78787878", nit = "444444-4", habilitado = true };
+                    _context.Personas.Add(cliente);
                     await _context.SaveChangesAsync();
 
                     
-                    var cliente2 = new Cliente { nom_cliente = "Josefa", direccion = "Zona 15", telefono = "52458965", habilitado = 1, nit = "487856-5"};
-                    _context.Clientes.Add(cliente);
+                    var cliente2 = new Persona { nom_persona = "Josefa", direccion = "Zona 15", telefono = "52458965",  nit = "487856-5", habilitado = true};
+                    _context.Personas.Add(cliente);
                     await _context.SaveChangesAsync();
                 }
             }

@@ -9,7 +9,7 @@ import { NgbTypeahead, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { debounceTime, distinctUntilChanged, filter,  map } from 'rxjs/operators';
 import { Observable, Subject, merge } from 'rxjs';
 import { Detalle_factura } from 'src/app/models/detalle_factura';
-import { Clientes } from 'src/app/models/clientes';
+import { Persona } from 'src/app/models/persona';
 import { DetalleKardex } from 'src/app/models/detalle_kardex';
 import { ClienteService } from 'src/app/services/clientes.service';
 import { UserService } from 'src/app/services/user.service';
@@ -38,12 +38,14 @@ export class NuevaVentaComponent implements OnInit
     public listDetalleKardex: DetalleKardex[] = new Array();
     public hayDetallesNuevaFactura: boolean = false;
 
-    public clientes: Clientes[]; 
-    public cli: any = new Clientes();
+    public clientes: Persona[]; 
+    public cli: any = new Persona();
     public hayClientes: boolean;
     public existeCliente: boolean;
-    public nuevoCliente: Clientes = new Clientes;
+    public nuevoCliente: Persona = new Persona;
     public clienteSeleccionado: boolean = false;
+    
+    public emp: any = new Persona();
 
     public fecha:Date;
     
@@ -68,11 +70,11 @@ export class NuevaVentaComponent implements OnInit
     private route: ActivatedRoute
     ){}
     ngOnInit(): void {
-        /*this.serviceU.getxEmail(localStorage.getItem("usr").toString()).subscribe(
+        this.serviceU.getxEmail(localStorage.getItem("usr")).subscribe(
             item => {
                 this.datosU = item;
             }
-        );*/
+        );
 
         this.obtenerProductos();
         this.obtenerClientes();
@@ -289,17 +291,17 @@ export class NuevaVentaComponent implements OnInit
           {
               
               this.nuevoCliente.nit =  this.cli;
-              this.nuevoCliente.nom_cliente = this.nomC; 
+              this.nuevoCliente.nom_persona = this.nomC; 
               this.nuevoCliente.direccion = this.dirC; 
               this.nuevoCliente.telefono = this.telC; 
-              this.nuevoCliente.habilitado = 1; 
+              this.nuevoCliente.habilitado = true; 
               
               this.serviceC.guardar(this.nuevoCliente).subscribe(
                   cliente => {
-                    this.fac.id_cliente = cliente.id_cliente; 
+                    this.fac.id_usu_cliente = cliente.id_persona; 
                     this.fac.estado = 1; 
                     this.fac.fecha = this.hoyFecha();
-                    this.fac.id_empleado = 1;
+                    this.fac.id_usu_empleado = this.emp.id_usu_empleado;
                     this.fac.total = this.totalFac;
                     this.service.guardarFactura(this.fac).subscribe(
                       items => {
@@ -326,10 +328,10 @@ export class NuevaVentaComponent implements OnInit
                   }
               );
           }else{
-            this.fac.id_cliente = this.cli.id_cliente; 
+            this.fac.id_usu_cliente = this.cli.id_usu_cliente; 
             this.fac.estado = 1; 
             this.fac.fecha = this.hoyFecha();
-            this.fac.id_empleado = 1; //this.datosU.id;
+            this.fac.id_usu_empleado = this.datosU.id;
             this.fac.total = this.totalFac;
 
             this.service.guardarFactura(this.fac).subscribe(

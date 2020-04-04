@@ -21,8 +21,8 @@
                     <tr *ngFor="let item of arrFacturas; index as i">
                         <td style="color: black;">{{i+1}}</td>
                         <td style="color: black;">{{item.fecha | date:'dd/MM/yyyy'}}</td>
-                        <td style="color: black;">{{item.nom_empleado}}</td>
-                        <td style="color: black;">{{item.nom_cliente}}</td>
+                        <td style="color: black;">{{item.nom_persona}}</td>
+                        <td style="color: black;">{{item.nom_persona}}</td>
                         <td style="color: black;">{{item.total}}</td>
                         <td>
                                 <button class="btn btn-sm btn-success" style="margin-right: 5px;" (click)="verDetalles(modalDetalles, item)">Detalles</button>
@@ -52,12 +52,12 @@
                 <div class="form-row" placement = "center">
                     <div class = "col-4 ">
                         <h6 class="h6 text-left"><b>NIT</b></h6>
-                        <h6 class = "h6 text-left">{{factura.nit_cliente}}</h6>
+                        <h6 class = "h6 text-left">{{factura.persona.nit}</h6>
                     </div>
     
                     <div class = "col-4">
                             <h6 class="h6 text-left"><b>Cliente</b></h6>
-                            <h6 class = "h6 text-left">{{factura.nom_cliente}}</h6>
+                            <h6 class = "h6 text-left">{{factura.persona.nom_persona}}</h6>
                     </div>
     
                     <div class = "col-4">

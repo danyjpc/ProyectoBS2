@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { APPCONFIG } from '../constantes.module';
-import { Empleado } from '../models/empleado';
+import { Persona } from '../models/persona';
 import { CambioPass } from '../models/cambio';
 import { UserInfo } from '../models/userinfo';
 import { Clientes } from '../models/clientes';
@@ -19,31 +19,31 @@ export class ClienteService {
 
   constructor(private http: HttpClient) { }
 
-  findList(): Observable<Clientes[]> {
-    return this.http.get<Clientes[]>(APPCONFIG.BASE_URL + "/clientes", httpOptions).pipe(
+  findList(): Observable<Persona[]> {
+    return this.http.get<Persona[]>(APPCONFIG.BASE_URL + "/clientes", httpOptions).pipe(
       catchError(this.handleError('findList', []))
     );
   }
 
   
 
-  findListIn(): Observable<Clientes[]> {
-    return this.http.get<Clientes[]>(APPCONFIG.BASE_URL + "/clientes/inhabilitados", httpOptions).pipe(
+  findListIn(): Observable<Persona[]> {
+    return this.http.get<Persona[]>(APPCONFIG.BASE_URL + "/clientes/inhabilitados", httpOptions).pipe(
       catchError(this.handleError('findList', []))
     );
   }
 
-  findbyId(item: number): Observable<Clientes> {
-    return this.http.get<Clientes>(APPCONFIG.BASE_URL+"/clientes/"+item);
+  findbyId(item: number): Observable<Persona> {
+    return this.http.get<Persona>(APPCONFIG.BASE_URL+"/clientes/"+item);
   }
 
-  guardar(item: Clientes): Observable<Clientes> {
-    return this.http.post<Clientes>(APPCONFIG.BASE_URL+"/clientes",item);
+  guardar(item: Persona): Observable<Persona> {
+    return this.http.post<Persona>(APPCONFIG.BASE_URL+"/clientes",item);
   }
 
 
-  editar(item: Clientes): Observable<Clientes> {
-    return this.http.put<Clientes>(APPCONFIG.BASE_URL+"/clientes/"+item.id_cliente,item);
+  editar(item: Persona): Observable<Persona> {
+    return this.http.put<Persona>(APPCONFIG.BASE_URL+"/clientes/"+item.id_persona,item);
   }
 
   

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core'
 import { Router } from '@angular/router'
-import { Clientes } from 'src/app/models/clientes';
+import { Persona } from 'src/app/models/persona';
 import { ClienteService } from 'src/app/services/clientes.service';
 
 
@@ -11,14 +11,14 @@ import { ClienteService } from 'src/app/services/clientes.service';
 
 export class CrearClienteComponent{
     //Aca va la declaracion de variables
-    public cliente: Clientes = new Clientes();
+    public cliente: Persona = new Persona();
     constructor(
         private router: Router,
         private service: ClienteService
     ){}
 
     guardar(){
-        this.cliente.habilitado=1;
+        this.cliente.habilitado=true;
         this.service.guardar(this.cliente).subscribe(
             items=>{
                 this.router.navigate(['/clientes']);

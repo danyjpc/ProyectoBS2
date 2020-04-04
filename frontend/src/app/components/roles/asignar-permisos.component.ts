@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router, ActivatedRoute } from "@angular/router";
 import { EmpleadoService } from "src/app/services/empleado.service";
-import { Empleado } from "src/app/models/empleado";
+import { Persona } from "src/app/models/persona";
 import { isNgTemplate } from "@angular/compiler";
 import { Roles } from "src/app/models/roles";
 import { RoleService } from "src/app/services/roles.service";

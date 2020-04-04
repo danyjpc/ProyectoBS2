@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import { Router } from '@angular/router'
 import { RoleService } from 'src/app/services/roles.service';
-import { Clientes } from 'src/app/models/clientes';
+import { Persona } from 'src/app/models/persona';
 import { ClienteService } from 'src/app/services/clientes.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { ClienteService } from 'src/app/services/clientes.service';
 
 export class ClientesInComponent implements OnInit{
     //Aca va la declaracion de variables
-    public listClientes: Clientes[];
+    public listClientes: Persona[];
     public clientes: boolean = false;
     constructor(
         private router: Router,
@@ -37,6 +37,6 @@ export class ClientesInComponent implements OnInit{
     }
 
     editarCliente(value){
-        this.router.navigate(['/editar-cliente', value.id_cliente])
+        this.router.navigate(['/editar-cliente', value.id_persona])
     }   
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { EmpleadoService } from "src/app/services/empleado.service";
-import { Empleado } from "src/app/models/empleado";
+import { Persona } from "src/app/models/persona";
 import { Puestos } from "src/app/models/puesto";
 import { PuestosService } from "src/app/services/puestos.service";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
@@ -20,8 +20,8 @@ import {
 })
 export class CrearEmpleadoComponent implements OnInit {
   //Aca va la declaracion de variables
-  public listEmpleado: Empleado[];
-  public emp: Empleado = new Empleado();
+  public listEmpleado: Persona[];
+  public emp: Persona = new Persona();
   public listPuestos: Puestos[];
   public model: Puestos = new Puestos();
   constructor(
@@ -71,8 +71,8 @@ export class CrearEmpleadoComponent implements OnInit {
  };
 
   guardar() {
-      this.emp.cod_puesto=this.model.cod_puesto;
-    this.emp.estado_activo = 1;
+      this.emp.id_puesto=this.model.cod_puesto;
+    this.emp.habilitado = true;
     this.service.guardar(this.emp).subscribe(items => {
       this.router.navigate(["/empleado"]);
     });

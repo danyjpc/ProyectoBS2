@@ -10,6 +10,8 @@ export class Producto{
     costo_compra: number;
     precio_unitario: number; 
     cantidad_existente: number; 
+    stock_minimo: number; 
+    stock_maximo: number;
     id_categoria: number; 
     categoria: Categoria;
     habilitado: number;

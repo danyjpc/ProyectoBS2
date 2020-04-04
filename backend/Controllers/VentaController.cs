@@ -36,9 +36,9 @@ namespace backend.Controllers
         }
 
         [HttpGet("dropclientes")]
-        public async Task<ActionResult<IEnumerable<Cliente>>> obtenerClientes()
+        public async Task<ActionResult<IEnumerable<Persona>>> obtenerClientes()
         {
-            var items = await _context.Clientes.ToListAsync();
+            var items = await _context.Personas.ToListAsync();
             return items;
         }
 
@@ -72,7 +72,7 @@ namespace backend.Controllers
             var items = await _context.Detalles_kardex.Where(dk => dk.kardex.validado == 1) .ToListAsync();
             return items;
         }
-        [HttpGet("getfactura")]
+      /*  [HttpGet("getfactura")]
         public async Task<ActionResult<IEnumerable<Factura>>> obtenerFacturas()
         {
             var items = await _context.Facturas.Select(
@@ -90,7 +90,7 @@ namespace backend.Controllers
                 }
             ).ToArrayAsync();
             return Ok(items);
-        }
+        }*/
 
         [HttpPost]
         public async Task<ActionResult> crearFactura( Factura factura)

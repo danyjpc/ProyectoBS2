@@ -12,14 +12,26 @@ namespace backend.Models
         public int id_factura { get; set; }
         [Column(TypeName = "date")]
         public DateTime fecha {get;set;}
+        [Column(TypeName = "varchar(60)")]
+        public string modo_envio { get; set; }
+        [Column(TypeName = "varchar(60)")]
+        public string modo_pago { get; set; }
         [Column(TypeName = "tinyint")]
         public byte estado {get;set;}
-        [ForeignKey("id_cliente")]
-        public int id_cliente {get;set;}
-        public Cliente cliente{get;set;}
+        [ForeignKey("id_usu_cliente")]
+        public int id_usu_cliente {get;set;}
+        public ApplicationUser usuario_cliente {get;set;}
+        [ForeignKey("id_usu_empleado")]
+        public int id_usu_empleado {get;set;}
+        public ApplicationUser usuario_empleado {get;set;}
+     /*   [ForeignKey("id_cliente")]
+        //quitar clientes porque ahora son usuarios
+        public int id_cliente {get;set;}//quitar
+        public Cliente cliente{get;set;}//quitar
         [ForeignKey("id_empleado")]
-        public int id_empleado {get;set;}
-        public Empleado empleado {get;set;}
+        //quitar empleados porque ahora son usuarios
+        public int id_empleado {get;set;}//quitar
+        public Empleado empleado {get;set;}//quitar*/
         public int habilitado { get; set; }
         public decimal total {get;set;}
 

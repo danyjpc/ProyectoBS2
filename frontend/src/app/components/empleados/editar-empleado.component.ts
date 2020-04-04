@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router, ActivatedRoute } from "@angular/router";
 import { EmpleadoService } from "src/app/services/empleado.service";
-import { Empleado } from "src/app/models/empleado";
+import { Persona } from "src/app/models/persona";
 import { Puestos } from "src/app/models/puesto";
 import { PuestosService } from "src/app/services/puestos.service";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
@@ -20,8 +20,8 @@ import {
 })
 export class EditarEmpleadoComponent implements OnInit {
   //Aca va la declaracion de variables
-  public listEmpleado: Empleado[];
-  public emp: Empleado = new Empleado();
+  public listEmpleado: Persona[];
+  public emp: Persona = new Persona();
   public estado: boolean;
   public listPuestos: Puestos[];
   public model: Puestos = new Puestos();
@@ -74,11 +74,11 @@ export class EditarEmpleadoComponent implements OnInit {
 
   guardar() {
     if (this.estado) {
-      this.emp.estado_activo = 1;
+      this.emp.habilitado = true;
     } else {
-      this.emp.estado_activo = 0;
+      this.emp.habilitado = false;
     }
-    this.emp.cod_puesto= this.model.cod_puesto;
+    this.emp.id_puesto= this.model.cod_puesto;
     this.service.editar(this.emp).subscribe(items => {
       this.router.navigate(["/empleado"]);
     });
@@ -87,12 +87,12 @@ export class EditarEmpleadoComponent implements OnInit {
   cargar(id: number) {
     this.service.findbyId(id).subscribe(items => {
       this.emp = items;
-      if (this.emp.estado_activo == 1) {
+      if (this.emp.habilitado) {
         this.estado = true;
       } else {
         this.estado = false;
       }
-      this.p.findbyId(this.emp.cod_puesto).subscribe(items => {
+      this.p.findbyId(this.emp.id_puesto).subscribe(items => {
         this.model = items;
       });
     });

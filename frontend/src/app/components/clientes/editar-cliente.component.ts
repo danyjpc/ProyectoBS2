@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { Roles } from 'src/app/models/roles';
 import { RoleService } from 'src/app/services/roles.service';
 import { ClienteService } from 'src/app/services/clientes.service';
-import { Clientes } from 'src/app/models/clientes';
+import { Persona } from 'src/app/models/persona';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { Clientes } from 'src/app/models/clientes';
 
 export class EditarClienteComponent implements OnInit{
     //Aca va la declaracion de variables
-    public cliente: Clientes = new Clientes();
+    public cliente: Persona = new Persona();
     public estado: boolean;
     constructor(
         private router: Router,
@@ -21,14 +21,14 @@ export class EditarClienteComponent implements OnInit{
         private route: ActivatedRoute
     ){}
     ngOnInit(){
-        this.route.params.subscribe(params => this.cargar(params.id_cliente));
+        this.route.params.subscribe(params => this.cargar(params.id_persona));
     }
 
     guardar(){
         if(this.estado){
-            this.cliente.habilitado=1;
+            this.cliente.habilitado=true;
         }else{
-            this.cliente.habilitado=0;
+            this.cliente.habilitado=false;
         }
         this.service.editar(this.cliente).subscribe(
             items=>{
@@ -41,7 +41,7 @@ export class EditarClienteComponent implements OnInit{
             this.service.findbyId(id).subscribe(
                 items=>{
                     this.cliente = items;
-                    if(this.cliente.habilitado ==1){
+                    if(this.cliente.habilitado = true){
                         this.estado = true;
                     }else{
                         this.estado = false;

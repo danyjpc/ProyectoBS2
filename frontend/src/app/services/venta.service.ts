@@ -9,6 +9,7 @@ import { Detalle_factura } from '../models/detalle_factura';
 import { Clientes } from '../models/clientes';
 import { DetalleKardex } from '../models/detalle_kardex';
 import { Factura } from '../models/factura';
+import { Persona } from '../models/persona';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,8 +27,8 @@ export class VentaService {
       catchError(this.handleError('findList', []))
     );
   }
-  obtenerClientes(): Observable<Clientes[]> {
-    return this.http.get<Clientes[]>(APPCONFIG.BASE_URL + "/venta/dropclientes", httpOptions).pipe(
+  obtenerClientes(): Observable<Persona[]> {
+    return this.http.get<Persona[]>(APPCONFIG.BASE_URL + "/venta/dropclientes", httpOptions).pipe(
       catchError(this.handleError('findList', []))
     );
   }

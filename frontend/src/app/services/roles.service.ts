@@ -4,7 +4,7 @@ import { Tarea } from 'src/app/models/tarea';
 import { Observable, throwError, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { APPCONFIG } from '../constantes.module';
-import { Empleado } from '../models/empleado';
+import { Persona } from '../models/persona';
 import { Roles } from '../models/roles';
 import { UserRoles } from '../models/user_role';
 import { User } from '../models/user';

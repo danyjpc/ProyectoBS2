@@ -15,6 +15,6 @@ namespace backend.Models
         [Column(TypeName = "varchar(120)")]
         public string descripcion { get; set; }
         public int habilitado { get; set; }
-        public List<Empleado> empleados { get; set; }
+        public List<Persona> personas { get; set; }
     }
 }

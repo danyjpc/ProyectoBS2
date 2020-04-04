@@ -26,7 +26,7 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<ActionResult> ObtenerClientes()
         {
-            var clientes = await _context.Clientes.Where(x => x.habilitado==1).ToListAsync();
+            var clientes = await _context.Personas.Where(x => x.habilitado && x.puesto == null).ToListAsync();
             return Ok(clientes);
         }
 
@@ -34,15 +34,15 @@ namespace backend.Controllers
         [HttpGet("Inhabilitados")]
         public async Task<ActionResult> ObtenerClientesIN()
         {
-            var clientes = await _context.Clientes.Where(x => x.habilitado==0).ToListAsync();
+            var clientes = await _context.Personas.Where(x => !x.habilitado && x.puesto == null).ToListAsync();
             return Ok(clientes);
         }
 
         //Obtner informacion de un cliente especifico
         [HttpGet("{id_cliente}")]
-        public async Task<ActionResult<Cliente>> ObtenerCliente(int id_cliente)
+        public async Task<ActionResult<Persona>> ObtenerCliente(int id_cliente)
         {
-            var cliente = await _context.Clientes.FindAsync(id_cliente);
+            var cliente = await _context.Personas.FindAsync(id_cliente);
 
             if(cliente == null)
             {
@@ -53,19 +53,19 @@ namespace backend.Controllers
 
         //Crear un cliente
         [HttpPost]
-        public async Task<ActionResult<Cliente>> CrearCliente([FromBody] Cliente cliente)
+        public async Task<ActionResult<Persona>> CrearCliente([FromBody] Persona cliente)
         {
-            _context.Clientes.Add(cliente);
+            _context.Personas.Add(cliente);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(ObtenerCliente), new {id_cliente = cliente.id_cliente}, cliente);
+            return CreatedAtAction(nameof(ObtenerCliente), new {id_cliente = cliente.id_persona}, cliente);
         }
 
         //Editar un cliente
         [HttpPut("{id_cliente}")]
-        public async Task<ActionResult> EditarCliente(int id_cliente, Cliente cliente)
+        public async Task<ActionResult> EditarCliente(int id_cliente, Persona cliente)
         {
-            if(id_cliente != cliente.id_cliente)
+            if(id_cliente != cliente.id_persona)
             {
                 return BadRequest();
             }

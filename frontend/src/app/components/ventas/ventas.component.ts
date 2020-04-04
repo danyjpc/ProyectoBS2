@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Factura } from 'src/app/models/factura';
 import { ClienteService } from 'src/app/services/clientes.service';
-import { Cliente } from 'src/app/models/cliente';
+import { Persona } from 'src/app/models/persona';
 import { Detalle_factura } from 'src/app/models/detalle_factura';
 
 @Component({
@@ -22,7 +22,7 @@ export class VentasComponent implements OnInit
 
     public detallesFactura: Detalle_factura[];
 
-    public cliFactura: Cliente;
+    public cliFactura: Persona;
 
     constructor(
         private service: VentaService,

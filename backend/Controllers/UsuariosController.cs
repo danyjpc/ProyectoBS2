@@ -65,7 +65,7 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<Int16> ObtenerIdPersona(string email)
         {
-            var idPersona = await _userManager.Users.Where(x => x.Email == email).Select(y => y.cod_empleado).FirstOrDefaultAsync();
+            var idPersona = await _userManager.Users.Where(x => x.Email == email).Select(y => y.id_persona).FirstOrDefaultAsync();
 
             return Convert.ToInt16(idPersona);
         }
@@ -111,7 +111,7 @@ namespace backend.Controllers
         [Route("CodUser/{cod_empleado}")]
         public async Task<IActionResult> UsuarioCod(int cod_empleado)
         {
-            var user = await _context.Users.Where(x => x.cod_empleado == cod_empleado).ToListAsync();
+            var user = await _context.Users.Where(x => x.id_persona == cod_empleado).ToListAsync();
 
             return Ok(user[0]);
         }

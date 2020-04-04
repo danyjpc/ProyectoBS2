@@ -8,5 +8,5 @@ export class Clientes{
     nit: string;
     habilitado: number;
     
-    facturas: Array<Factura>;
+   // facturas: Array<Factura>;
 }

@@ -31,7 +31,7 @@ namespace backend.Controllers
 
         //Obtner informacion de un proveedor especifico
         [HttpGet("{id_proveedor}")]
-        public async Task<ActionResult<Cliente>> ObtenerProveedor(int id_proveedor)
+        public async Task<ActionResult<Persona>> ObtenerProveedor(int id_proveedor)
         {
             var proveedor = await _context.Proveedores.FindAsync(id_proveedor);
 

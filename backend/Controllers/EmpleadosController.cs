@@ -30,9 +30,9 @@ namespace backend.Controllers
         //GET: api/Empleados/Habilitado
         [Route("Habilitado")]
         [HttpGet]
-        public async Task<List<Empleado>> obtenerPersonasHabilitadas()
+        public async Task<List<Persona>> obtenerPersonasHabilitadas()
         {
-            var personas = await _context.Empleados.Where(x => x.estado_activo == 1).ToListAsync();
+            var personas = await _context.Personas.Where(x => x.habilitado && x.nit == null).ToListAsync();
             return personas;
         }
 
@@ -40,18 +40,18 @@ namespace backend.Controllers
         //GET: api/Personas/Deshabilitado
         [Route("Deshabilitado")]
         [HttpGet]
-        public async Task<List<Empleado>> obtenerPersonasDeshabilitadas()
+        public async Task<List<Persona>> obtenerPersonasDeshabilitadas()
         {
-            var personas = await _context.Empleados.Where(x => x.estado_activo == 0).ToListAsync();
+            var personas = await _context.Personas.Where(x => !x.habilitado && x.nit == null).ToListAsync();
             return personas;
         }
 
         //Obtener a un empleado por su codigo
         [HttpGet("{cod_empleado}")]
-        public async Task<ActionResult<Empleado>> getItem(int cod_empleado)
+        public async Task<ActionResult<Persona>> getItem(int cod_empleado)
         {
 
-            var item = await _context.Empleados.FindAsync(cod_empleado);
+            var item = await _context.Personas.FindAsync(cod_empleado);
             //DateTime fecha= new System.DateTime(item.fecha_nacimiento.Day, item.fecha_nacimiento.Month, item.fecha_nacimiento.Year);
 
             if (item == null)
@@ -64,14 +64,14 @@ namespace backend.Controllers
         //CREAR EMPLEADO
         //POST: api/Empleados
         [HttpPost]
-        public async Task<ActionResult> crearEmpleado([FromBody] Empleado empleado)
+        public async Task<ActionResult> crearEmpleado([FromBody] Persona empleado)
         {
-            await _context.Empleados.AddAsync(empleado);
+            await _context.Personas.AddAsync(empleado);
             await _context.SaveChangesAsync();
 
-            int id = empleado.cod_empleado;
+            int id = empleado.id_persona;
 
-            var nuevoEmpleado = _context.Empleados.Where(x => x.cod_empleado == id);
+            var nuevoEmpleado = _context.Personas.Where(x => x.id_persona == id);
 
             return Ok(nuevoEmpleado); //Retorn Id de usuario creado
         }
@@ -80,22 +80,22 @@ namespace backend.Controllers
         //Si su estado activo se deshabilita, tambien se deshabilitará su cuenta de usuario.
         //PUT: api/Personas/4
         [HttpPut("{cod_empleado}")]
-        public async Task<IActionResult> editarPersona(int cod_empleado, Empleado empleado)
+        public async Task<IActionResult> editarPersona(int cod_empleado, Persona empleado)
         {
-            if (cod_empleado != empleado.cod_empleado)
+            if (cod_empleado != empleado.id_persona)
             {
                 return BadRequest();
             }
 
-            var empleadoOld = _context.Empleados.Where(x => x.cod_empleado == cod_empleado).FirstOrDefault();
+            var empleadoOld = _context.Personas.Where(x => x.id_persona == cod_empleado).FirstOrDefault();
 
             if (empleadoOld != null) //Si la persona tiene una cuenta de usuario
             {
-                empleadoOld.nombre = empleado.nombre;
+                empleadoOld.nom_persona = empleado.nom_persona;
                 empleadoOld.direccion = empleado.direccion;
                 empleadoOld.dpi = empleado.dpi;
-                empleadoOld.cod_puesto= empleado.cod_puesto;
-                empleadoOld.estado_activo = empleado.estado_activo;
+                empleadoOld.id_puesto= empleado.id_puesto;
+                empleadoOld.habilitado = empleado.habilitado;
 
                 _context.Entry(empleadoOld).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
