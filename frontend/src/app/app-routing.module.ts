@@ -37,21 +37,25 @@ import { VentasComponent } from './components/ventas/ventas.component';
 import { InventarioService } from './services/inventario.service';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { CrearProductosComponent } from './components/productos/crear-producto.component';
+import { CatalogoComponent } from './components/catalogo/cat.component';
 
 
 const routes: Routes = [
   //Se configura el componente de inicio
   {
     path: '',
-    redirectTo: '//tareas',
+    redirectTo: '/catalogo',
     pathMatch: 'full'
   },
+  
+  //Catalogo
   {
-    path: 'tareas',
-    component: TareasComponent,
-    canActivate: [AuthGuard],
+    path: 'catalogo',
+    component: CatalogoComponent,
+    
     //
   },
+  
 
   {
     path: 'cambiar-contrasenia',
@@ -59,6 +63,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     //
   },
+  
   
 
 
@@ -257,7 +262,9 @@ const routes: Routes = [
   {
     path: 'crear-producto',
     component: CrearProductosComponent
-  }
+  },
+
+  
 ];
 
 @NgModule({
