@@ -102,6 +102,9 @@ namespace backend.Models
                     _context.Permisos.Add(new Permiso { nom_permiso = "Administración de Kardex", habilitado = 1 });
                     _context.SaveChanges();
 
+                    _context.Permisos.Add(new Permiso { nom_permiso = "Catalogo", habilitado = 1 });
+                    _context.SaveChanges();
+
                 }
 
                 if (_context.Permisos_rol.Count() == 0)
@@ -183,10 +186,11 @@ namespace backend.Models
                     _context.Personas.Add(cliente);
                     await _context.SaveChangesAsync();
 
-                    
+                    /**
                     var cliente2 = new Persona { nom_persona = "Josefa", direccion = "Zona 15", telefono = "52458965",  nit = "487856-5", habilitado = true};
                     _context.Personas.Add(cliente);
                     await _context.SaveChangesAsync();
+                    */
                 }
             }
         }

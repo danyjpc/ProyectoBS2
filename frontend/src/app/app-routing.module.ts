@@ -52,8 +52,15 @@ const routes: Routes = [
   {
     path: 'catalogo',
     component: CatalogoComponent,
+    //canActivate: [AuthGuard]
     
     //
+  },
+  {
+    path: 'catalogo-log',
+    component: CatalogoComponent,
+    canActivate: [AuthGuard]
+
   },
   
 
@@ -63,6 +70,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     //
   },
+
+  {
+    path: 'tareas',
+    component: TareasComponent,
+    canActivate: [AuthGuard],
+    //
+  },
+  
   
   
 
