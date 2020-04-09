@@ -177,14 +177,14 @@ namespace backend.Models
                 }*/
 
                 //CLIENTES PRUEBA
-                if(_context.Productos.Count() == 0)
+                if(_context.Personas.Count() == 0)
                 {
-                    var cliente = new Persona { nom_persona = "Juan", direccion = "Zona 1", telefono = "78787878", nit = "444444-4", habilitado = true };
+                    var cliente = new Persona { nom_persona = "Juan", direccion = "Zona 1", telefono = "78787878", nit = "444444-4", habilitado = true, id_puesto = null };
                     _context.Personas.Add(cliente);
                     await _context.SaveChangesAsync();
 
                     
-                    var cliente2 = new Persona { nom_persona = "Josefa", direccion = "Zona 15", telefono = "52458965",  nit = "487856-5", habilitado = true};
+                    var cliente2 = new Persona { nom_persona = "Josefa", direccion = "Zona 15", telefono = "52458965",  nit = "487856-5", habilitado = true, id_puesto = null};
                     _context.Personas.Add(cliente);
                     await _context.SaveChangesAsync();
                 }

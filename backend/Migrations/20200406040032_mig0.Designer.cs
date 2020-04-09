@@ -9,7 +9,7 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(BdContext))]
-    [Migration("20200404193715_mig0")]
+    [Migration("20200406040032_mig0")]
     partial class mig0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -134,7 +134,8 @@ namespace backend.Models
             modelBuilder.Entity<Persona>()
             .HasOne(per => per.puesto)
             .WithMany(pu => pu.personas)
-            .HasForeignKey(per => per.id_puesto);
+            .HasForeignKey(per => per.id_puesto)
+            .IsRequired(false);
 
             //QUITAR: Una cliente, muchas factura
            /* modelBuilder.Entity<Factura>()
