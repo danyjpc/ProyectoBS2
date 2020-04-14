@@ -42,3 +42,17 @@ d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/Proper
 /home/shadownox/Escritorio/Proyectos/Analisis y Diseño/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.RazorTargetAssemblyInfo.cache
 /home/shadownox/Escritorio/Proyectos/Analisis y Diseño/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.dll
 /home/shadownox/Escritorio/Proyectos/Analisis y Diseño/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.pdb
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.dll
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.pdb
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csprojAssemblyReference.cache
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csproj.CoreCompileInputs.cache
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cache
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cs
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfoInputs.cache
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfo.cs
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
+C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
