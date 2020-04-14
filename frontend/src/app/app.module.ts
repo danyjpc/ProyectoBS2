@@ -49,6 +49,7 @@ import { VentaService } from './services/venta.service';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { InventarioService } from 'src/app/services/inventario.service';
 import { CrearProductosComponent } from './components/productos/crear-producto.component';
+import { CatalogoComponent } from './components/catalogo/cat.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { CrearProductosComponent } from './components/productos/crear-producto.c
     NuevaVentaComponent,
     VentasComponent,
     InventarioComponent,
-    CrearProductosComponent
+    CrearProductosComponent,
+    CatalogoComponent
 
   ],
 

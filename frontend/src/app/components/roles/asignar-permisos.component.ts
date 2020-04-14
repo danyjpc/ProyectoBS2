@@ -71,6 +71,9 @@ export class AsignarPermisosComponent implements OnInit {
       if(this.nombre_permiso.admin_kardex){
         this.permiso_rol.cod_permisos.push(12);
       }
+      if(this.nombre_permiso.catalogo){
+        this.permiso_rol.cod_permisos.push(13);
+      }
       this.service.permisosARol(this.permiso_rol).subscribe(
         items=>{
           this.router.navigate(['/roles'])
@@ -123,6 +126,9 @@ export class AsignarPermisosComponent implements OnInit {
           }
           if (this.perms[x].cod_permiso == 12) {
             this.nombre_permiso.admin_kardex = true;
+          }
+          if (this.perms[x].cod_permiso == 13) {
+            this.nombre_permiso.catalogo = true;
           }
         }
       });
