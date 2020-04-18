@@ -33,13 +33,17 @@ export class AppComponent implements OnInit {
 
   constructor(private router: Router, private authenticationService: AuthenticationService, private modalService: NgbModal, private service: VentaService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    this.user = localStorage.getItem('usr');
+    
 
 
   }
+  /**
+   * Verifica si el usuario esta logueado 
+   */
   get logueado() {
     try {
       if (localStorage.getItem('usr') != '' && localStorage.getItem('usr') != null) {
+        this.user = localStorage.getItem('usr');
         return true;
       } else {
         return false;
@@ -48,8 +52,27 @@ export class AppComponent implements OnInit {
       return false;
 
     }
-
   }
+  /**
+   * Verifica si se agrego un elemento al carrito, de lo contrario retorna false
+   */
+  get carrito(){
+    try {
+      var carrito = localStorage.getItem('carrito')
+      if(carrito){
+        return true;
+      }else{
+        return false;
+      }
+    } catch (error) {
+      return false;
+    }
+  }
+
+  /**
+   * Verifica si el usuario tiene el permiso de ver catalogo, para que no le aparezca el boton de panel administrativo 
+   * 
+   */
   get catalogo(){
     var array = localStorage.getItem("permisos");
     if (array) {
@@ -63,6 +86,8 @@ export class AppComponent implements OnInit {
     }
 
   }
+
+  
 
   get usuario() {
     var array = localStorage.getItem("usr");

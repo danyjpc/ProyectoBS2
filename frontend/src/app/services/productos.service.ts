@@ -34,6 +34,9 @@ export class ProductosService {
   guardarD(item: Dimension): Observable<Dimension> {
     return this.http.post<Dimension>(APPCONFIG.BASE_URL+"/productos/dimension",item);
   }
+  obtenerProductoC(item: number): Observable<Producto[]> {
+    return this.http.get<Producto[]>(APPCONFIG.BASE_URL+"/productos/cat/"+item);
+  }
   /*eliminarPorId(cod_tarea: number): Observable<any> {
     return this.http.delete(APPCONFIG.BASE_URL+"/tareas/"+cod_tarea);
   }*/

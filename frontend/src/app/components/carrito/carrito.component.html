@@ -1,0 +1,35 @@
+<div class="container col-md-6 offset-md-3 float-left">
+  <h4 class="mt-2">{{cant}} elementos en el carrito</h4>
+  <hr>
+  <div class="alert alert-warning col" *ngIf="carritoVacio">No se han agregado elementos al carrito</div>
+  <div class="container border-solid">
+    <div *ngFor="let item of products; index as i">
+      <div class="card float-left ml-1 " style="width: 15rem;">
+
+        <div class="card-body">
+          <h5 class="card-title">{{item.nom_producto}}</h5>
+          <p class="card-text">{{item.descripcion}}</p>
+          <button class="btn btn-outline-danger btn-sm" (click)="eliminardelCarrito(i)">Eliminar</button>
+          <hr>
+          <label for="cant">Cantidad: </label>
+          <input type="number" class="form-control col" [(ngModel)]="item.cantidad" max="20" min="1" value="1"
+            (ngModelChange)="actualizarTotal()">
+        </div>
+        <div class="card-footer">
+          <h5>Subtotal: </h5>
+          <p>Q. {{item.cantidad * item.precio_unitario}}</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container col-md-4 offset-md-4 mt-4 float-left text-center">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Total a pagar: {{totalCompra}}</h2>
+      <a href="" class="btn btn-success btn-small">Pagar</a>
+    </div>
+  </div>
+</div>

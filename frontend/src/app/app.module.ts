@@ -50,6 +50,7 @@ import { InventarioComponent } from './components/inventario/inventario.componen
 import { InventarioService } from 'src/app/services/inventario.service';
 import { CrearProductosComponent } from './components/productos/crear-producto.component';
 import { CatalogoComponent } from './components/catalogo/cat.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { CatalogoComponent } from './components/catalogo/cat.component';
     VentasComponent,
     InventarioComponent,
     CrearProductosComponent,
-    CatalogoComponent
+    CatalogoComponent, 
+    CarritoComponent
 
   ],
 

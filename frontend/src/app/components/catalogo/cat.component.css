@@ -19,3 +19,9 @@
     margin-top: 80px;
     text-align: center;
 }
+#b:hover{
+    color: white;
+    background-color: rgb(58, 57, 57);
+    transition: background-color .5s;
+}
+

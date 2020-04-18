@@ -18,4 +18,5 @@ export class Producto{
     //detalles_kardex: Array<Detalle_kardex>;
     detalles_factura: Array<Detalle_factura>;
     dimensiones: Array<Dimension>;
+    cantidad: number;
  }

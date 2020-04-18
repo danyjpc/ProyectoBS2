@@ -42,6 +42,7 @@ export class RoleService {
   }
 
   rolesUser(item: UserRoles): Observable<UserRoles> {
+    console.log(item)
     return this.http.post<UserRoles>(APPCONFIG.BASE_URL+"/roles/AsignarRolesUsuario",item);
   }
 

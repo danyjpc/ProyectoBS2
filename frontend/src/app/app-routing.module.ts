@@ -38,6 +38,7 @@ import { InventarioService } from './services/inventario.service';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { CrearProductosComponent } from './components/productos/crear-producto.component';
 import { CatalogoComponent } from './components/catalogo/cat.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 
 const routes: Routes = [
@@ -77,7 +78,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     //
   },
+
+  //Carrito de compras
   
+  {
+    path: 'carrito',
+    component: CarritoComponent,
+    //
+  },
   
   
 

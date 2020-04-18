@@ -9,8 +9,8 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(BdContext))]
-    [Migration("20200408020609_Migracion1")]
-    partial class Migracion1
+    [Migration("20200417035008_Migracion15")]
+    partial class Migracion15
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -172,19 +172,7 @@ namespace backend.Migrations
 
                     b.Property<int>("id_persona");
 
-                    b.Property<int>("id_rol");
-
-                    b.Property<int>("id_usuario");
-
-                    b.Property<string>("nom_usuario")
-                        .HasColumnType("varchar(45)");
-
-                    b.Property<string>("password")
-                        .HasColumnType("varchar(45)");
-
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("id_usuario");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
