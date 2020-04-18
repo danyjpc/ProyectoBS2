@@ -1,108 +1,100 @@
-<div class="imagen">
-  
-</div>
+<div class="imagen"> </div>
+
 <div class="content">
-  <h1>CATÁLOGO DE PRODUCTOS</h1>
-
-  <!--Contenedor de todos los productos-->
-  <div class="container-fluid col-md-10 offset-md-1">
-    <!--Fila de productos-->
-    <div class="row">
-      <!--Columna de cada producto-->
-      <div class="col col-md-4">
-        <div class="card mb-3" style="max-width: 540px;">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <img src="https://image.shutterstock.com/image-vector/vector-round-blank-frame-car-260nw-1400327858.jpg"
-                class="card-img" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-header">
-                <h5>Producto</h5>
-              </div>
-              <div class="card-body">
-
-                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur inventore
-                  ipsum possimus delectus, veniam sequi vitae consectetur ad quibusdam accusantium incidunt, explicabo
-                  ipsam excepturi esse vel? Deleniti ipsa nam animi!</p>
-
-              </div>
-              <div class="card-footer">
-                <a href="" class="text-center">Detalles <i class="fa fa-eye" aria-hidden="true"></i>
-                </a>
-                <a href="" class="text-center ml-2"> Agregar al carro<i class="fa fa-cart-plus" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+  <br>
+  <div class="row">
+    <div class="col-2">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-a" data-toggle="pill" href="#v-pills-home" role="tab"
+          aria-selected="true" (click)="filtro(1)">Accesorio </a>
+        <a class="nav-link" id="v-pills-h" data-toggle="pill" href="#v-pills-home" role="tab" aria-selected="false"
+          (click)="filtro(2)">Herramientas</a>
+        <a class="nav-link" id="v-pills-e" data-toggle="pill" href="#v-pills-home" role="tab" aria-selected="false"
+          (click)="filtro(3)">Eléctrico</a>
+        <a class="nav-link" id="v-pills-m" data-toggle="pill" href="#v-pills-home" role="tab" aria-selected="false"
+          (click)="filtro(4)">Motor</a>
+        <a class="nav-link" id="v-pills-s" data-toggle="pill" href="#v-pills-home" role="tab" aria-selected="false"
+          (click)="filtro(5)">Suspensión</a>
       </div>
-      <!--Fin de columna de producto-->
-
-      <!--Columna de cada producto-->
-      <div class="col col-md-4">
-        <div class="card mb-3" style="max-width: 540px;">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <img src="https://image.shutterstock.com/image-vector/vector-round-blank-frame-car-260nw-1400327858.jpg"
-                class="card-img" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-header">
-                <h5>Producto</h5>
-              </div>
-              <div class="card-body">
-
-                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur inventore
-                  ipsum possimus delectus, veniam sequi vitae consectetur ad quibusdam accusantium incidunt, explicabo
-                  ipsam excepturi esse vel? Deleniti ipsa nam animi!</p>
-
-              </div>
-              <div class="card-footer">
-                <a href="" class="text-center">Detalles <i class="fa fa-eye" aria-hidden="true"></i>
-                </a>
-                <a href="" class="text-center ml-2"> Agregar al carro<i class="fa fa-cart-plus" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--Fin de columna de producto-->
-
-      <!--Columna de cada producto-->
-      <div class="col col-md-4">
-        <div class="card mb-3" style="max-width: 540px;">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <img src="https://image.shutterstock.com/image-vector/vector-round-blank-frame-car-260nw-1400327858.jpg"
-                class="card-img" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-header">
-                <h5>Producto</h5>
-              </div>
-              <div class="card-body">
-
-                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur inventore
-                  ipsum possimus delectus, veniam sequi vitae consectetur ad quibusdam accusantium incidunt, explicabo
-                  ipsam excepturi esse vel? Deleniti ipsa nam animi!</p>
-
-              </div>
-              <div class="card-footer">
-                <a href="" class="text-center">Detalles <i class="fa fa-eye" aria-hidden="true"></i>
-                </a>
-                <a href="" class="text-center ml-2"> Agregar al carro<i class="fa fa-cart-plus" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--Fin de columna de producto-->
-
     </div>
-    <!--Fin de fila de producto-->
+
+    <div class="container-fluid col-md-10">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel">
+          <h3>{{nomCat}}</h3>
+
+          <!--Tarjetas inicio-->
+          <div class="row row-cols-1 row-cols-md-3">
+            <div *ngFor="let item of items; index as i">
+
+              <div class="col mb-4">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <div class="row no-gutters">
+                    <div class="col-md-4">
+                      <img
+                        src="https://image.shutterstock.com/image-vector/vector-round-blank-frame-car-260nw-1400327858.jpg"
+                        class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-header">
+                        <h5>{{item.nom_producto}}</h5>
+                      </div>
+                      <div class="card-body">
+                        <p class="card-text">{{item.descripcion}}</p>
+                      </div>
+                      <div class="card-footer">
+                        <button id="b" class="btn btn-sm text-center" (click)="Detalle(content, item.id_producto)"
+                        >Detalles <i class="fa fa-eye" aria-hidden="true"></i>
+                        </button>
+                        <button id="b" class="btn btn-sm text-center"> Agregar<i class="fa fa-cart-plus"
+                            aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--Tarjetas fin-->
+
+        </div>
+
+      </div>
+    </div>
   </div>
-  <!--Fin de contenedor-->
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Detalles del producto</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+         <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Nombre</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"   [(ngModel)]="itemDetalle.nom_producto" disabled>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword" class="col-sm-3 col-form-label">Descripción</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"  [(ngModel)]="itemDetalle.descripcion" disabled>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Precio Q.</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"   [(ngModel)]="itemDetalle.precio_unitario" disabled>
+            </div>
+          </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger btn-sm" (click)="modal.close('Aceptar')">Aceptar</button>
+    <button type="button" class="btn btn-outline-warning btn-sm" (click)="modal.dismiss('Cerrar')">Cerrar</button>
+  </div>
+</ng-template>

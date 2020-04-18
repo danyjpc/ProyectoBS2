@@ -39,6 +39,8 @@ import { InventarioComponent } from './components/inventario/inventario.componen
 import { CrearProductosComponent } from './components/productos/crear-producto.component';
 import { CatalogoComponent } from './components/catalogo/cat.component';
 
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+
 
 const routes: Routes = [
   //Se configura el componente de inicio
@@ -76,10 +78,7 @@ const routes: Routes = [
     component: TareasComponent,
     canActivate: [AuthGuard],
     //
-  },
-  
-  
-  
+  }, 
 
 
   //Administracion de ventas
@@ -279,7 +278,12 @@ const routes: Routes = [
     component: CrearProductosComponent
   },
 
-  
+  {
+    path:'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+    data: { permisos:"14" } 
+  }  
 ];
 
 @NgModule({

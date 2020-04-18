@@ -14,7 +14,7 @@
     </button>
   </div>
 
-<!--Dropdown de panle administrativo-->
+<!--Dropdown de panel administrativo-->
   <div ngbDropdown class="ml-2" *ngIf="catalogo" >
     <button class="btn btn-outline-warning" id="dropdownConfig" ngbDropdownToggle>Panel Administrativo</button>
     <div ngbDropdownMenu aria-labelledby="dropdownConfig">
@@ -75,14 +75,17 @@
             <li>
               <button ngbDropdownItem *ngIf="admin_empleados" [routerLink]="['/empleado']"
                 routerLinkActive="/empleado">Empleados</button>
-            </li>
+            </li>           
           </div>
         </div>
+        <!-- Dashboard -->
+        <li class="nav-item">
+          <button class="btn btn-secondary" *ngIf="dashboard" [routerLink]="'/dashboard'"
+            routerLinkActive="/pedidos">Dashboard</button>
+        </li>        
       </ul>
     </div>
   </div>
-
- 
 
   <!--Botones login y demas-->
   <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">

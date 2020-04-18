@@ -256,6 +256,22 @@ export class AppComponent implements OnInit {
     }
   }
 
+    get dashboard() {
+    var array = localStorage.getItem("permisos");
+    //var array2 = localStorage.getItem('permisos2');
+    if (array) {
+      array = JSON.parse(array);
+      //array2 = JSON.parse(array2);
+      //array = array + array2;
+      for (var x = 0; x < array.length; x++) {
+        if (array[x] == "14") {
+          return true;
+        }
+      }
+      return false;
+    }
+  }
+
   logout() {
     this.authenticationService.logout();
     this.router.navigate(["/catalogo"]);

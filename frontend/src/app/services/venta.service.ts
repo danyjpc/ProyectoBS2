@@ -22,6 +22,12 @@ export class VentaService {
 
   constructor(private http: HttpClient) { }
 
+  ventasxSemana(fec: Date): Observable<Factura[]>{
+    return this.http.get<Factura[]>(APPCONFIG.BASE_URL + "/dashboard/venxsem/" + fec, httpOptions).pipe(
+      catchError(this.handleError('findList', []))
+    );
+  }
+
   obtenerProductos(): Observable<Producto[]> {
     return this.http.get<Producto[]>(APPCONFIG.BASE_URL + "/venta/dropproductos", httpOptions).pipe(
       catchError(this.handleError('findList', []))
@@ -47,8 +53,8 @@ export class VentaService {
       catchError(this.handleError('findList', []))
     );
   }
-  guardarFactura(item: Factura): Observable<Factura[]> {
-    return this.http.post<Factura[]>(APPCONFIG.BASE_URL+"/venta",item);
+  guardarFactura(item: Factura): Observable<Factura> {
+    return this.http.post<Factura>(APPCONFIG.BASE_URL+"/venta",item);
   }
 
   guardarDetalleFactura(item: Detalle_factura[], fac: Factura): Observable<Detalle_factura[]>{
@@ -68,13 +74,13 @@ export class VentaService {
   /*findListIn(): Observable<Empleado[]> {
     return this.http.get<Empleado[]>(APPCONFIG.BASE_URL + "/empleados/deshabilitado", httpOptions).pipe(
       catchError(this.handleError('findList', []))
-    );
-  }
+    )
+  }*/
 
-  findbyId(item: number): Observable<Empleado> {
-    return this.http.get<Empleado>(APPCONFIG.BASE_URL+"/empleados/"+item);
+  findbyId(item: number): Observable<Factura> {
+    return this.http.get<Factura>(APPCONFIG.BASE_URL+"/venta/"+ item);
   }
-
+/*
   guardar(item: Empleado): Observable<Empleado> {
     return this.http.post<Empleado>(APPCONFIG.BASE_URL+"/empleados",item);
   }

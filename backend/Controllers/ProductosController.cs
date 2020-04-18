@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 namespace backend.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+   // [ApiController]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ProductosController : ControllerBase
     {
         BdContext _context;
@@ -74,6 +74,14 @@ namespace backend.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        //Obtener los productos por categoria
+        [HttpGet("cat/{id_categoria}")]
+        public async Task<ActionResult> ObtenerProductoC(int id_categoria)
+        {
+            var items = await _context.Productos.Where(c=> c.categoria.id_categoria==id_categoria).ToListAsync();
+            return Ok(items);
         }
     }
 }
