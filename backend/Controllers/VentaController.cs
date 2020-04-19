@@ -74,17 +74,35 @@ namespace backend.Controllers
             return items;
         }
 
-        [HttpGet("/dashboard/venxsem/{fec}")]
-        public async Task<ActionResult<IEnumerable<Factura>>> ObtenerVentasxSemana(DateTime fecha)
+        [HttpGet("venxsem")]
+        public async Task<ActionResult<IEnumerable<Decimal>>> ObtenerVentasxSemana()
         {
-            var facs = await _context.Facturas.Where(fac => fac.fecha == fecha).Select(
+            Decimal mtotal = 0;
+            var facs = await _context.Facturas.Where(fac => fac.fecha <= DateTime.Now && fac.fecha >= DateTime.Now.AddDays(-7)).Select(
                 fct => new
                 {
-                    fe = fct.fecha,
-                    suma = fct.total
+                    total = fct.total
                 }
              ).ToListAsync();    
-            return Ok(facs);
+             foreach (var item in facs)
+             {
+                 mtotal = mtotal + item.total;
+             }
+            return Ok(mtotal);
+
+        }
+
+        [HttpGet("getfacturas")]
+        public async Task<ActionResult<IEnumerable<Factura>>> obtenerFactura()
+        {
+            var fac = await _context.Facturas.ToListAsync();
+
+            if(fac == null)
+            {
+                return NotFound();
+            }
+
+            return fac;
         }
 
         [HttpGet("{id_factura}")]

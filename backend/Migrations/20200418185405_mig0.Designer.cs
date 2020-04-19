@@ -9,7 +9,7 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(BdContext))]
-    [Migration("20200418072430_mig0")]
+    [Migration("20200418185405_mig0")]
     partial class mig0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -172,19 +172,7 @@ namespace backend.Migrations
 
                     b.Property<int>("id_persona");
 
-                    b.Property<int>("id_rol");
-
-                    b.Property<int>("id_usuario");
-
-                    b.Property<string>("nom_usuario")
-                        .HasColumnType("varchar(45)");
-
-                    b.Property<string>("password")
-                        .HasColumnType("varchar(45)");
-
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("id_usuario");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -297,7 +285,7 @@ namespace backend.Migrations
 
                     b.Property<int>("id_usu_cliente");
 
-                    b.Property<int>("id_usu_empleado");
+                    b.Property<int?>("id_usu_empleado");
 
                     b.Property<string>("modo_envio")
                         .HasColumnType("varchar(60)");
@@ -610,8 +598,7 @@ namespace backend.Migrations
 
                     b.HasOne("backend.Models.ApplicationUser", "usuario_empleado")
                         .WithMany("facturas_empleado")
-                        .HasForeignKey("id_usu_empleado")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("id_usu_empleado");
                 });
 
             modelBuilder.Entity("backend.Models.Kardex", b =>

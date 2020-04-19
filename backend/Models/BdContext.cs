@@ -122,7 +122,8 @@ namespace backend.Models
             modelBuilder.Entity<Factura>()
             .HasOne(fa => fa.usuario_empleado)
             .WithMany(usu => usu.facturas_empleado)
-            .HasForeignKey(fa => fa.id_usu_empleado);
+            .HasForeignKey(fa => fa.id_usu_empleado)
+            .IsRequired(false);
 
             //AñADIDO: Una persona, muchos usuarios
             modelBuilder.Entity<ApplicationUser>()

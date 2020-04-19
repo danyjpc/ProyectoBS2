@@ -313,18 +313,13 @@ namespace backend.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    id_usuario = table.Column<int>(nullable: false),
-                    nom_usuario = table.Column<string>(type: "varchar(45)", nullable: true),
-                    password = table.Column<string>(type: "varchar(45)", nullable: true),
                     id_persona = table.Column<int>(nullable: false),
                     fecha_registro = table.Column<DateTime>(type: "date", nullable: false),
-                    id_rol = table.Column<int>(nullable: false),
                     estado_activo = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_user", x => x.Id);
-                    table.UniqueConstraint("AK_tb_user_id_usuario", x => x.id_usuario);
                     table.ForeignKey(
                         name: "FK_tb_user_tb_persona_id_persona",
                         column: x => x.id_persona,
@@ -344,7 +339,7 @@ namespace backend.Migrations
                     modo_pago = table.Column<string>(type: "varchar(60)", nullable: true),
                     estado = table.Column<sbyte>(type: "tinyint", nullable: false),
                     id_usu_cliente = table.Column<int>(nullable: false),
-                    id_usu_empleado = table.Column<int>(nullable: false),
+                    id_usu_empleado = table.Column<int>(nullable: true),
                     habilitado = table.Column<int>(nullable: false),
                     total = table.Column<decimal>(nullable: false)
                 },
@@ -362,7 +357,7 @@ namespace backend.Migrations
                         column: x => x.id_usu_empleado,
                         principalTable: "tb_user",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

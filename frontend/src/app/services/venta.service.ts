@@ -22,10 +22,8 @@ export class VentaService {
 
   constructor(private http: HttpClient) { }
 
-  ventasxSemana(fec: Date): Observable<Factura[]>{
-    return this.http.get<Factura[]>(APPCONFIG.BASE_URL + "/dashboard/venxsem/" + fec, httpOptions).pipe(
-      catchError(this.handleError('findList', []))
-    );
+  ventasxSemana(): Observable<number>{
+    return this.http.get<number>(APPCONFIG.BASE_URL + "/venta/venxsem/")
   }
 
   obtenerProductos(): Observable<Producto[]> {
@@ -62,7 +60,7 @@ export class VentaService {
   }
 
   obtenerFacturas(): Observable<Factura[]>{
-    return this.http.get<Factura[]>(APPCONFIG.BASE_URL + "/venta/getfactura", httpOptions).pipe(
+    return this.http.get<Factura[]>(APPCONFIG.BASE_URL + "/venta/getfacturas", httpOptions).pipe(
       catchError(this.handleError('findList', []))
     );
   }

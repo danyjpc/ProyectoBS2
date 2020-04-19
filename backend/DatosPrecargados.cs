@@ -13,7 +13,7 @@ namespace backend.Models
         public DatosPrecargados()
         {
         }
-
+       
         public static async void Precargar(IServiceProvider services)
         {
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -69,18 +69,21 @@ namespace backend.Models
                 //USUARIOS
                 if (_userManager.Users.Count() == 0)
                 {
-                    var usuarioadmin = new ApplicationUser { UserName = "admin@gmail.com", Email = "admin@gmail.com", id_usuario = 1, id_persona = 2, estado_activo = 1 };
+                    var usuarioadmin = new ApplicationUser { UserName = "admin@gmail.com", Email = "admin@gmail.com", id_persona = 2, estado_activo = 1 };
 
                     await _userManager.CreateAsync(usuarioadmin, "Admin1234");
 
-                    var usuarioempleado = new ApplicationUser { UserName = "empleado@gmail.com", Email = "empleado@gmail.com", id_usuario = 2, id_persona = 1, estado_activo = 1 };
+                    var usuarioempleado = new ApplicationUser { UserName = "empleado@gmail.com", Email = "empleado@gmail.com",  id_persona = 1, estado_activo = 1 };
 
                     await _userManager.CreateAsync(usuarioempleado, "Admin1234");
 
-                    var usuariocliente = new ApplicationUser { UserName = "cliente@gmail.com", Email = "cliente@gmail.com", id_usuario = 3, id_persona = 3, estado_activo = 1 };
+                    var usuariocliente = new ApplicationUser { UserName = "cliente@gmail.com", Email = "cliente@gmail.com", id_persona = 3, estado_activo = 1 };
 
-                    await _userManager.CreateAsync(usuariocliente, "Admin1234");                   
+                    await _userManager.CreateAsync(usuariocliente, "Admin1234");    
                 }
+
+                //Generar fecha actual
+                
 
 
 

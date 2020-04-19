@@ -80,7 +80,7 @@ export class CrearProductosComponent implements OnInit {
                         },err => {console.log(err);} 
                     );
                 }
-                this.router.navigate(['/productos']);    
+                this.router.navigate(['/catalogo-log']);  
             },
             err => {
                 console.log(err);

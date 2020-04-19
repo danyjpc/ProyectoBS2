@@ -11,28 +11,55 @@
                   <td>
                     Total en ventas en la última semana
                   </td>
-                  <td>10</td>
+                  <td>{{ sumVentasxSem }}</td>
                 </tr>
                 <tr>
                   <td>
                     Nuevos clientes en la última semana
                   </td>
-                  <td>10</td>
+                  <td>{{ niuClientesxSem }}</td>
                 </tr>
                 <tr>
                     <td>
                         Alerta de reabastecimiento
                     </td>
                     <td>
-                        lista
+                        <table *ngIf="reabProductos.length != 0">
+                          <thead>
+                            <th>No.</th>
+                            <th>Producto</th>
+                            <th>Disponible</th>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of reabProductos; index as i">
+                              <td>{{i+1}}</td>
+                              <td>{{item.nom_producto}}</td>
+                              <td>{{item.cantidad_existente}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                            <h6 *ngIf="reabProductos.length == 0" >No hay registros</h6>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                      Productos más vendidos del 2019
+                      Productos más vendidos del {{hoyFecha()}}
                     </td>
                     <td>
-                        lista
+                      <table>
+                        <thead>
+                          <th>No.</th>
+                          <th>Producto</th>
+                          <th>Unidades vendidas</th>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of prodMasVendidos; index as i">
+                            <td>{{i+1}}</td>
+                            <td>{{item.nom_producto}}</td>
+                            <td>{{item.cantidad}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </td>
                 </tr>
                 </tbody>

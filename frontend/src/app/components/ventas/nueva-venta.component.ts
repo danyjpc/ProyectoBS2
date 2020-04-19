@@ -293,7 +293,7 @@ export class NuevaVentaComponent implements OnInit
             this.nuevoCliente.id_puesto = null; 
               this.serviceC.guardar(this.nuevoCliente).subscribe(
                   nCli => {
-                      this.fac.id_usu_cliente = nCli.id_persona; 
+                      this.fac.id_usu_cliente = 3; 
                       this.fac.fecha = this.hoyFecha(); 
                       this.fac.modo_envio = "cex"; 
                       this.fac.modo_pago = "tarjeta de credito";
@@ -316,12 +316,12 @@ export class NuevaVentaComponent implements OnInit
                   }
               );
           }else{
-            this.fac.id_usu_cliente = this.cli.id_usu_cliente; 
+            this.fac.id_usu_cliente = 3; 
             this.fac.estado = 1; 
             this.fac.modo_envio = "";
             this.fac.modo_pago = "";
             this.fac.fecha = this.hoyFecha();
-            this.fac.id_usu_empleado = 1;
+            this.fac.id_usu_empleado =1;
             this.fac.habilitado = 1;
             this.fac.total = this.totalFac;
             this.service.guardarFactura(this.fac).subscribe(

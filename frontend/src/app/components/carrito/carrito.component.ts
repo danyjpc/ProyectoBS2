@@ -1,0 +1,93 @@
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { AuthGuard } from '../_guards';
+import { Producto } from 'src/app/models/producto';
+import { ProductosService } from 'src/app/services/productos.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2'
+import { element } from '@angular/core/src/render3';
+@Component({
+  selector: 'carrito',
+  templateUrl: './carrito.component.html',
+})
+
+export class CarritoComponent implements OnInit {
+  //Aca va la declaracion de variables
+  public products: Producto[];
+  public cant: Number = 0;
+  public cantProducts: any[];
+  public cantidad: Number = 1;
+  public total: number =0;
+  public carritoVacio: boolean;
+  public totalCompra: number =0;
+  
+  constructor(private router: Router, public act: AuthGuard,
+    private service: ProductosService, private modalService: NgbModal
+  ) { }
+
+  ngOnInit() {
+    //Extraigo los valores que se tienen en el carrito de compras 
+    try {
+      this.cant = JSON.parse(localStorage.getItem('carrito')).length;
+      this.cantProducts = JSON.parse(localStorage.getItem('carrito'));
+
+    } catch (error) {
+      this.carritoVacio = true;
+    }
+    //Extraigo todos los productos del carrito de compras
+    this.extraerProductos();
+    
+
+  }
+
+  extraerProductos() {
+    try {
+      var products = []
+      for (var x = 0; x < this.cantProducts.length; x++) {
+        this.service.findbyId(this.cantProducts[x]).subscribe(
+          items => {
+            items.cantidad=1;
+            products.push(items);
+            this.totalCompra = this.totalCompra + (items.cantidad*items.precio_unitario)
+
+          }
+        );
+      }
+      this.products = products;
+      console.log(this.products)
+    } catch (error) {
+      console.log('No se encuentran elementos en el carrito')
+    }
+ 
+
+  }
+
+
+
+  eliminardelCarrito(indice: number){
+    
+    this.products.splice(indice,1);
+    var cart = JSON.parse(localStorage.getItem('carrito'));
+    cart.splice(indice,1);
+    localStorage.setItem('carrito', JSON.stringify(cart));
+    if(cart.length == 0){
+      localStorage.removeItem('carrito');
+      this.cant =0;
+      this.carritoVacio= true;
+    }
+  }
+
+
+  actualizarTotal(){
+    console.log('enrtra')
+    this.totalCompra=0
+    for(var x =0; x<this.products.length; x++){
+      this.totalCompra = this.totalCompra + (this.products[x].cantidad * this.products[x].precio_unitario);
+    }
+  }
+
+
+
+
+
+}

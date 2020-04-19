@@ -22,7 +22,7 @@ namespace backend.Models
         public int id_usu_cliente {get;set;}
         public ApplicationUser usuario_cliente {get;set;}
         [ForeignKey("id_usu_empleado")]
-        public int id_usu_empleado {get;set;}
+        public int? id_usu_empleado {get;set;}
         public ApplicationUser usuario_empleado {get;set;}
      /*   [ForeignKey("id_cliente")]
         //quitar clientes porque ahora son usuarios

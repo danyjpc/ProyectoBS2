@@ -5,7 +5,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
    <!--Amabisca centrado-->
-   <a class="navbar-brand" href="#">AMABISCA S.A.</a>
+   <a class="navbar-brand" href="/">AMABISCA S.A.</a>
 
   <!--Formulario-->
   <div class="form-inline ml-auto">
@@ -14,8 +14,8 @@
     </button>
   </div>
 
-<!--Dropdown de panel administrativo-->
-  <div ngbDropdown class="ml-2" *ngIf="catalogo" >
+<!--Dropdown de panle administrativo-->
+  <div ngbDropdown class="ml-2" *ngIf="catalogo && logueado" >
     <button class="btn btn-outline-warning" id="dropdownConfig" ngbDropdownToggle>Panel Administrativo</button>
     <div ngbDropdownMenu aria-labelledby="dropdownConfig">
       <ul class="navbar-nav ml-auto">
@@ -79,9 +79,9 @@
           </div>
         </div>
         <!-- Dashboard -->
-        <li class="nav-item">
-          <button class="btn btn-secondary" *ngIf="dashboard" [routerLink]="'/dashboard'"
-            routerLinkActive="/pedidos">Dashboard</button>
+        <li class="nav-item" *ngIf="admin_empleados">
+          <button class="btn btn-secondary" [routerLink]="['/dashboard']"
+            routerLinkActive="/dashboard">Dashboard</button>
         </li>        
       </ul>
     </div>
@@ -107,8 +107,11 @@
         <a class="nav-link" *ngIf="!logueado" href="#">Register</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="border: orange solid; border-radius: 40%;" href="#"> <img style="max-width: 30px;"
-            src="https://i0.pngocean.com/files/833/426/329/5bbe6867ae693.jpg" alt=""> </a>
+        
+        <a class="nav-link" style="border: orange solid; border-radius: 40%;" [routerLink]="['/carrito']" routerLinkActive="router-link-active"  href=""> <img style="max-width: 30px;"
+            src="https://i0.pngocean.com/files/833/426/329/5bbe6867ae693.jpg" alt=""> 
+            <span id="noti" *ngIf="carrito"><small><strong>1+</strong></small></span>
+          </a>
       </li>
     </ul>
 

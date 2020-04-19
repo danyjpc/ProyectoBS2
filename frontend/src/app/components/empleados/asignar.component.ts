@@ -82,7 +82,7 @@ export class AsignarCredencialesComponent implements OnInit {
       this.estado = false;
       this.user.estado_activo = 1;
       this.user.cod_empleado = this.uss;
-
+      console.log(this.user)
       //Guardo los datos del usuario
       this.service.crearuser(this.user).subscribe(items => {
         //Ya guardo el usuario
