@@ -3,9 +3,11 @@ import { Router } from '@angular/router'
 import { AuthGuard } from '../_guards';
 import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/services/productos.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2'
 import { element } from '@angular/core/src/render3';
+import { Factura } from 'src/app/models/factura';
+
 @Component({
   selector: 'carrito',
   templateUrl: './carrito.component.html',
@@ -20,9 +22,10 @@ export class CarritoComponent implements OnInit {
   public total: number =0;
   public carritoVacio: boolean;
   public totalCompra: number =0;
+  public fact: Factura  = new Factura();
   
   constructor(private router: Router, public act: AuthGuard,
-    private service: ProductosService, private modalService: NgbModal
+    private service: ProductosService, private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -75,6 +78,7 @@ export class CarritoComponent implements OnInit {
       this.cant =0;
       this.carritoVacio= true;
     }
+    this.actualizarTotal();
   }
 
 
@@ -86,7 +90,10 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-
+  open(content){
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    }, (reason) => { });
+  }
 
 
 
