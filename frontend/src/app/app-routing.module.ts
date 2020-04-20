@@ -38,6 +38,7 @@ import { InventarioService } from './services/inventario.service';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { CrearProductosComponent } from './components/productos/crear-producto.component';
 import { CatalogoComponent } from './components/catalogo/cat.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 
 const routes: Routes = [
@@ -278,7 +279,10 @@ const routes: Routes = [
     path: 'crear-producto',
     component: CrearProductosComponent
   },
-
+  {
+    path: 'registro',
+    component: RegistroComponent
+  },
   
 ];
 

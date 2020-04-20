@@ -21,6 +21,7 @@ export class CrearClienteComponent{
         this.cliente.habilitado=true;
         this.service.guardar(this.cliente).subscribe(
             items=>{
+                console.log(items);
                 this.router.navigate(['/clientes']);
             }
         );

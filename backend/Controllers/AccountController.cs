@@ -18,7 +18,7 @@ namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AccountController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -44,22 +44,29 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<IActionResult> CrearUsuario([FromBody] UserInfo datos)
         {
-
-            if(!datos.password.Equals(datos.password_confirmar))
+            if (ModelState.IsValid)
             {
-                return BadRequest(new {message = "Contraseñas no coinciden"});
+                if (!datos.password.Equals(datos.password_confirmar))
+                {
+                    return BadRequest(new { message = "Contraseñas no coinciden" });
+                }
+
+                var user = new ApplicationUser { id_persona = datos.cod_empleado, UserName = datos.email, Email = datos.email, estado_activo = 1 };
+
+                var result = await _userManager.CreateAsync(user, datos.password);
+
+                if (result.Succeeded)
+                {
+                    return BuildToken(datos);
+                }
+                else
+                {
+                    return BadRequest(new { message = "Error al crear usuario" });
+                }
             }
-
-            var user = new ApplicationUser {id_persona = datos.cod_empleado, UserName = datos.email, Email = datos.email, estado_activo = 1};
-
-            var result = await _userManager.CreateAsync(user, datos.password);
-
-            if(result.Succeeded)
+            else
             {
-                return BuildToken(datos);
-            }
-            else{
-                return BadRequest(new {message = "Error al crear usuario"});
+                return BadRequest(ModelState);
             }
         }
 
@@ -69,18 +76,19 @@ namespace backend.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] UserInfo userInfo)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var usuario = await _userManager.FindByEmailAsync(userInfo.email);
 
                 var result = await _signInManager.PasswordSignInAsync(userInfo.email, userInfo.password, true, true);
 
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     return BuildToken(userInfo); //Construir token
                 }
-                else{
-                    return BadRequest(new {message = "Error al iniciar sesion"});
+                else
+                {
+                    return BadRequest(new { message = "Error al iniciar sesion" });
                 }
             }
             else

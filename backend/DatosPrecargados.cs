@@ -31,6 +31,9 @@ namespace backend.Models
                     var puesto = new Puesto { nombre = "Vendedor", descripcion = "Atiende a los clientes", habilitado = 1 };
                     _context.Puestos.Add(puesto);
                     await _context.SaveChangesAsync();
+                    var cliente = new Puesto { nombre = "Cliente", descripcion = "Realiza compras", habilitado = 1 };
+                    _context.Puestos.Add(cliente);
+                    await _context.SaveChangesAsync();
                 }
 
                 //EMPLEADOS
