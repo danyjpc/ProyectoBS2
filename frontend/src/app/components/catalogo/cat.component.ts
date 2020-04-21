@@ -79,6 +79,7 @@ export class CatalogoComponent implements OnInit {
   }
 
   agregarCarrito(id) {
+    console.log(id);
     var cart = []
     if (localStorage.getItem('carrito') == null) {
       console.log(cart)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Models;
@@ -16,10 +17,12 @@ namespace backend.Controllers
     public class ClientesController : ControllerBase
     {
         private readonly BdContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ClientesController(BdContext bdContext)
+        public ClientesController(BdContext bdContext,  UserManager<ApplicationUser> userManager)
         {
             _context = bdContext;
+            _userManager = userManager;
         }
 
         //Obtener todos los clientes

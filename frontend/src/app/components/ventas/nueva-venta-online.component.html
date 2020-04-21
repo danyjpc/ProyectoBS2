@@ -1,0 +1,75 @@
+<div class="container col-md-8 offset-md-2 mt-2">
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="h3 col text-center"><b>Órden de pedido</b></h3>
+        <h6 class="h6 col text-left"><b>Amabisca S. A.</b></h6>
+        <h6 class="h6 col text-left"><b>4ta ave 6ta calle zona 1</b></h6>
+        <h6 class="h6 col text-left"><b>7777-7777</b></h6>
+        <h6 class="h6 col text-left"><b>amabiscasa@amabisca.com</b></h6>
+      </div>        
+    </div>  
+
+  <div class="card-header">
+    <div class="form-row" placement = "center">
+      <div class = "col-4 ">
+          <h6 class="h6 text-left"><b>NIT</b></h6>
+          <label>{{personaCliente.nit}}</label>
+        <!--  <input  placeholder="Ingrese NIT" type="text" class="form-control" [(ngModel)]  = "cli" (ngModelChange)="borrarCampos()" [ngbTypeahead] = "searchcli" [resultFormatter] = "rFormatterCli" [inputFormatter] = "iFormatterCli" (focus) = "focusC$.next($event.target.value)" (click) = "clickC$.next($event.target.value)" #instanceC = "ngbTypeahead" (selectItem)="autocompletar($event)"> -->
+      </div>
+      <div class = "col-4">
+          <h6 class="h6 text-left"><b>Cliente</b></h6>
+          <label>{{personaCliente.nom_persona}}</label>
+        <!--  <input type="text" class="form-control" placeholder="Cliente" [(ngModel)]="nomC">-->
+      </div>
+      <div class = "col-4">
+              <h6 class="h6 text-left"><b>Dirección</b></h6>
+              <label>{{personaCliente.direccion}}</label>
+            <!--  <input type="text" class="form-control" placeholder="Dirección"  [(ngModel)]="dirC">-->
+      </div>
+  </div>
+  <div class="form-row">
+      <div class = "col-4">
+          <h6 class="h6 text-left"><b>Teléfono</b></h6>
+          <h6 class="h6 text-left">{{personaCliente.telefono}}</h6>
+          <!--<input type="text" class="form-control" placeholder="Teléfono"  [(ngModel)]="telC">--->
+      </div>
+          <div class = "col-4">
+          <h6 class="h6 text-left"><b>Fecha</b></h6>
+          <label > {{ fecha | date:'dd/MM/yyyy'}}</label>
+      </div>
+  </div>  
+</div>  
+
+<div class="card-body">
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th scope="col">No.</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Precio unitario</th>
+              <th scope="col">Subtotal</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of prodCarrito; index as i">
+              <td class="align-middle">{{ i+1 }}</td>
+              <td class="align-middle">{{ item.cantidad }}</td>
+              <td class="align-middle">{{ item.nom_producto}}</td>
+              <td class="align-middle">{{ item.precio_unitario }}</td>
+              <td class="align-middle">{{ item.precio_unitario * item.cantidad }}</td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+<div class = "card-header">              
+  <h3 class="h3 col text-right"><b>Total: {{totalFactura}}</b></h3>
+</div>
+
+<div class = "card-header">              
+  <button type="button" class="btn btn-primary" (click) = "descargarFactura(this.factura.id_factura)" [routerLink]="['/']">Descargar factura</button>
+</div>
+
+</div>

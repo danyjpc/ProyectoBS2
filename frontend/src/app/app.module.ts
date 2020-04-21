@@ -52,6 +52,7 @@ import { CrearProductosComponent } from './components/productos/crear-producto.c
 import { CatalogoComponent } from './components/catalogo/cat.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { NuevaVentaOnlineComponent } from './components/ventas/nueva-venta-online.component';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { CarritoComponent } from './components/carrito/carrito.component';
     CrearProductosComponent,
     CatalogoComponent, 
     DashboardComponent,
-    CarritoComponent
+    CarritoComponent, 
+    NuevaVentaOnlineComponent
 
   ],
 

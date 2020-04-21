@@ -42,6 +42,8 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 
+import {NuevaVentaOnlineComponent} from './components/ventas/nueva-venta-online.component';
+
 
 const routes: Routes = [
   //Se configura el componente de inicio
@@ -294,7 +296,14 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
     data: { permisos:"14" } 
-  }  
+  },
+
+  {
+    path:'nueva-venta-online',
+    component: NuevaVentaOnlineComponent,
+    // canActivate: [AuthGuard], 
+    // data: {permisos:"13"}
+  } 
 ];
 
 @NgModule({

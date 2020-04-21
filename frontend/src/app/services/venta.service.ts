@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Tarea } from 'src/app/models/tarea';
 import { Observable, throwError, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { Clientes } from '../models/clientes';
 import { DetalleKardex } from '../models/detalle_kardex';
 import { Factura } from '../models/factura';
 import { Persona } from '../models/persona';
+import { User } from '../models/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,6 +25,24 @@ export class VentaService {
 
   ventasxSemana(): Observable<number>{
     return this.http.get<number>(APPCONFIG.BASE_URL + "/venta/venxsem/")
+  }
+
+  obtenerIdPersonaCliente(): Observable<Persona>
+  {
+     return this.http.get<Persona>(APPCONFIG.BASE_URL+"/venta/getxemail/" + localStorage.getItem("usr"));
+  }
+
+  obtenerIdUsuCliente(usr: string): Observable<number>
+  {
+    return this.http.get<number>(APPCONFIG.BASE_URL + "/venta/getusucliente/" + usr);
+  }
+
+  obtenerProductoxId(item: number): Observable<Producto> {
+    return this.http.get<Producto>(APPCONFIG.BASE_URL+"/venta/productos/"+item);
+  }
+
+  generarFacturaPDF(idfactura: number): Observable<HttpResponse<Blob>>{
+    return this.http.get(APPCONFIG.BASE_URL + "/venta/facturapdf/" + idfactura, { responseType: 'blob', observe: 'response' });
   }
 
   obtenerProductos(): Observable<Producto[]> {

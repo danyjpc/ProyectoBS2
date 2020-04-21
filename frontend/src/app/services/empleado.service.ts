@@ -50,6 +50,7 @@ export class EmpleadoService {
   editarPass(item: CambioPass): Observable<CambioPass> {
     return this.http.put<CambioPass>(APPCONFIG.BASE_URL+"/usuarios/EditarPassword/"+localStorage.getItem('usr'),item);
   }
+  
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

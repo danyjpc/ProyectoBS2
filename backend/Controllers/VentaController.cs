@@ -7,13 +7,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 using System;
 
 namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+  //  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class VentaController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -43,11 +46,37 @@ namespace backend.Controllers
             return items;
         }
 
+        //Obtener cliente por email
+        [Route("getxemail/{email}")]
+        [HttpGet]
+        public async Task<ActionResult<Persona>> ObtenerIdPersona(string email)
+        {
+            var idPersona = await _userManager.Users.Where(x => x.Email == email).Select(y => y.id_persona).FirstOrDefaultAsync();
+            var pers = await _context.Personas.Where(per => per.id_persona == idPersona).FirstOrDefaultAsync();
+            return pers;
+        }
+
+        //ObtenerProducto por id
+        [Route("productos/{id}")]
+        [HttpGet]
+        public async Task<ActionResult<Producto>> ObtenerProductosxId(int id)
+        {
+            var prod = await _context.Productos.Where(pr => pr.id_producto == id).FirstOrDefaultAsync();
+            return prod;
+        }
+
         [HttpGet("getdetxprod")]
         public async Task<ActionResult<IEnumerable<Detalle_factura>>> obtenerDetalles()
         {
             var items = await _context.Detalles_facturas.ToListAsync();
             return items;
+        }
+
+        [HttpGet("getusucliente/{usr}")]
+        public async Task<Int32> obtenerUsuCli(string usr)
+        {
+            var us = await _userManager.Users.Where(u => u.Email == usr).FirstOrDefaultAsync();
+            return us.Id;
         }
 
         [HttpGet("getdetxfac/{idfac}")]
@@ -131,6 +160,7 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<ActionResult<Factura>> crearFactura( Factura factura)
         {
+            System.Console.Write(factura);
             await _context.Facturas.AddAsync(factura);
             await _context.SaveChangesAsync();
 
@@ -158,6 +188,116 @@ namespace backend.Controllers
 
 
 
+
+        [HttpGet("facturapdf/{idfactura}")]
+        public async Task<FileResult> generarPDF(int idfactura)
+        {
+            var fac = await _context.Facturas.FindAsync(idfactura);
+
+            MemoryStream workStream = new MemoryStream();
+            Document document = new Document();
+            PdfWriter.GetInstance(document, workStream).CloseStream = false;
+
+            document.Open();
+
+            Paragraph title = new Paragraph();
+            Paragraph encabezado = new Paragraph();
+            Paragraph infoCliente = new Paragraph();
+
+            title.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 28f,BaseColor.BLACK);
+            title.Alignment = Element.ALIGN_CENTER;
+            title.Add("AMABISCA S. A.");
+            title.Add(Chunk.NEWLINE);
+            document.Add(title);
+
+            encabezado.Font = FontFactory.GetFont(FontFactory.HELVETICA, 18f,BaseColor.BLACK);
+            encabezado.Alignment = Element.ALIGN_LEFT;
+            encabezado.Add("Factura No. " + idfactura.ToString());
+            encabezado.Add(Chunk.NEWLINE);
+            encabezado.Add("4ta calle 5ta avenida zona 1, Guatemala");
+            encabezado.Add(Chunk.NEWLINE);
+            encabezado.Add("(+502)7777-7777");
+            encabezado.Add(Chunk.NEWLINE);
+            encabezado.Add("amabiscasa@amabisca.com");
+            encabezado.Add(Chunk.NEWLINE);
+            encabezado.Add(Chunk.NEWLINE);
+            document.Add(encabezado);
+
+            var idfper = await _context.Facturas.Where(f => f.id_factura == fac.id_factura).Select(
+                ob => ob.usuario_cliente.persona.id_persona
+            ).FirstOrDefaultAsync();
+
+            var cli = await _context.Personas.Join(
+                _userManager.Users, 
+                ip => ip.id_persona, 
+                iu => iu.id_persona,
+                (ip, iu) => new {
+                    idpersona = iu.id_persona, 
+                    nompersona = ip.nom_persona, 
+                    direccion = ip.direccion, 
+                    nit = ip.nit,
+                    telefono = ip.telefono
+                }
+
+            ).Where( p => p.idpersona == idfper).FirstOrDefaultAsync();
+            
+            infoCliente.Alignment = Element.ALIGN_LEFT;
+            infoCliente.Add(cli.nit);
+            infoCliente.Add(Chunk.SPACETABBING);
+            infoCliente.Add(cli.nompersona);
+            infoCliente.Add(Chunk.SPACETABBING);
+            infoCliente.Add(cli.direccion);
+            infoCliente.Add(Chunk.SPACETABBING);
+            infoCliente.Add(cli.telefono);
+            document.Add(infoCliente);
+
+            document.Add(Chunk.SPACETABBING);
+            document.Add(Chunk.SPACETABBING);
+
+            var dets = await _context.Detalles_facturas.Where(df => df.id_factura == idfactura).ToListAsync();
+
+            iTextSharp.text.Font _fuenteNormal = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+            iTextSharp.text.Font _fuenteTitulosTabla = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+
+            PdfPTable table = new PdfPTable(5);
+
+            // Esta es la primera fila
+            table.AddCell(new Paragraph("No.", _fuenteTitulosTabla));
+            table.AddCell(new Paragraph("Cantidad", _fuenteTitulosTabla));
+            table.AddCell(new Paragraph("Producto", _fuenteTitulosTabla));
+            table.AddCell(new Paragraph("Precio unitario", _fuenteTitulosTabla));
+            table.AddCell(new Paragraph("Subtotal", _fuenteTitulosTabla));
+
+                for (int i = 0; i < dets.Count; i++)
+                {
+                    var prod = await _context.Productos.Where(p => p.id_producto == dets[i].id_producto).FirstOrDefaultAsync();
+
+                    table.AddCell(new Paragraph((i+1).ToString(), _fuenteNormal));
+                    table.AddCell(new Paragraph(dets[i].cantidad.ToString(), _fuenteNormal));
+                    table.AddCell(new Paragraph(prod.nom_producto, _fuenteNormal));
+                    table.AddCell(new Paragraph((Math.Truncate(prod.precio_unitario * 100)/100).ToString(), _fuenteNormal));
+                    table.AddCell(new Paragraph((Math.Truncate(dets[i].cantidad * prod.precio_unitario * 100)/100).ToString(),_fuenteNormal));
+                }
+
+            document.Add(table);
+            
+            document.Add(Chunk.NEWLINE);
+            document.Add(Chunk.NEWLINE);
+
+            Paragraph totalFactura = new Paragraph();
+            totalFactura.Font = FontFactory.GetFont(FontFactory.HELVETICA, 18f,BaseColor.BLACK);
+            totalFactura.Alignment = Element.ALIGN_RIGHT;
+            totalFactura.Add("Total: " + (Math.Truncate(fac.total * 100)/100).ToString());
+            document.Add(totalFactura);          
+
+            document.Close();
+
+            byte[] byteInfo = workStream.ToArray();
+            workStream.Write(byteInfo, 0, byteInfo.Length);
+            workStream.Position = 0;
+
+            return new FileStreamResult(workStream, "application/pdf");    
+        }
 
     }
 }
