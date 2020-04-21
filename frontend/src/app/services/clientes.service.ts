@@ -19,6 +19,11 @@ export class ClienteService {
 
   constructor(private http: HttpClient) { }
 
+  
+  getNuevosxSem(){
+    return this.http.get<number>(APPCONFIG.BASE_URL + "/account/nclien");
+}
+
   findList(): Observable<Persona[]> {
     return this.http.get<Persona[]>(APPCONFIG.BASE_URL + "/clientes", httpOptions).pipe(
       catchError(this.handleError('findList', []))

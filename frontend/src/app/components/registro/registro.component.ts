@@ -4,6 +4,7 @@ import { Persona } from 'src/app/models/persona';
 import { ClienteService } from 'src/app/services/clientes.service';
 import { UserInfo } from 'src/app/models/userinfo';
 import { UserService } from 'src/app/services/user.service';
+import { RoleService } from 'src/app/services/roles.service';
 
 @Component({
   selector: 'app-registro',
@@ -12,7 +13,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegistroComponent implements OnInit {
 
-  constructor(private router: Router, private service: ClienteService, private serviceU: UserService) { }
+  constructor(private router: Router, private service: ClienteService, private serviceU: UserService,
+  private serviceRol: RoleService) { }
 
   public cliente: Persona = new Persona();
   public usuario: UserInfo = new UserInfo();
@@ -21,18 +23,22 @@ export class RegistroComponent implements OnInit {
   }
 
   guardar() {
+    //Crear persona
     this.cliente.habilitado = true;
     this.service.guardar(this.cliente).subscribe(
       items => {
-        console.log("Persona creada "+items.id_persona)
+
+        //Crear usuario
         this.usuario.cod_empleado = items.id_persona;
         this.usuario.estado_activo = 1;
-        console.log("Usuario "+this.usuario.cod_empleado, this.usuario.email, this.usuario.password);
         this.serviceU.crear(this.usuario).subscribe(
           data => {
-            localStorage.setItem('usr', data.email);
-
+            //asignar role a cliente
+            this.serviceRol.rolCliente(this.usuario.email).subscribe(items => {
+            localStorage.setItem('usr',this.usuario.email);
             this.router.navigate(['/catalogo-log']);
+            }
+            );    
           },
           error => {
             console.log("Ocurrio un error ...");

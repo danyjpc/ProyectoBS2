@@ -42,6 +42,7 @@ export class RoleService {
   }
 
   rolesUser(item: UserRoles): Observable<UserRoles> {
+    console.log(item)
     return this.http.post<UserRoles>(APPCONFIG.BASE_URL+"/roles/AsignarRolesUsuario",item);
   }
 
@@ -52,7 +53,10 @@ export class RoleService {
   editar(item: Roles): Observable<Roles> {
     return this.http.put<Roles>(APPCONFIG.BASE_URL+"/roles/Editar/"+item.id,item);
   }
-
+  //Asignar rol al usuario cliente
+  rolCliente(item: string): Observable<string> {
+    return this.http.post<string>(APPCONFIG.BASE_URL+"/roles/rolcliente/"+item,item);
+  }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

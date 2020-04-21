@@ -12,22 +12,6 @@ C:/Users/Emanuel Rosales/Desktop/Escritorio Anterior/Proyectos de cursos/Bases d
 C:/Users/Emanuel Rosales/Desktop/Escritorio Anterior/Proyectos de cursos/Bases de datos/Proyecto Final/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.RazorTargetAssemblyInfo.cache
 C:/Users/Emanuel Rosales/Desktop/Escritorio Anterior/Proyectos de cursos/Bases de datos/Proyecto Final/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.dll
 C:/Users/Emanuel Rosales/Desktop/Escritorio Anterior/Proyectos de cursos/Bases de datos/Proyecto Final/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.pdb
-D:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/backend.deps.json
-D:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/backend.runtimeconfig.json
-D:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/backend.runtimeconfig.dev.json
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/backend.dll
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/backend.pdb
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.csprojAssemblyReference.cache
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.RazorAssemblyInfo.cache
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.RazorAssemblyInfo.cs
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.AssemblyInfoInputs.cache
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.AssemblyInfo.cs
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.RazorTargetAssemblyInfo.cache
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.dll
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.pdb
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/appsettings.Development.json
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/appsettings.json
-d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/Properties/launchSettings.json
 /home/shadownox/Escritorio/Proyectos/Analisis y Diseño/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/backend.deps.json
 /home/shadownox/Escritorio/Proyectos/Analisis y Diseño/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/backend.runtimeconfig.json
 /home/shadownox/Escritorio/Proyectos/Analisis y Diseño/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/backend.runtimeconfig.dev.json
@@ -42,6 +26,22 @@ d:/8vo semestre/SBD2/proyecto/ProyectoBS2/backend/bin/Debug/netcoreapp2.2/Proper
 /home/shadownox/Escritorio/Proyectos/Analisis y Diseño/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.RazorTargetAssemblyInfo.cache
 /home/shadownox/Escritorio/Proyectos/Analisis y Diseño/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.dll
 /home/shadownox/Escritorio/Proyectos/Analisis y Diseño/ProyectoBS2/backend/obj/Debug/netcoreapp2.2/backend.pdb
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.csprojAssemblyReference.cache
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cache
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorAssemblyInfo.cs
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfoInputs.cache
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.AssemblyInfo.cs
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\appsettings.Development.json
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\appsettings.json
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.dll
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.pdb
+D:\8vo semestre\SBD2\proyecto\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
 C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.deps.json
 C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.json
 C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\bin\Debug\netcoreapp2.2\backend.runtimeconfig.dev.json
@@ -56,3 +56,4 @@ C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\n
 C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.RazorTargetAssemblyInfo.cache
 C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.dll
 C:\Users\dany_\Documents\9no Semestre\Analisis 2\ProyectoBS2\backend\obj\Debug\netcoreapp2.2\backend.pdb
+>>>>>>> 1159d730c352327a8eb32f14d8175fb76570b077

@@ -13,6 +13,7 @@
           <div class="col-6">
             <label for=""><b>Numero de NIT *</b></label>
             <input type="text" class="form-control" [(ngModel)]="cliente.nit">
+            <samp>ej. 8889-9999</samp>
           </div>
         </div>
       </div>
@@ -24,11 +25,11 @@
         <div class="form-row">
           <div class="col-6">
             <label for=""><b>Contraseña*</b></label>
-            <input type="text" class="form-control" [(ngModel)]="usuario.password">
+            <input type="password" class="form-control" [(ngModel)]="usuario.password">
           </div>
           <div class="col-6">
             <label for=""><b>Confirmar Contraseña*</b></label>
-            <input type="text" class="form-control" [(ngModel)]="usuario.password_confirmar">
+            <input type="password" class="form-control" [(ngModel)]="usuario.password_confirmar">
           </div>
         </div>
       </div>
@@ -40,7 +41,7 @@
           </div>
           <div class="col-6">
             <label for=""><b>Telefono *</b></label>
-            <input type="text" class="form-control" [(ngModel)]="cliente.telefono" maxlength="8">
+            <input type="number" class="form-control" [(ngModel)]="cliente.telefono" maxlength="8">
           </div>
         </div>      
       </div>

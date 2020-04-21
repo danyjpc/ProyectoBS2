@@ -1,0 +1,78 @@
+<div class="container col-md-8 offset-md-2 mt-2 mb-4">
+    
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title" style="color: black;">Cuadro de mando</h3>
+        </div>        
+        <div class="card-body">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                  <td>
+                    Total en ventas en la última semana
+                  </td>
+                  <td>{{ sumVentasxSem }}</td>
+                </tr>
+                <tr>
+                  <td>
+                    Nuevos clientes en la última semana
+                  </td>
+                  <td>{{ niuClientesxSem }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        Alerta de reabastecimiento
+                    </td>
+                    <td>
+                        <table *ngIf="reabProductos.length != 0">
+                          <thead>
+                            <th>No.</th>
+                            <th>Producto</th>
+                            <th>Disponible</th>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of reabProductos; index as i">
+                              <td>{{i+1}}</td>
+                              <td>{{item.nom_producto}}</td>
+                              <td>{{item.cantidad_existente}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                            <h6 *ngIf="reabProductos.length == 0" >No hay registros</h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                      Productos más vendidos del {{hoyFecha()}}
+                    </td>
+                    <td>
+                      <table>
+                        <thead>
+                          <th>No.</th>
+                          <th>Producto</th>
+                          <th>Unidades vendidas</th>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of prodMasVendidos; index as i">
+                            <td>{{i+1}}</td>
+                            <td>{{item.nom_producto}}</td>
+                            <td>{{item.cantidad}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+        
+</div>  
+
+
+
+
+
+
+
+

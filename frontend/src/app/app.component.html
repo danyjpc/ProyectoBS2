@@ -5,7 +5,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
    <!--Amabisca centrado-->
-   <a class="navbar-brand" href="#">AMABISCA S.A.</a>
+   <a class="navbar-brand" href="/">AMABISCA S.A.</a>
 
   <!--Formulario-->
   <div class="form-inline ml-auto">
@@ -15,7 +15,7 @@
   </div>
 
 <!--Dropdown de panle administrativo-->
-  <div ngbDropdown class="ml-2" *ngIf="catalogo" >
+  <div ngbDropdown class="ml-2" *ngIf="catalogo && logueado" >
     <button class="btn btn-outline-warning" id="dropdownConfig" ngbDropdownToggle>Panel Administrativo</button>
     <div ngbDropdownMenu aria-labelledby="dropdownConfig">
       <ul class="navbar-nav ml-auto">
@@ -75,14 +75,17 @@
             <li>
               <button ngbDropdownItem *ngIf="admin_empleados" [routerLink]="['/empleado']"
                 routerLinkActive="/empleado">Empleados</button>
-            </li>
+            </li>           
           </div>
         </div>
+        <!-- Dashboard -->
+        <li class="nav-item" *ngIf="admin_empleados">
+          <button class="btn btn-secondary" [routerLink]="['/dashboard']"
+            routerLinkActive="/dashboard">Dashboard</button>
+        </li>        
       </ul>
     </div>
   </div>
-
- 
 
   <!--Botones login y demas-->
   <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -104,8 +107,11 @@
         <a class="nav-link" *ngIf="!logueado" [routerLink]="['/registro']">Register</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="border: orange solid; border-radius: 40%;" href="#"> <img style="max-width: 30px;"
-            src="https://i0.pngocean.com/files/833/426/329/5bbe6867ae693.jpg" alt=""> </a>
+        
+        <a class="nav-link" style="border: orange solid; border-radius: 40%;" [routerLink]="['/carrito']" routerLinkActive="router-link-active"  href=""> <img style="max-width: 30px;"
+            src="https://i0.pngocean.com/files/833/426/329/5bbe6867ae693.jpg" alt=""> 
+            <span id="noti" *ngIf="carrito"><small><strong>1+</strong></small></span>
+          </a>
       </li>
     </ul>
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace backend.Controllers
 {
@@ -72,28 +73,63 @@ namespace backend.Controllers
             var items = await _context.Detalles_kardex.Where(dk => dk.kardex.validado == 1) .ToListAsync();
             return items;
         }
-      /*  [HttpGet("getfactura")]
-        public async Task<ActionResult<IEnumerable<Factura>>> obtenerFacturas()
+
+        [HttpGet("venxsem")]
+        public async Task<ActionResult<IEnumerable<Decimal>>> ObtenerVentasxSemana()
         {
-            var items = await _context.Facturas.Select(
-                f => new{
-                    id_factura = f.id_factura,
-                    fecha = f.fecha,
-                    estado = f.estado, 
-                    id_cliente = f.id_cliente,
-                    id_empleado = f.id_empleado, 
-                    habilitado = f.habilitado, 
-                    total = f.total, 
-                    nom_cliente = f.cliente.nom_cliente, 
-                    nom_empleado = f.empleado.nombre,
-                    nit_cliente = f.cliente.nit
+            Decimal mtotal = 0;
+            var facs = await _context.Facturas.Where(fac => fac.fecha <= DateTime.Now && fac.fecha >= DateTime.Now.AddDays(-7)).Select(
+                fct => new
+                {
+                    total = fct.total
                 }
-            ).ToArrayAsync();
-            return Ok(items);
+             ).ToListAsync();    
+             foreach (var item in facs)
+             {
+                 mtotal = mtotal + item.total;
+             }
+            return Ok(mtotal);
+
+        }
+
+        [HttpGet("getfacturas")]
+        public async Task<ActionResult<IEnumerable<Factura>>> obtenerFactura()
+        {
+            var fac = await _context.Facturas.ToListAsync();
+
+            if(fac == null)
+            {
+                return NotFound();
+            }
+
+            return fac;
+        }
+
+        [HttpGet("{id_factura}")]
+        public async Task<ActionResult<Factura>> obtenerFactura(int id_factura)
+        {
+            var fac = await _context.Facturas.FindAsync(id_factura);
+
+            if(fac == null)
+            {
+                return NotFound();
+            }
+
+            return fac;
+        }
+
+    /*    [HttpPost]
+        public async Task<ActionResult<Factura>> crearFactura([FromBody] Factura factura)
+        {
+            _context.Facturas.Add(factura);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(obtenerFactura), new {id_factura = factura.id_factura}, factura);
         }*/
 
+
         [HttpPost]
-        public async Task<ActionResult> crearFactura( Factura factura)
+        public async Task<ActionResult<Factura>> crearFactura( Factura factura)
         {
             await _context.Facturas.AddAsync(factura);
             await _context.SaveChangesAsync();

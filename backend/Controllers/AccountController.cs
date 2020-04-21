@@ -70,6 +70,28 @@ namespace backend.Controllers
             }
         }
 
+        //Usuarios por sermana
+        [Route("nclien")]
+        [HttpGet]
+        public async Task<Int32> UsersxSemana(DateTime fec)
+        {
+           var nusu = await _userManager.Users.Where(usu => usu.fecha_registro <= DateTime.Now && usu.fecha_registro >= DateTime.Now.AddDays(-7)).ToListAsync();
+           var lper = await _context.Personas.Where(per => per.nit != null).ToListAsync();
+           var nclien = 0;
+
+           foreach (var item in nusu)
+           {
+               foreach (var item2 in lper)
+               {
+                   if (item.id_persona == item2.id_persona)
+                   {
+                       nclien++;
+                   }
+               }
+           }
+           return nclien;
+        }
+
         /************ AREA DE CONSTRUCCION DE TOKENS xD*******/
         [AllowAnonymous]
         [HttpPost]

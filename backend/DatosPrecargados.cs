@@ -13,7 +13,7 @@ namespace backend.Models
         public DatosPrecargados()
         {
         }
-
+       
         public static async void Precargar(IServiceProvider services)
         {
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -46,14 +46,14 @@ namespace backend.Models
                     var empleado2 = new Persona { nom_persona = "Manuel Paredes", direccion = "Cobán", dpi = "0987654321", habilitado = true, id_puesto = 1};
                     _context.Personas.Add(empleado2);
                     await _context.SaveChangesAsync();
-                }
 
-                //USUARIOS
-                if (_userManager.Users.Count() == 0)
-                {
-                    var usuario = new ApplicationUser { UserName = "admin@gmail.com", Email = "admin@gmail.com", id_persona = 2, estado_activo = 1 };
-
-                    await _userManager.CreateAsync(usuario, "Admin1234");
+                    var cliente = new Persona { nom_persona = "Juan", direccion = "Zona 1", telefono = "78787878", nit = "444444-4", habilitado = true, id_puesto = null };
+                    _context.Personas.Add(cliente);
+                    await _context.SaveChangesAsync();
+                    
+                    var cliente2 = new Persona { nom_persona = "Josefa", direccion = "Zona 15", telefono = "52458965",  nit = "487856-5", habilitado = true, id_puesto = null};
+                    _context.Personas.Add(cliente2);
+                    await _context.SaveChangesAsync();
                 }
 
                 //ROLES
@@ -64,7 +64,31 @@ namespace backend.Models
 
                     var rol2 = new ApplicationRole { Name = "Ejecutivo de ventas", descripcion = "Solo puede vender", habilitado = 1 };
                     await _roleManager.CreateAsync(rol2);
+
+                    var rol3 = new ApplicationRole { Name = "Cliente", descripcion = "catalogos y compras", habilitado = 1 };
+                    await _roleManager.CreateAsync(rol3);                    
                 }
+
+                //USUARIOS
+                if (_userManager.Users.Count() == 0)
+                {
+                    var usuarioadmin = new ApplicationUser { UserName = "admin@gmail.com", Email = "admin@gmail.com", id_persona = 2, estado_activo = 1 };
+
+                    await _userManager.CreateAsync(usuarioadmin, "Admin1234");
+
+                    var usuarioempleado = new ApplicationUser { UserName = "empleado@gmail.com", Email = "empleado@gmail.com",  id_persona = 1, estado_activo = 1 };
+
+                    await _userManager.CreateAsync(usuarioempleado, "Admin1234");
+
+                    var usuariocliente = new ApplicationUser { UserName = "cliente@gmail.com", Email = "cliente@gmail.com", id_persona = 3, estado_activo = 1 };
+
+                    await _userManager.CreateAsync(usuariocliente, "Admin1234");    
+                }
+
+                //Generar fecha actual
+                
+
+
 
                 //PERMISOS
                 if (_context.Permisos.Count() == 0)
@@ -108,6 +132,9 @@ namespace backend.Models
                     _context.Permisos.Add(new Permiso { nom_permiso = "Catalogo", habilitado = 1 });
                     _context.SaveChanges();
 
+                    _context.Permisos.Add(new Permiso { nom_permiso = "Dashboard", habilitado = 1 });
+                    _context.SaveChanges();
+
                 }
 
                 if (_context.Permisos_rol.Count() == 0)
@@ -147,6 +174,21 @@ namespace backend.Models
 
                     _context.Permisos_rol.Add(new PermisoRol { cod_rol = 1, cod_permiso = 12 });
                     _context.SaveChanges();
+
+                    _context.Permisos_rol.Add(new PermisoRol {cod_rol = 1, cod_permiso = 14}); //permiso dashboard
+                    _context.SaveChanges();
+
+                    _context.Permisos_rol.Add(new PermisoRol {cod_rol = 3, cod_permiso = 13}); 
+                    _context.SaveChanges();
+
+                    _context.Permisos_rol.Add(new PermisoRol {cod_rol = 2, cod_permiso = 6}); 
+                    _context.SaveChanges();                    
+
+                    _context.Permisos_rol.Add(new PermisoRol {cod_rol = 2, cod_permiso = 3}); 
+                    _context.SaveChanges();   
+
+                    _context.Permisos_rol.Add(new PermisoRol {cod_rol = 2, cod_permiso = 4}); 
+                    _context.SaveChanges();   
                 }
 
                 //ASIGNAR USUARIO ROL
@@ -179,9 +221,9 @@ namespace backend.Models
 
                     var categoria5 = new Categoria { nombre = "Suspensión", descripcion = "Piezas para suspensiones", habilitado = 1 };
                     _context.Categorias.Add(categoria5);
-                    await _context.SaveChangesAsync();
-                }
+                    await _context.SaveChangesAsync();                  
 
+                    
                 //PRODUCTOS PRUEBA
                 if(_context.Productos.Count() == 0)
                 {
@@ -192,6 +234,7 @@ namespace backend.Models
 
             }
         }
+    }
 
     }
 }

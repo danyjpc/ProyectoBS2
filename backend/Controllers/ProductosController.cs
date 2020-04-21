@@ -27,6 +27,47 @@ namespace backend.Controllers
             return Ok(productos);
         }
 
+        //Productos con existencias < 20
+        [HttpGet("stkmin")]
+        public async Task<ActionResult<Producto[]>> StockMin()
+        {
+            var productos = await _context.Productos.Where(prod => prod.cantidad_existente < prod.stock_minimo).ToListAsync();
+            return Ok(productos);
+        }
+
+        //5 Productos más vendidos
+        [HttpGet("masvendidos")]
+        public async Task<ActionResult<Detalle_factura[]>> MasVendidos()
+        {
+           /* var dts = await _context.Detalles_facturas.Select(
+                det => new{
+                    id_producto = det.id_producto,
+                    nom_producto = det.producto.nom_producto,
+                    cantidad = det.cantidad
+                }
+            ).GroupBy(de => de.id_producto).ToListAsync();
+            dts.Sum(de => de.cantidad).OrderByDescending(de => de.cantidad);*/
+            var dts2 = await _context.Detalles_facturas.GroupBy(de => de.id_producto).Select(
+                det => new {
+                    id_producto = det.ElementAt(0).id_producto,
+                   // nom_producto = det.ElementAt(0).producto.nom_producto,
+                    cantidad = det.Sum(n => n.cantidad)
+                }
+            ).Join(_context.Productos, 
+                d => d.id_producto, 
+                p => p.id_producto,
+                (d, p) => new {
+                    id_producto = d.id_producto, 
+                    nom_producto = p.nom_producto, 
+                    cantidad = d.cantidad
+                }
+            ).OrderByDescending(dt => dt.cantidad).Take(3).ToListAsync();
+           // dts.Sum(de => de.cantidad).GroupBy(de => de.id_producto).OrderByDescending(de => de.cantidad);
+            return Ok(dts2);
+
+          /*  var productos = await _context.Productos.Select().ToListAsync();
+            productos.Top(pro => pro.cantidad_existente);*/
+        }
         //Obtener informacion de un producto especifico
         [HttpGet("{id_producto}")]
         public async Task<ActionResult<Producto>> ObtenerProducto(int id_producto)
