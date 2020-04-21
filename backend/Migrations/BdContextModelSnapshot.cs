@@ -170,19 +170,7 @@ namespace backend.Migrations
 
                     b.Property<int>("id_persona");
 
-                    b.Property<int>("id_rol");
-
-                    b.Property<int>("id_usuario");
-
-                    b.Property<string>("nom_usuario")
-                        .HasColumnType("varchar(45)");
-
-                    b.Property<string>("password")
-                        .HasColumnType("varchar(45)");
-
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("id_usuario");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend.Migrations
 {
-    public partial class InitialMig : Migration
+    public partial class mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -313,18 +313,13 @@ namespace backend.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    id_usuario = table.Column<int>(nullable: false),
-                    nom_usuario = table.Column<string>(type: "varchar(45)", nullable: true),
-                    password = table.Column<string>(type: "varchar(45)", nullable: true),
                     id_persona = table.Column<int>(nullable: false),
                     fecha_registro = table.Column<DateTime>(type: "date", nullable: false),
-                    id_rol = table.Column<int>(nullable: false),
                     estado_activo = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_user", x => x.Id);
-                    table.UniqueConstraint("AK_tb_user_id_usuario", x => x.id_usuario);
                     table.ForeignKey(
                         name: "FK_tb_user_tb_persona_id_persona",
                         column: x => x.id_persona,

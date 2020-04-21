@@ -11,4 +11,5 @@ export class NombrePermisos{
     admin_unidad_medida: boolean; 
     asignar_credenciales:boolean;
     admin_kardex: boolean;
+    catalogo: boolean;
 }
