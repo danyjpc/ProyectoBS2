@@ -12,7 +12,7 @@ namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class RolesController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -43,7 +43,7 @@ namespace backend.Controllers
             return roles;
         }
 
-        
+
 
         //Obtener solo roles habilitados
         [Route("RolesHabilitados")]
@@ -118,19 +118,20 @@ namespace backend.Controllers
 
         //Mostrar roles de un empleado
         [HttpGet("ObtenerRolesUs/{cod_empleado}")]
-        public  IActionResult ObtenerRolesUs(int cod_empleado)
+        public IActionResult ObtenerRolesUs(int cod_empleado)
         {
-            var usuario = _userManager.Users.Where(x=> x.id_persona == cod_empleado).Select(x=> x.Id).FirstOrDefault();
-           // int u=usuario;
-            var roles =  from  ur in _context.UserRoles
-                         join ro in _context.Roles on ur.RoleId equals ro.Id
-                         where ur.UserId.Equals(usuario)
-                         select new {
-                             cod_usuario=ur.UserId,
-                             cod_rol2=ur.RoleId,
-                             nombre_rol=ro.Name
-                         };
-          
+            var usuario = _userManager.Users.Where(x => x.id_persona == cod_empleado).Select(x => x.Id).FirstOrDefault();
+            // int u=usuario;
+            var roles = from ur in _context.UserRoles
+                        join ro in _context.Roles on ur.RoleId equals ro.Id
+                        where ur.UserId.Equals(usuario)
+                        select new
+                        {
+                            cod_usuario = ur.UserId,
+                            cod_rol2 = ur.RoleId,
+                            nombre_rol = ro.Name
+                        };
+
             return Ok(roles);
         }
 
@@ -145,7 +146,8 @@ namespace backend.Controllers
             var usuario = await _userManager.FindByIdAsync(user_roles.cod_usuario.ToString());
             var rolesActuales = await _context.UserRoles.Where(x => x.UserId == usuario.Id).ToListAsync();
 
-            if(usuario == null){
+            if (usuario == null)
+            {
                 return NotFound();
             }
 
@@ -163,10 +165,20 @@ namespace backend.Controllers
 
                 await _userManager.AddToRoleAsync(usuario, rol.Name.ToString());
             }
-        
             return Ok();
         }
 
+       //Creacion de nuevo rol
+        [HttpPost]
+        [Route("rolcliente/{email}")]
+        public async Task<IActionResult> RolCliente(string email)
+        {
+            var usuario = await _userManager.FindByEmailAsync(email);
+            var rol = await _roleManager.FindByIdAsync("3");
+            await _userManager.AddToRoleAsync(usuario, rol.Name);
+            await _context.SaveChangesAsync();
+            return Ok();          
+        }
 
         /******************************AREA DE MODIFICACIONES*************************/
 
@@ -194,7 +206,7 @@ namespace backend.Controllers
                 return BadRequest();
             }
             return Ok();
-        }       
+        }
 
 
 

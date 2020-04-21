@@ -50,7 +50,7 @@ export class CarritoComponent implements OnInit {
         this.service.findbyId(this.cantProducts[x]).subscribe(
           items => {
             items.cantidad=1;
-            products.push(items);
+            products.push(Object.assign({}, items));
             localStorage.setItem('arrProds', JSON.stringify(products));
             this.totalCompra = this.totalCompra + (items.cantidad*items.precio_unitario);
             localStorage.setItem('totalCompra', JSON.stringify(this.totalCompra));
