@@ -15,7 +15,7 @@ import { Factura } from 'src/app/models/factura';
 
 export class CarritoComponent implements OnInit {
   //Aca va la declaracion de variables
-  public products: Producto[];
+  public products: Producto[] = new Array();
   public cant: Number = 0;
   public cProds: any[];
   public cantProducts: any[];
@@ -51,13 +51,15 @@ export class CarritoComponent implements OnInit {
           items => {
             items.cantidad=1;
             products.push(Object.assign({}, items));
-            localStorage.setItem('arrProds', JSON.stringify(products));
             this.totalCompra = this.totalCompra + (items.cantidad*items.precio_unitario);
-            localStorage.setItem('totalCompra', JSON.stringify(this.totalCompra));
+            console.log(items.cantidad);
+            localStorage.setItem('totalCompra', JSON.stringify(this.totalCompra));            
+            localStorage.setItem('arrProds', JSON.stringify(this.products));
           }
         );
       }
       this.products = products;
+      console.log(this.products);
      // localStorage.setItem('carrito', JSON.stringify(products));
     } catch (error) {
       console.log('No se encuentran elementos en el carrito');
@@ -103,6 +105,7 @@ export class CarritoComponent implements OnInit {
     for(var x =0; x<this.products.length; x++){
       this.totalCompra = this.totalCompra + (this.products[x].cantidad * this.products[x].precio_unitario);
       localStorage.setItem('totalCompra', JSON.stringify(this.totalCompra));
+      localStorage.setItem('arrProds', JSON.stringify(this.products));
     }
   }
 

@@ -203,12 +203,20 @@ namespace backend.Controllers
             Paragraph title = new Paragraph();
             Paragraph encabezado = new Paragraph();
             Paragraph infoCliente = new Paragraph();
+            Paragraph fechaGeneracion= new Paragraph();
 
             title.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 28f,BaseColor.BLACK);
             title.Alignment = Element.ALIGN_CENTER;
             title.Add("AMABISCA S. A.");
             title.Add(Chunk.NEWLINE);
             document.Add(title);
+            fechaGeneracion.Font = FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 8f,BaseColor.BLACK);
+            fechaGeneracion.Alignment = Element.ALIGN_RIGHT;
+            fechaGeneracion.Add("Generada el " + DateTime.Now.ToString());
+            document.Add(fechaGeneracion);
+            
+            document.Add(Chunk.NEWLINE);            
+            document.Add(Chunk.NEWLINE);
 
             encabezado.Font = FontFactory.GetFont(FontFactory.HELVETICA, 18f,BaseColor.BLACK);
             encabezado.Alignment = Element.ALIGN_LEFT;
@@ -244,9 +252,12 @@ namespace backend.Controllers
             infoCliente.Alignment = Element.ALIGN_LEFT;
             infoCliente.Add(cli.nit);
             infoCliente.Add(Chunk.SPACETABBING);
+            infoCliente.Add(Chunk.SPACETABBING);
             infoCliente.Add(cli.nompersona);
             infoCliente.Add(Chunk.SPACETABBING);
+            infoCliente.Add(Chunk.SPACETABBING);
             infoCliente.Add(cli.direccion);
+            infoCliente.Add(Chunk.SPACETABBING);
             infoCliente.Add(Chunk.SPACETABBING);
             infoCliente.Add(cli.telefono);
             document.Add(infoCliente);
@@ -287,7 +298,7 @@ namespace backend.Controllers
             Paragraph totalFactura = new Paragraph();
             totalFactura.Font = FontFactory.GetFont(FontFactory.HELVETICA, 18f,BaseColor.BLACK);
             totalFactura.Alignment = Element.ALIGN_RIGHT;
-            totalFactura.Add("Total: " + (Math.Truncate(fac.total * 100)/100).ToString());
+            totalFactura.Add("Total: Q." + (Math.Truncate(fac.total * 100)/100).ToString());
             document.Add(totalFactura);          
 
             document.Close();

@@ -11,8 +11,6 @@
                     <tr>
                         <th scope="col">No.</th>
                         <th scope="col">Fecha</th>
-                        <th scope="col">Empleado</th>
-                        <th scope="col">Cliente</th>
                         <th scope="col">Total</th>
                         <th scope="col">Opciones</th>
                     </tr>
@@ -21,8 +19,6 @@
                     <tr *ngFor="let item of arrFacturas; index as i">
                         <td style="color: black;">{{i+1}}</td>
                         <td style="color: black;">{{item.fecha | date:'dd/MM/yyyy'}}</td>
-                        <td style="color: black;">{{item.nom_persona}}</td>
-                        <td style="color: black;">{{item.nom_persona}}</td>
                         <td style="color: black;">{{item.total}}</td>
                         <td>
                                 <button class="btn btn-sm btn-success" style="margin-right: 5px;" (click)="verDetalles(modalDetalles, item)">Detalles</button>
@@ -50,15 +46,15 @@
         </div>
         <div class="card-header">
                 <div class="form-row" placement = "center">
-                    <div class = "col-4 ">
+                 <!--   <div class = "col-4 ">
                         <h6 class="h6 text-left"><b>NIT</b></h6>
                         <h6 class = "h6 text-left">{{factura.persona.nit}</h6>
-                    </div>
+                    </div>-->
     
-                    <div class = "col-4">
+                 <!--    <div class = "col-4">
                             <h6 class="h6 text-left"><b>Cliente</b></h6>
                             <h6 class = "h6 text-left">{{factura.persona.nom_persona}}</h6>
-                    </div>
+                    </div>-->
     
                     <div class = "col-4">
                                 <h6 class="h6 text-left"><b>Fecha</b></h6>
