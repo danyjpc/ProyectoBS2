@@ -1,6 +1,7 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Kardex } from 'src/app/models/kardex';
+import { Producto} from 'src/app/models/producto';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DetalleKardex } from 'src/app/models/detalle_kardex';
@@ -8,6 +9,7 @@ import { ProveedoresService } from 'src/app/services/proveedores.service';
 import { Proveedor } from 'src/app/models/proveedor';
 import { DatePipe } from '@angular/common';
 import { PermisosService } from 'src/app/services/permisos.service';
+import { ProductosService } from 'src/app/services/productos.service';
 
 @Component({
     selector: 'sel-pedidos',
@@ -25,11 +27,12 @@ export class PedidosComponent implements OnInit {
     private textoAdvertencia: string = "";
     private paginaActual: number = 1;
     private cantidadItems: number;
+    private prodKrdx: Producto[] = new Array();
 
     private banderaSuper: boolean = false;
     private banderaKardex: boolean = false;
 
-    constructor(private router: Router, private route: ActivatedRoute, private service: PedidosService, private permisosServices: PermisosService,
+    constructor(private router: Router, private route: ActivatedRoute, private service: PedidosService, private permisosServices: PermisosService, productoServices: ProductosService,
         private modalService: NgbModal, private proveedorService: ProveedoresService, private datePipe: DatePipe) { }
 
     ngOnInit() { 
@@ -110,6 +113,31 @@ export class PedidosComponent implements OnInit {
         this.router.navigate(['/editar-pedido', item.id_kardex])
     }
 
+    modificarStockProducto(id_kar)
+    {
+        this.service.obtenerProductos().subscribe(prods => {
+            this.prodKrdx = prods;
+        }, err => {
+            console.log(err);
+        });
+        this.service.obtenerDetallesPedido(id_kar).subscribe(kards => {
+            this.detalleKardexList = kards;           
+        }, err => {
+            console.log(err);
+        });
+        this.detalleKardexList.forEach(dt => {
+            this.prodKrdx.forEach(prod => {
+                if (dt.id_producto == prod.id_producto)
+                {
+                    console.log(prod.cantidad_existente);
+                    prod.cantidad_existente = prod.cantidad_existente + dt.cantidad;
+                    console.log(prod.cantidad_existente);
+                }
+            });
+        });
+        
+    }
+
     validar(modalValidacion, modalAdvertencia, item){
         this.service.verificarValidacion(item.id_kardex).subscribe(validar => {
             if(validar == 1){
@@ -121,6 +149,7 @@ export class PedidosComponent implements OnInit {
                 kardexActualizar.tipo_operacion = item.tipo_operacion;
                 kardexActualizar.validado = 1;
                 kardexActualizar.id_proveedor = item.id_proveedor;
+                this.modificarStockProducto(item.id_kardex);
                 this.modalService.open(modalValidacion).result.then((result) => {
                     this.service.validarKardex(kardexActualizar).subscribe(kar => {
                         this.kardexList = new Array();

@@ -70,11 +70,6 @@ export class NuevaVentaComponent implements OnInit
     private route: ActivatedRoute
     ){}
     ngOnInit(): void {
-        this.serviceU.getxEmail(localStorage.getItem("usr")).subscribe(
-            item => {
-                this.datosU = item;
-            }
-        );
 
         this.obtenerProductos();
         this.obtenerClientes();
@@ -229,7 +224,7 @@ export class NuevaVentaComponent implements OnInit
     }
 
     autocompletar(clienteSelect){
-        this.nomC = clienteSelect.item.nom_cliente;   
+        this.nomC = clienteSelect.item.nom_persona;   
         this.dirC = clienteSelect.item.direccion;
         this.telC = clienteSelect.item.telefono;
     }
@@ -289,51 +284,46 @@ export class NuevaVentaComponent implements OnInit
 
           if(!this.existeCliente)
           {
-              
-              this.nuevoCliente.nit =  this.cli;
-              this.nuevoCliente.nom_persona = this.nomC; 
-              this.nuevoCliente.direccion = this.dirC; 
-              this.nuevoCliente.telefono = this.telC; 
-              this.nuevoCliente.habilitado = true; 
-              
+            this.nuevoCliente.nom_persona = this.cli.nom_persona; 
+            this.nuevoCliente.dpi = null; 
+            this.nuevoCliente.direccion = this.cli.direccion; 
+            this.nuevoCliente.telefono = null; 
+            this.nuevoCliente.nit = this.cli.nit; 
+            this.nuevoCliente.habilitado = true; 
+            this.nuevoCliente.id_puesto = null; 
               this.serviceC.guardar(this.nuevoCliente).subscribe(
-                  cliente => {
-                    this.fac.id_usu_cliente = cliente.id_persona; 
-                    this.fac.estado = 1; 
-                    this.fac.fecha = this.hoyFecha();
-                    this.fac.id_usu_empleado = this.emp.id_usu_empleado;
-                    this.fac.total = this.totalFac;
-                    this.service.guardarFactura(this.fac).subscribe(
-                      items => {
-                          this.service.guardarDetalleFactura(this.listDetalleNuevaFactura, items[0]).subscribe(
-                              items => {            
-                                  this.router.navigate(['/tareas'])
-                              },
-                              err => {
-                                console.log(err);
-                              }
-                          
-                            );     
-                          
-                      },
-                      err => {
-                        console.log(err);
-                      }
-                  
-                    );
-
-                  }, 
-                  err => {
-                      console.log(err);
+                  nCli => {
+                      this.fac.id_usu_cliente = 3; 
+                      this.fac.fecha = this.hoyFecha(); 
+                      this.fac.modo_envio = "cex"; 
+                      this.fac.modo_pago = "tarjeta de credito";
+                      this.fac.estado = 1; 
+                      this.fac.id_usu_empleado = 1; 
+                      this.fac.habilitado = 1; 
+                      this.fac.total = this.totalFac;
+                      this.service.guardarFactura(this.fac).subscribe(
+                          fa => {
+                              this.service.guardarDetalleFactura(this.listDetalleFactura, fa).subscribe(
+                                  dts => {
+                                    this.router.navigate(['/tareas'])
+                                  },
+                                  err =>{
+                                      console.log(err);
+                                  }
+                              );
+                          }
+                      );
                   }
               );
           }else{
-            this.fac.id_usu_cliente = this.cli.id_usu_cliente; 
+            this.fac.id_usu_cliente = 3; 
             this.fac.estado = 1; 
+            this.fac.modo_envio = "";
+            this.fac.modo_pago = "";
             this.fac.fecha = this.hoyFecha();
-            this.fac.id_usu_empleado = this.datosU.id;
+            this.fac.id_usu_empleado =1;
+            this.fac.habilitado = 1;
             this.fac.total = this.totalFac;
-
             this.service.guardarFactura(this.fac).subscribe(
               items => {
                   this.service.guardarDetalleFactura(this.listDetalleNuevaFactura, items[0]).subscribe(
@@ -344,8 +334,7 @@ export class NuevaVentaComponent implements OnInit
                         console.log(err);
                       }
                   
-                    );     
-                  
+                    );                       
               },
               err => {
                 console.log(err);
@@ -353,8 +342,7 @@ export class NuevaVentaComponent implements OnInit
           
             );
 
-          }   
-                    
+          }                      
                     
           
       }
