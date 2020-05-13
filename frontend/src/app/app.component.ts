@@ -299,6 +299,9 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
+    localStorage.removeItem('carrito');    
+    localStorage.removeItem('arrProds');         
+    localStorage.removeItem('totalCompra');
     this.router.navigate(["/catalogo"]);
   }
 }

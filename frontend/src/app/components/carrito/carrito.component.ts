@@ -15,8 +15,9 @@ import { Factura } from 'src/app/models/factura';
 
 export class CarritoComponent implements OnInit {
   //Aca va la declaracion de variables
-  public products: Producto[];
+  public products: Producto[] = new Array();
   public cant: Number = 0;
+  public cProds: any[];
   public cantProducts: any[];
   public cantidad: Number = 1;
   public total: number =0;
@@ -33,14 +34,13 @@ export class CarritoComponent implements OnInit {
     try {
       this.cant = JSON.parse(localStorage.getItem('carrito')).length;
       this.cantProducts = JSON.parse(localStorage.getItem('carrito'));
+      console.log(this.cantProducts);
 
     } catch (error) {
       this.carritoVacio = true;
     }
     //Extraigo todos los productos del carrito de compras
-    this.extraerProductos();
-    
-
+    this.extraerProductos();    
   }
 
   extraerProductos() {
@@ -50,16 +50,19 @@ export class CarritoComponent implements OnInit {
         this.service.findbyId(this.cantProducts[x]).subscribe(
           items => {
             items.cantidad=1;
-            products.push(items);
-            this.totalCompra = this.totalCompra + (items.cantidad*items.precio_unitario)
-
+            products.push(Object.assign({}, items));
+            this.totalCompra = this.totalCompra + (items.cantidad*items.precio_unitario);
+            console.log(items.cantidad);
+            localStorage.setItem('totalCompra', JSON.stringify(this.totalCompra));            
+            localStorage.setItem('arrProds', JSON.stringify(this.products));
           }
         );
       }
       this.products = products;
-      console.log(this.products)
+      console.log(this.products);
+     // localStorage.setItem('carrito', JSON.stringify(products));
     } catch (error) {
-      console.log('No se encuentran elementos en el carrito')
+      console.log('No se encuentran elementos en el carrito');
     }
  
 
@@ -73,6 +76,20 @@ export class CarritoComponent implements OnInit {
     var cart = JSON.parse(localStorage.getItem('carrito'));
     cart.splice(indice,1);
     localStorage.setItem('carrito', JSON.stringify(cart));
+    this.cantProducts = JSON.parse(localStorage.getItem('carrito'));
+    
+    var products = []
+    for (var x = 0; x < this.cantProducts.length; x++) {
+      this.service.findbyId(this.cantProducts[x]).subscribe(
+        items => {
+          products.push(items);
+          localStorage.setItem('arrProds', JSON.stringify(products));
+          this.totalCompra = this.totalCompra + (items.cantidad*items.precio_unitario);
+          localStorage.setItem('totalCompra', JSON.stringify(this.totalCompra));
+        }
+      );
+    }
+
     if(cart.length == 0){
       localStorage.removeItem('carrito');
       this.cant =0;
@@ -87,6 +104,8 @@ export class CarritoComponent implements OnInit {
     this.totalCompra=0
     for(var x =0; x<this.products.length; x++){
       this.totalCompra = this.totalCompra + (this.products[x].cantidad * this.products[x].precio_unitario);
+      localStorage.setItem('totalCompra', JSON.stringify(this.totalCompra));
+      localStorage.setItem('arrProds', JSON.stringify(this.products));
     }
   }
 
@@ -94,7 +113,5 @@ export class CarritoComponent implements OnInit {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
     }, (reason) => { });
   }
-
-
 
 }

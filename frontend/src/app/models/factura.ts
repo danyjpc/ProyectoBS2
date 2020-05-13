@@ -1,4 +1,4 @@
-import { Detalle_factura } from './detalle_factura';
+import { Persona } from './persona';
 
 export class Factura{
     id_factura: number; 
@@ -10,4 +10,5 @@ export class Factura{
     id_usu_empleado: number;
     habilitado: number; 
     total: number;
+    cliente: Persona;
 }

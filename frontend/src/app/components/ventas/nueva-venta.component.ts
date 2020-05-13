@@ -210,7 +210,7 @@ export class NuevaVentaComponent implements OnInit
     }
 
     precioProductoDetalle(id)
-    {
+    {   
         var precUnitario: number = 0;
         for (let i = 0; i < this.productos.length; i++) {
             if(this.productos[i].id_producto == id)

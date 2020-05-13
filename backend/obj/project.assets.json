@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
+      "iTextSharp/5.5.13.1": {
+        "type": "package",
+        "compile": {
+          "lib/itextsharp.dll": {}
+        },
+        "runtime": {
+          "lib/itextsharp.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -4478,6 +4487,22 @@
     }
   },
   "libraries": {
+    "iTextSharp/5.5.13.1": {
+      "sha512": "xqzsYEYW/nMDjCtAXM5cl9fWil/Ju3HEGbsmoTKtltJc3M/9HNJzg++bCIOHm5uZITvRmZJWMO+S2u1yNG0gQg==",
+      "type": "package",
+      "path": "itextsharp/5.5.13.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "gnu-agpl-v3.0.md",
+        "itextsharp.5.5.13.1.nupkg.sha512",
+        "itextsharp.nuspec",
+        "lib/iTextSharp.xml",
+        "lib/itextsharp.dll",
+        "notice.txt"
+      ]
+    },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "sha512": "owAlEIUZXWSnkK8Z1c+zR47A0X6ykF4XjbPok4lQKNuciUfHLGPd6QnI+rt/8KlQ17PmF+I4S3f+m+Qe4IvViw==",
       "type": "package",
@@ -12237,7 +12262,8 @@
       "Microsoft.EntityFrameworkCore >= 2.2.6",
       "Microsoft.NETCore.App >= 2.2.0",
       "MySqlConnector >= 0.60.0",
-      "Pomelo.EntityFrameworkCore.Mysql >= 2.2.6"
+      "Pomelo.EntityFrameworkCore.Mysql >= 2.2.6",
+      "iTextSharp >= 5.5.13.1"
     ]
   },
   "packageFolders": {
@@ -12246,11 +12272,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\backend.csproj",
+      "projectUniqueName": "d:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "D:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\backend.csproj",
+      "projectPath": "d:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\gtavo\\.nuget\\packages\\",
-      "outputPath": "D:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\obj\\",
+      "outputPath": "d:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gtavo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -12309,6 +12335,10 @@
           "Pomelo.EntityFrameworkCore.Mysql": {
             "target": "Package",
             "version": "[2.2.6, )"
+          },
+          "iTextSharp": {
+            "target": "Package",
+            "version": "[5.5.13.1, )"
           }
         },
         "imports": [
@@ -12324,5 +12354,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"iTextSharp 5.5.13.1\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.2\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "iTextSharp",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.2"
+      ]
+    }
+  ]
 }

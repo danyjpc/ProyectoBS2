@@ -69,6 +69,7 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Finalizar</button>
+   <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Finalizar</button> -->
+    <button type="button" class="btn btn-outline-dark"  (click)="modal.dismiss('Cross click')" [routerLink]="['/nueva-venta-online']">Finalizar</button>
   </div>
 </ng-template>
