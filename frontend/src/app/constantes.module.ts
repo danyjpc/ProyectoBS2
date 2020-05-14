@@ -11,7 +11,7 @@ export interface ConstantesConfig {
 export const APPCONFIG:ConstantesConfig = {
   
  //BASE_URL: 'http://localhost:5000/api',
- BASE_URL: 'http://192.168.99.100:5000/api', //Prueba en docker-toolbox
+ BASE_URL: 'http://34.71.65.81:5000/api', //Prueba CI/CD
   //BASE_URL: 'http://192.168.43.214:5000/api', //en produccion
  
 };
