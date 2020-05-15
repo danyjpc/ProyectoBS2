@@ -10,8 +10,8 @@ export interface ConstantesConfig {
 
 export const APPCONFIG:ConstantesConfig = {
   
- //BASE_URL: 'http://localhost:5000/api',
- BASE_URL: 'http://34.71.65.81:5000/api', //Prueba CI/CD
-  //BASE_URL: 'http://192.168.43.214:5000/api', //en produccion
+  BASE_URL: 'http://localhost:5000/api',
+  //BASE_URL: 'http://13.58.141.161:5000/api', //Prueba CI/CD
+ //BASE_URL: 'http://192.168.43.214:5000/api', //en produccion
  
 };

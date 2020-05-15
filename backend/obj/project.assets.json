@@ -12272,11 +12272,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\backend.csproj",
+      "projectUniqueName": "D:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "d:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\backend.csproj",
+      "projectPath": "D:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\gtavo\\.nuget\\packages\\",
-      "outputPath": "d:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\obj\\",
+      "outputPath": "D:\\MIS DOCUMENTOS\\2020 - Noveno ciclo\\Analisis y diseño\\PROY-AMABISCA\\ProyectoBS2\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gtavo\\AppData\\Roaming\\NuGet\\NuGet.Config",
